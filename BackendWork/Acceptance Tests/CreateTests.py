@@ -1,5 +1,5 @@
 from django.test import TestCase
-from StuffTracker.models import Stuff, MyUser
+from BackendWork.models import ClassList, MyUser
 from django.test import Client
 
 
@@ -13,15 +13,15 @@ class TestAccountCreate(TestCase):
         self.thingList = {"Mike": {"Bobble head", "Mike Tyson"}, "Bob": {"Crackers", "Digimon"}}
 
         for i in self.thingList.keys():
-            temp = MyUser(name=i, password=i)
+            temp = MyUser(username=i, password=i)
             temp.save()
             for j in self.thingList[i]:
-                Stuff(name=j, owner=temp).save()
+                ClassList(username=j, owner=temp).save()
 
     def test_CreateAccount(self):
-        Stuff(name="Sauce", owner=MyUser(name='Tys', password="Tys")).save()
-        resp = self.client.post("/", {"name": "Tys", "password": "Tys"}, follow=True)
-        self.assertEqual(resp.context["name"], "Tys", "name not passed from Login to list")
+        ClassList(username="Sauce", owner=MyUser(username='Tys', password="Tys")).save()
+        resp = self.client.post("/", {"username": "Tys", "password": "Tys"}, follow=True)
+        self.assertEqual(resp.context["username"], "Tys", "name not passed from Login to list")
         self.assertEqual(resp.context["password"], "Tys", "name not passed from Login to list")
 
 
@@ -34,17 +34,17 @@ class TestFailAccount(TestCase):
         self.thingList = {"Mike": {"Bobble head", "Mike Tyson"}, "Bob": {"Crackers", "Digimon"}}
 
         for i in self.thingList.keys():
-            temp = MyUser(name=i, password=i)
+            temp = MyUser(username=i, password=i)
             temp.save()
             for j in self.thingList[i]:
-                Stuff(name=j, owner=temp).save()
+                ClassList(username=j, owner=temp).save()
 
     def test_EmptyFields(self):
-        Stuff(name="Sauce", owner=MyUser(name="Chic", password=None)).save()
-        resp = self.client.post("/", {"name": "Chic", "password": None}, follow=True)
+        ClassList(username="Sauce", owner=MyUser(username="Chic", password=None)).save()
+        resp = self.client.post("/", {"username": "Chic", "password": None}, follow=True)
         self.assertEqual(resp.context["password"], None, "Should be passing")
 
     def test_EmptyUser(self):
-        Stuff(name="Sauce", owner=MyUser(name=None, password="Chic")).save()
+        ClassList(username="Sauce", owner=MyUser(username=None, password="Chic")).save()
         with self.assertRaises(KeyError, "Key shouldn't pass through"):
-            resp = self.client.post("/", {"name": None, "password": "Link"}, follow=True)
+            resp = self.client.post("/", {"username": None, "password": "Link"}, follow=True)

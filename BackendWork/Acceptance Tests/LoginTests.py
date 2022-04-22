@@ -1,5 +1,5 @@
 from django.test import TestCase
-from StuffTracker.models import Stuff, MyUser
+from BackendWork.models import ClassList, MyUser
 from django.test import Client
 
 
@@ -13,15 +13,15 @@ class TestLogin(TestCase):
         self.thingList = {"Mike": {"Bobble head", "Mike Tyson"}, "Bob": {"Crackers", "Digimon"}}
 
         for i in self.thingList.keys():
-            temp = MyUser(name=i, password=i)
+            temp = MyUser(username=i, password=i)
             temp.save()
             for j in self.thingList[i]:
-                Stuff(name=j, owner=temp).save()
+                ClassList(username=j, owner=temp).save()
 
     def test_correctName(self):
         for i in self.thingList.keys():
-            resp = self.client.post("/", {"name": i, "password": i}, follow=True)
-            self.assertEqual(resp.context["name"], i, "name not passed from Login to list")
+            resp = self.client.post("/", {"username": i, "password": i}, follow=True)
+            self.assertEqual(resp.context["username"], i, "name not passed from Login to list")
 
 
 class TestIncorrectLogin(TestCase):
@@ -33,17 +33,17 @@ class TestIncorrectLogin(TestCase):
         self.thingList = {"Mike": {"Bobble head", "Mike Tyson"}, "Bob": {"Crackers", "Digimon"}}
 
         for i in self.thingList.keys():
-            temp = MyUser(name=i, password=i)
+            temp = MyUser(username=i, password=i)
             temp.save()
             for j in self.thingList[i]:
-                Stuff(name=j, owner=temp).save()
+                ClassList(username=j, owner=temp).save()
 
     def test_incorrectPassword(self):
         for i in self.thingList.keys():
-            resp = self.client.post("/", {"name": i, "password": i}, follow=True)
+            resp = self.client.post("/", {"username": i, "password": i}, follow=True)
             self.assertFalse(resp.context["password"], "Bubby Kot", "Password shouldn't pass")
 
     def test_incorrectUsername(self):
         for i in self.thingList.keys():
-            resp = self.client.post("/", {"name": i, "password": i}, follow=True)
-            self.assertFalse(resp.context["name"], "Bubby Kot", "Username doesn't exist")
+            resp = self.client.post("/", {"username": i, "password": i}, follow=True)
+            self.assertFalse(resp.context["username"], "Bubby Kot", "Username doesn't exist")
