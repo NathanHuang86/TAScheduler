@@ -21,8 +21,8 @@ class TestAccountCreate(TestCase):
     def test_CreateAccount(self):
         Stuff(name="Sauce", owner=MyUser(name='Tys', password="Tys")).save()
         resp = self.client.post("/", {"name": "Tys", "password": "Tys"}, follow=True)
-        self.assertEqual(resp.context["name"], "Tys", "name not passed from login to list")
-        self.assertEqual(resp.context["password"], "Tys", "name not passed from login to list")
+        self.assertEqual(resp.context["name"], "Tys", "name not passed from Login to list")
+        self.assertEqual(resp.context["password"], "Tys", "name not passed from Login to list")
 
 
 class TestFailAccount(TestCase):

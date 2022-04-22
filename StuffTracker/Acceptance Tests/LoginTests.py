@@ -21,7 +21,7 @@ class TestLogin(TestCase):
     def test_correctName(self):
         for i in self.thingList.keys():
             resp = self.client.post("/", {"name": i, "password": i}, follow=True)
-            self.assertEqual(resp.context["name"], i, "name not passed from login to list")
+            self.assertEqual(resp.context["name"], i, "name not passed from Login to list")
 
 
 class TestIncorrectLogin(TestCase):
