@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses</title>
+    <link rel="stylesheet" type="text/css" href="courses.css">
+</head>
+
+<body>
+<p class="header">Add a new course</p>
+<div class="newCourseContainer">
+    <table>
+        <tr>
+            <td><input class = "course-textbox" placeholder="Course Name" ></td>
+            <td>
+                <select required class ="dropdownMenu" >
+                    <option value="" disabled selected>Select an instructor</option>
+                </select></td>
+        </tr>
+        <tr>
+            <td><input class = "course-textbox" placeholder="Meeting Time" ></td>
+            <td><input class = "course-textbox" placeholder="Semester" ></td>
+        </tr>
+        <tr>
+            <td><input class = "course-textbox" placeholder="Course Type">
+            </td>
+            <td><input class = "course-textbox" placeholder="Description">
+        </tr>
+    </table>
+
+    <div class="submit-button">
+        <button type="submit">Create Account</button>
+    </div>
+</div>
+<p class="header">Add a TA to a course</p>
+    <div class="assignTAContainer">
+        <table>
+            <tr>
+                <td>
+                <select required class ="dropdownMenuTA" >
+                    <option value="" disabled selected>Select a TA</option>
+                </select>
+                </td>
+                <td>
+                <select required class ="dropdownMenuCourse" >
+                    <option value="" disabled selected>Select Course</option>
+                </select>
+        </td></tr>
+        </table>
+        <div class="submit-button">
+            <button type="submit">Assign TA</button>
+        </div>
+    </div>
+
+    <h1 class="header">Your Courses</h1>
+
+    <div class="container">
+
+    </div>
+
+
+</body>
+</html>

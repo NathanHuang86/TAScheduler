@@ -1,0 +1,126 @@
+html {
+    background: rgb(145, 178, 199);
+}
+.header{
+    padding-top: 40px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+}
+.container{
+    width: 700px;
+    height: 250px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    border: 2px solid White;
+    border-radius: 15px;
+    background: white;
+    text-align: center;
+}
+.newCourseContainer{
+    width: 700px;
+    height: 230px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    border: 2px solid White;
+    border-radius: 15px;
+    background: white;
+    text-align: center;
+}
+.assignTAContainer{
+    width: 700px;
+    height: 100px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    border: 2px solid White;
+    border-radius: 15px;
+    background: white;
+    text-align: center;
+}
+.course-textbox{
+    margin-top: 10px;
+    width: 100%;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 11px 70px;
+    border-radius: 20px;
+    outline-color:rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    text-align: center;
+    border: 2px solid #e1dede69;
+    background: #e1dede69;
+    color: grey;
+}
+.submit-button {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 10px 30px;
+}
+.submit-button button {
+
+    font-size: 20px;
+    padding: 5px 15px;
+    border: 2px solid;
+    border-radius: 15px;
+    color: white;
+    background: #91B2C7;
+    width: 500px;
+    cursor: pointer;
+    margin-left: 70px;
+}
+.dropdownMenu{
+    width: 100%;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    border-radius: 20px;
+    outline-width: 20px;
+    outline-color: #333333;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    color: grey;
+}
+.dropdownMenuTA{
+    width: 247%;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    border-radius: 20px;
+    outline-width: 20px;
+    outline-color: #333333;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    color: grey;
+    margin-left: 10px;
+
+}
+.dropdownMenuCourse{
+    width: 105%;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    border-radius: 20px;
+    outline-width: 20px;
+    outline-color: #333333;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    color: grey;
+    margin-left: 200px;
+}
