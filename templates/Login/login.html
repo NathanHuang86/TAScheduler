@@ -7,15 +7,17 @@
 </head>
 
 <body>
+<form action="/" method="post">
+    {%  csrf_token %}
     <div class="body-content">
         <div class="container">
             <h2>Login</h2>
             <div class="login-form">
                     <div class="login-item">
-                        <input type="text" placeholder="Username or Email">
+                        <input type="text" id="username" name="username" placeholder="Username or Email">
                     </div>
                     <div class="login-item">
-                        <input placeholder="Password">
+                        <input type="text" id="password" name="password" placeholder="Password">
                     </div>
                     <div class="login-button">
                         <button type="submit">Login</button>
@@ -24,5 +26,6 @@
             <hr>
         </div>
     </div>
+</form>
 </body>
 </html>
