@@ -6,7 +6,6 @@ html {
     padding-top: 14.25vh;
 }
 .createUserHeader{
-    padding-top: 40px;
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
     font-size: 24px;
@@ -19,7 +18,8 @@ html {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: auto;
+    margin-bottom: 6px;
+    margin-left: 500px;
     border: 2px solid White;
     border-radius: 15px;
     background: white;
@@ -55,7 +55,6 @@ html {
 }
 
 .submit-button button {
-
     font-size: 20px;
     padding: 5px 15px;
     border: 2px solid;
@@ -66,3 +65,31 @@ html {
     cursor: pointer;
     margin-left: 80px;
 }
+navContainer {
+    position: center;
+    height: auto;
+    width: 100%;
+}
+.navigation {
+    list-style-type: none;
+    background-color: #333;
+    position: sticky;
+    width: 100%;
+    overflow:auto;
+}
+
+.navigation li a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    background-color: #333;
+}
+
+.navigation li:hover a:not(.active) {
+    background-color: #D3D3D3;
+    color: #000;
+}
+
