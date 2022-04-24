@@ -5,14 +5,16 @@ html {
 .body-content {
     padding-top: 14.25vh;
 }
-.createUserHeader{
+
+.createUserHeader {
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
     font-size: 24px;
     text-align: center;
 
 }
-.container{
+
+.container {
     width: 700px;
     height: 350px;
     flex-direction: row;
@@ -26,10 +28,12 @@ html {
     text-align: center;
 
 }
-.containerbox{
+
+.containerbox {
     padding-left: 95px;
 }
-.newAccountInformation{
+
+.newAccountInformation {
 
     align-items: center;
     width: 100%;
@@ -37,7 +41,7 @@ html {
     letter-spacing: 1px;
     padding: 10px 20px;
     border-radius: 20px;
-    outline-color:rgba(0, 0, 0, 0.1);
+    outline-color: rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     border: 2px solid rgba(0, 0, 0, 0.3);
     text-align: center;
@@ -65,17 +69,19 @@ html {
     cursor: pointer;
     margin-left: 80px;
 }
+
 navContainer {
     position: center;
     height: auto;
     width: 100%;
 }
+
 .navigation {
     list-style-type: none;
     background-color: #333;
     position: sticky;
     width: 100%;
-    overflow:auto;
+    overflow: auto;
 }
 
 .navigation li a {

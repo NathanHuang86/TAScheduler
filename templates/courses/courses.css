@@ -1,26 +1,16 @@
 html {
     background: rgb(145, 178, 199);
 }
-.header{
+
+.header {
     padding-top: 40px;
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
     font-size: 24px;
     text-align: center;
 }
-.container{
-    width: 700px;
-    height: 250px;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    border: 2px solid White;
-    border-radius: 15px;
-    background: white;
-    text-align: center;
-}
-.newCourseContainer{
+
+.newCourseContainer {
     width: 700px;
     height: 230px;
     flex-direction: row;
@@ -32,7 +22,8 @@ html {
     background: white;
     text-align: center;
 }
-.assignTAContainer{
+
+.assignTAContainer {
     width: 700px;
     height: 100px;
     flex-direction: row;
@@ -44,26 +35,29 @@ html {
     background: white;
     text-align: center;
 }
-.course-textbox{
+
+.course-textbox {
     margin-top: 10px;
     width: 100%;
     font-size: 14px;
     letter-spacing: 1px;
     padding: 11px 70px;
     border-radius: 20px;
-    outline-color:rgba(0, 0, 0, 0.1);
+    outline-color: rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     text-align: center;
     border: 2px solid #e1dede69;
     background: #e1dede69;
     color: grey;
 }
+
 .submit-button {
     display: flex;
     flex-direction: column;
     margin: auto;
     padding: 10px 30px;
 }
+
 .submit-button button {
 
     font-size: 20px;
@@ -76,7 +70,8 @@ html {
     cursor: pointer;
     margin-left: 70px;
 }
-.dropdownMenu{
+
+.dropdownMenu {
     width: 100%;
     font-size: 14px;
     letter-spacing: 1px;
@@ -91,7 +86,8 @@ html {
     margin-top: 10px;
     color: grey;
 }
-.dropdownMenuTA{
+
+.dropdownMenuTA {
     width: 247%;
     font-size: 14px;
     letter-spacing: 1px;
@@ -108,7 +104,8 @@ html {
     margin-left: 10px;
 
 }
-.dropdownMenuCourse{
+
+.dropdownMenuCourse {
     width: 105%;
     font-size: 14px;
     letter-spacing: 1px;
@@ -124,17 +121,19 @@ html {
     color: grey;
     margin-left: 200px;
 }
+
 navContainer {
     position: center;
     height: auto;
     width: 100%;
 }
+
 .navigation {
     list-style-type: none;
     background-color: #333;
     position: sticky;
     width: 100%;
-    overflow:auto;
+    overflow: auto;
 }
 
 .navigation li a {
