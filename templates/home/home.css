@@ -1,0 +1,60 @@
+html {
+    background: rgb(145, 178, 199);
+}
+
+.header {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+}
+
+.subHeader {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 36px;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.container {
+    width: 700px;
+    height: 250px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    border: 2px solid White;
+    border-radius: 15px;
+    background: white;
+    text-align: center;
+}
+
+navContainer {
+    position: center;
+    height: auto;
+    width: 100%;
+}
+
+.navigation {
+    list-style-type: none;
+    background-color: #333;
+    position: sticky;
+    width: 100%;
+    overflow: auto;
+}
+
+.navigation li a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    background-color: #333;
+}
+
+.navigation li:hover a:not(.active) {
+    background-color: #D3D3D3;
+    color: #000;
+}
