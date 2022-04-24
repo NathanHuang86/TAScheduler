@@ -15,41 +15,47 @@ class MyUserUnitTestSuite(TestCase):
         instructorList = MyUser.objects.filter(role='Instructor')
         teachingAssistantList = MyUser.objects.filter(role='Teaching Assistant')
         self.assertEqual(len(adminList), 2)
+        self.assertEqual(len(instructorList), 2)
+        self.assertEqual(len(teachingAssistantList), 2)
 
     def test_list_myuser_names(self):
-        charlieClassList = ClassList.objects.filter(owner=self.charlie)
-        self.assertEqual(charlieClassList, [self.science, self.english])
+        adminList = MyUser.objects.filter(role='Admin')
+        instructorList = MyUser.objects.filter(role='Instructor')
+        teachingAssistantList = MyUser.objects.filter(role='Teaching Assistant')
+        self.assertEqual(adminList, [self.charlie, self.dennis])
+        self.assertEqual(instructorList, [self.bob, self.ellis])
+        self.assertEqual(teachingAssistantList, [self.alice, self.felix])
 
     def test_edit_username(self):
-        self.history.owner = self.charlie
-        self.assertEqual(self.charlie, self.history.owner)
+        self.alice.username = 'newalice'
+        self.assertEqual(self.alice.username, 'newalice')
 
     def test_edit_password(self):
-        self.history.name = 'US history'
-        self.assertEqual('US history', self.history.name)
+        self.alice.password = 'newpassword123'
+        self.assertEqual('newpassword123', self.alice.password)
 
     def test_edit_name(self):
-        self.history.name = 'US history'
-        self.assertEqual('US history', self.history.name)
+        self.alice.name = 'alexa'
+        self.assertEqual('alexa', self.alice.name)
 
     def test_edit_email(self):
-        self.history.name = 'US history'
-        self.assertEqual('US history', self.history.name)
+        self.alice.email = 'alice@gmail.com'
+        self.assertEqual('alice@gmail.com', self.alice.email)
 
     def test_edit_address(self):
-        self.history.name = 'US history'
-        self.assertEqual('US history', self.history.name)
+        self.alice.address = 'milwaukeecampus'
+        self.assertEqual('milwaukeecampus', self.alice.address)
 
     def test_edit_phone(self):
-        self.history.name = 'US history'
-        self.assertEqual('US history', self.history.name)
+        self.alice.phone = '123-123-1234'
+        self.assertEqual('123-123-1234', self.alice.phone)
 
     def test_delete_myuser(self):
-        self.science.delete()
-        charlieClassList = ClassList.objects.filter(owner=self.charlie)
-        self.assertEqual(1, len(charlieClassList))
+        self.alice.delete()
+        teachingAssistantList = MyUser.objects.filter(role='Teaching Assistant')
+        self.assertEqual(1, len(teachingAssistantList))
 
     def test_create_myuser(self):
-        self.english2 = ClassList.objects.create(name='english2', owner=self.charlie)
-        charlieClassList = ClassList.objects.filter(owner=self.charlie)
-        self.assertEqual(3, len(charlieClassList))
+        self.garry = MyUser.objects.create(username='garry', password='somepassword', name='garry', email='garry@yahoo.com', address='garryshome', phone='123-456-7896', role='Teaching Assistant')
+        teachingAssistantList = MyUser.objects.filter(role='Teaching Assistant')
+        self.assertEqual(3, len(teachingAssistantList))
