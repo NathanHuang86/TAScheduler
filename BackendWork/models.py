@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class User(models.Model):
+class MyUser(models.Model):
     ROLE_CHOICES = (('Teaching Assistant', 'TEACHING_ASSISTANT'), ('Instructor', 'INSTRUCTOR'), ('Admin', 'ADMIN'))
     username = models.CharField(max_length=20)
     password = models.CharField(max_length=20)
@@ -9,23 +9,12 @@ class User(models.Model):
     email = models.CharField(max_length=20)
     address = models.CharField(max_length=72)
     phone = models.CharField(max_length=10)
-    role = models.Choices(max_length=20, choices=ROLE_CHOICES)
+    role = models.CharField(choices=ROLE_CHOICES)
 
 
-class Class(models.Model):
+class ClassList(models.Model):
     name = models.CharField(max_length=20)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-
-
-class Permission(models.Model):
-    API_Name = models.CharField
-    label = models.CharField
-
-
-class PermissionAssignment(models.Model):
-    userID = models.ForeignKey(User)
-    permission = models.ForeignKey(Permission)
-
+    owner = models.ForeignKey(MyUser, on_delete=models.CASCADE, null=True)
 
 class Schedule(models.Model):
     sunday = models.BooleanField
@@ -41,9 +30,9 @@ class Schedule(models.Model):
 
 class Section(models.Model):
     SECTION_TYPE_CHOICES = (('Discussion', 'DISCUSSION'), ('Lab', 'LAB'))
-    Class = models.ForeignKey(Class)
-    TA = models.ForeignKey(User)
-    schedule = models.ForeignKey(Schedule)
+    Class = models.ForeignKey(ClassList, on_delete=models.SET_NULL, null=False)
+    TA = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=False)
+    schedule = models.ForeignKey(Schedule, on_delete=models.SET_NULL, null=False)
     time = models.TimeField
     sectionNumber = models.IntegerField
-    sectionType = models.CharField(max_length=20, choices=SECTION_TYPE_CHOICES)
+    sectionType = models.CharField(choices=SECTION_TYPE_CHOICES)

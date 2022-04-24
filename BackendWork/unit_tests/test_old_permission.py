@@ -1,7 +1,7 @@
 from django.test import TestCase
 from BackendWork.models import User, PermissionAssignment, Permission
 
-class ClassUnitTestSuite(TestCase):
+class PermissionUnitTestSuite(TestCase):
     def setUp(self):
         self.alice = User.objects.create(username='alice', password='password', name='alice', email='alice@yahoo.com', address='somewhere', phone='123-456-7890')
         self.bob = User.objects.create(username='bob', password='password123', name='bob', email='bob@yahoo.com', address='someplace', phone='123-456-7891')
