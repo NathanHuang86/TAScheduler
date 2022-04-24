@@ -23,6 +23,7 @@ class Section(models.Model):
     SECTION_TYPE_CHOICES = (('Discussion', 'DISCUSSION'), ('Lab', 'LAB'))
     Class = models.ForeignKey(ClassList, on_delete=models.SET_NULL, null=False)
     TA = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=False)
+    owner = models.ForeignKey(MyUser, on_delete=models.CASCADE, null=True)
     sectionNumber = models.IntegerField
     sectionType = models.CharField(choices=SECTION_TYPE_CHOICES)
     schedule = MultiSelectField(choices=SCHEDULE_CHOICES)

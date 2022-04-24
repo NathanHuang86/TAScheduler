@@ -5,9 +5,9 @@ from models import ClassList, MyUser
 
 # Create your views here.
 
-class Home(View):
+class Login(View):
     def get(self, request):
-        return render(request, "home.html", {})
+        return render(request, "login.html", {})
 
     def post(self, request):
         noSuchUser = False
@@ -18,15 +18,12 @@ class Home(View):
         except:
             noSuchUser = True
         if noSuchUser:
-            m = MyUser(name=request.POST['username'], password=request.POST['password'])
-            m.save()
-            request.session["username"] = m.name
-            return redirect("/things/")
+            return render(request, "login.html", {"message": "No such user exists."})
         elif badPassword:
-            return render(request, "home.html", {"message": "bad password"})
+            return render(request, "login.html", {"message": "Password is incorrect."})
         else:
             request.session["username"] = m.name
-            return redirect("/things/")
+            return redirect("/createAccount/")
 
 
 class Things(View):
