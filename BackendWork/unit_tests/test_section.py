@@ -11,16 +11,16 @@ class SectionUnitTestSuite(TestCase):
         self.history = ClassList.objects.create(name='history', owner=self.theProfessor)
         self.science = ClassList.objects.create(name='science', owner=self.theProfessor)
         self.english = ClassList.objects.create(name='english', owner=self.theProfessor)
-        self.mathDiscussionSection = Section.objects.create(Class= self.math, TA= )
+        self.mathDiscussionSection = Section.objects.create(Class=self.math, TA=self.alice)
 
 
-class Section(models.Model):
-    SCHEDULE_CHOICES = (('Sunday', 'SUNDAY'), ('Monday', 'MONDAY'), ('Tuesday', 'TUESDAY'), ('Wednesday', 'WEDNESDAY'), ('Thursday', 'THURSDAY'), ('Friday', 'FRIDAY'), ('Saturday', 'SATURDAY'))
-    SECTION_TYPE_CHOICES = (('Discussion', 'DISCUSSION'), ('Lab', 'LAB'))
-    Class = models.ForeignKey(ClassList, on_delete=models.SET_NULL, null=False)
-    TA = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=False)
-    sectionNumber = models.IntegerField
-    sectionType = models.CharField(choices=SECTION_TYPE_CHOICES)
-    schedule = MultiSelectField(choices=SCHEDULE_CHOICES)
-    startTime = models.TimeField
-    endTime = models.TimeField
+# class Section(models.Model):
+#     SCHEDULE_CHOICES = (('Sunday', 'SUNDAY'), ('Monday', 'MONDAY'), ('Tuesday', 'TUESDAY'), ('Wednesday', 'WEDNESDAY'), ('Thursday', 'THURSDAY'), ('Friday', 'FRIDAY'), ('Saturday', 'SATURDAY'))
+#     SECTION_TYPE_CHOICES = (('Discussion', 'DISCUSSION'), ('Lab', 'LAB'))
+#     Class = models.ForeignKey(ClassList, on_delete=models.SET_NULL, null=False)
+#     TA = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=False)
+#     sectionNumber = models.IntegerField
+#     sectionType = models.CharField(choices=SECTION_TYPE_CHOICES)
+#     schedule = MultiSelectField(choices=SCHEDULE_CHOICES)
+#     startTime = models.TimeField
+#     endTime = models.TimeField
