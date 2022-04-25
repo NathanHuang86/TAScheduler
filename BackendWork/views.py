@@ -48,8 +48,11 @@ class CreateAccount(View):
                          name=request.POST["name"],
                          email=request.POST["email"], address=request.POST["address"], phone=request.POST["phone"])
 
-        if request.POST["username"] == "" or request.POST["password"] == "" or request.POST["name"] == "" or request.POST["email"] == "" or request.POST["address"] == "" or request.POST["phone"] == "":
-            return render(request, "createAccount.html", {"message": "Invalid data entered"})
+        for names in vars(newuser).values():
+            print(names)
+            if names == "":
+                print("Didn't go through.")
+                return render(request, "createAccount.html", {"message": "Invalid data entered"})
 
         newuser.save()
         return render(request, "createAccount.html", {"message": "Invalid data entered"})
