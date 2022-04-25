@@ -5,6 +5,14 @@ from BackendWork.models import ClassList, MyUser
 
 # Create your views here.
 
+class Landing(View):
+    def post(self, request):
+        if request.method == 'POST' and 'loginSubmit' in request.POST:
+            Login.post(self, request)
+        elif request.method == 'POST' and 'createAccountSubmit' in request.POST:
+            CreateAccount.post(self, request)
+
+
 class Login(View):
     def get(self, request):
         return render(request, "login.html", {})
@@ -15,7 +23,7 @@ class Login(View):
 
         try:
             m = MyUser.objects.get(username=request.POST['username'])
-            noSuchUser = not(m.username == request.POST['username'])
+            noSuchUser = not (m.username == request.POST['username'])
             badPassword = (m.password != request.POST['password'])
         except:
             noSuchUser = True
@@ -33,15 +41,15 @@ class Login(View):
 class CreateAccount(View):
     def get(self, request):
         m = request.session["username"]
-        things = list(map(str, ClassList.objects.filter(owner__name=m)))
-        return render(request, "createAccount.html", {})
+        return render(request, "createAccount.html", {"username": m})
 
     def post(self, request):
-        m = request.session["name"]
-        s = request.POST.get('stuff', '')
-        if s != '':
-            newThing = ClassList(name=s, owner=MyUser.objects.get(name=m))
-            newThing.save()
-        things = list(map(str, ClassList.objects.filter(owner__name=m)))
-        return render(request, "things.html", {"username": m, "things": things})
+        newuser = MyUser(username=request.POST["username"], password=request.POST["password"],
+                         name=request.POST["name"],
+                         email=request.POST["email"], address=request.POST["address"], phone=request.POST["phone"])
 
+        if request.POST["username"] == "" or request.POST["password"] == "" or request.POST["name"] == "" or request.POST["email"] == "" or request.POST["address"] == "" or request.POST["phone"] == "":
+            return render(request, "createAccount.html", {"message": "Invalid data entered"})
+
+        newuser.save()
+        return render(request, "createAccount.html", {"message": "Invalid data entered"})

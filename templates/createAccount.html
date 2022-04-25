@@ -23,6 +23,8 @@
 </div>
 
 <body>
+<form action="" method="post">
+    {%  csrf_token %}
 <div class="body-content">
     <div class="container">
         <p class=createUserHeader>Create Account</p>
@@ -31,16 +33,16 @@
 
             <table>
                 <tr>
-                    <td><input placeholder="Username" class='newAccountInformation'></td>
-                    <td><input placeholder="Password" class=newAccountInformation></td>
+                    <td><input placeholder="Username" name="username" class='newAccountInformation'></td>
+                    <td><input placeholder="Password" name="password" class=newAccountInformation></td>
                 </tr>
                 <tr>
-                    <td><input placeholder="Name" class=newAccountInformation></td>
-                    <td><input placeholder="Email" class=newAccountInformation></td>
+                    <td><input placeholder="Name" name="name" class=newAccountInformation></td>
+                    <td><input placeholder="Email" name="email" class=newAccountInformation></td>
                 </tr>
                 <tr>
-                    <td><input placeholder="Address" class=newAccountInformation></td>
-                    <td><input placeholder="Phone Number" class=newAccountInformation></td>
+                    <td><input placeholder="Address" name="address" class=newAccountInformation></td>
+                    <td><input placeholder="Phone Number" name="phone" class=newAccountInformation></td>
                 </tr>
                 <tr>
                     <th>Account Permission</th>
@@ -56,11 +58,12 @@
 
             </table>
             <div class="submit-button">
-                <button type="submit">Create Account</button>
+                <button name="createAccountSubmit">Create Account</button>
             </div>
 
         </div>
     </div>
 </div>
+</form>
 </body>
 </html>
