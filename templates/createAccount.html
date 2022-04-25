@@ -1,9 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Create Account</title>
-    <link rel="stylesheet" type="text/css" href="../TAScheduler/static/css/createAccount.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css\createAccount.css' %}"/>
 </head>
 
 <div class="navContainer">
@@ -12,7 +13,7 @@
     </header>
     <div class="navigation">
         <li><a>Home</a></li>
-        <li><a>Courses</a></li>
+        <li><a href="../courses/">Courses</a></li>
         <li><a>Labs</a></li>
         <li><a>People</a></li>
         <li><a>View TA Assignments</a></li>

@@ -53,3 +53,17 @@ class CreateAccount(View):
 
         newuser.save()
         return render(request, "createAccount.html", {"message": "Invalid data entered"})
+
+
+class Courses(View):
+    def get(self, request):
+        instructors = MyUser.objects.filter(role='Instructor')
+        m = request.session["username"]
+        return render(request, "courses.html", {'instructors': instructors})
+
+    def post(self, request):
+        instructors = MyUser.objects.filter(role='Instructor').values().name
+        newcourse = ClassList(name=request.POST["name"], owner=request.POST["owner"])
+        newcourse.save()
+        print(instructors)
+        return render(request, "courses.html", {'instructors': instructors})

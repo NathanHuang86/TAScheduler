@@ -16,6 +16,9 @@ class MyUser(models.Model):
     def __str__(self):
         return self.username
 
+    def getName(self):
+        return self.name
+
 class ClassList(models.Model):
     name = models.CharField(max_length=20)
     owner = models.ForeignKey(MyUser, on_delete=models.CASCADE, blank=True, null=True)
