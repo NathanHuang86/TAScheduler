@@ -1,6 +1,6 @@
 from django.test import TestCase
 from BackendWork.models import Section, MyUser, ClassList
-import datetime
+from _datetime import time
 
 class SectionUnitTestSuite(TestCase):
     def setUp(self):
@@ -12,22 +12,22 @@ class SectionUnitTestSuite(TestCase):
         self.history = ClassList.objects.create(name='history', owner=self.theProfessor)
         self.science = ClassList.objects.create(name='science', owner=self.theProfessor)
         self.english = ClassList.objects.create(name='english', owner=self.theProfessor)
-        self.mathDiscussionSection1 = Section.objects.create(Class=self.math, TA=self.alice, sectionNumber=1, sectionType='Discussion', schedule=['Monday', 'Wednesday'], startTime=datetime(8, 0, 0), endTime=datetime(9, 30, 0))
-        self.mathDiscussionSection2 = Section.objects.create(Class=self.math, TA=self.bob, sectionNumber=2, sectionType='Discussion', schedule=['Monday', 'Wednesday'], startTime=datetime(8, 0, 0), endTime=datetime(9, 30, 0))
-        self.mathLabSection1 = Section.objects.create(Class=self.math, TA=self.charlie, sectionNumber=3, sectionType='Lab', schedule=['Tuesday'], startTime=datetime(13, 0, 0), endTime=datetime(14, 30, 0))
-        self.mathLabSection2 = Section.objects.create(Class=self.math, TA=self.charlie, sectionNumber=4, sectionType='Lab', schedule=['Wednesday'], startTime=datetime(13, 0, 0), endTime=datetime(14, 30, 0))
-        self.historyDiscussionSection1 = Section.objects.create(Class=self.history, TA=self.alice, sectionNumber=1, sectionType='Discussion', schedule=['Monday', 'Wednesday'], startTime=datetime(8, 0, 0), endTime=datetime(9, 30, 0))
-        self.historyDiscussionSection2 = Section.objects.create(Class=self.history, TA=self.bob, sectionNumber=2, sectionType='Discussion', schedule=['Monday', 'Wednesday'], startTime=datetime(8, 0, 0), endTime=datetime(9, 30, 0))
-        self.historyLabSection1 = Section.objects.create(Class=self.history, TA=self.charlie, sectionNumber=3, sectionType='Lab', schedule=['Tuesday'], startTime=datetime(13, 0, 0), endTime=datetime(14, 30, 0))
-        self.historyLabSection2 = Section.objects.create(Class=self.history, TA=self.charlie, sectionNumber=4, sectionType='Lab', schedule=['Wednesday'], startTime=datetime(13, 0, 0), endTime=datetime(14, 30, 0))
-        self.scienceDiscussionSection1 = Section.objects.create(Class=self.science, TA=self.alice, sectionNumber=1, sectionType='Discussion', schedule=['Monday', 'Wednesday'],startTime=datetime(8, 0, 0), endTime=datetime(9, 30, 0))
-        self.scienceDiscussionSection2 = Section.objects.create(Class=self.science, TA=self.bob, sectionNumber=2, sectionType='Discussion', schedule=['Monday', 'Wednesday'], startTime=datetime(8, 0, 0), endTime=datetime(9, 30, 0))
-        self.scienceLabSection1 = Section.objects.create(Class=self.science, TA=self.charlie, sectionNumber=3, sectionType='Lab', schedule=['Tuesday'], startTime=datetime(13, 0, 0), endTime=datetime(14, 30, 0))
-        self.scienceLabSection2 = Section.objects.create(Class=self.science, TA=self.charlie, sectionNumber=4, sectionType='Lab', schedule=['Wednesday'], startTime=datetime(13, 0, 0), endTime=datetime(14, 30, 0))
-        self.englishDiscussionSection1 = Section.objects.create(Class=self.english, TA=self.alice, sectionNumber=1, sectionType='Discussion', schedule=['Monday', 'Wednesday'], startTime=datetime(8, 0, 0), endTime=datetime(9, 30, 0))
-        self.englishDiscussionSection2 = Section.objects.create(Class=self.english, TA=self.bob, sectionNumber=2, sectionType='Discussion', schedule=['Monday', 'Wednesday'], startTime=datetime(8, 0, 0), endTime=datetime(9, 30, 0))
-        self.englishLabSection1 = Section.objects.create(Class=self.english, TA=self.charlie, sectionNumber=3, sectionType='Lab', schedule=['Tuesday'], startTime=datetime(13, 0, 0), endTime=datetime(14, 30, 0))
-        self.englishLabSection2 = Section.objects.create(Class=self.english, TA=self.charlie, sectionNumber=4, sectionType='Lab', schedule=['Wednesday'], startTime=datetime(13, 0, 0), endTime=datetime(14, 30, 0))
+        self.mathDiscussionSection1 = Section.objects.create(Class=self.math, TA=self.alice, sectionNumber=1, sectionType='Discussion', schedule=['Monday', 'Wednesday'], startTime=time(8, 0, 0), endTime=time(9, 30, 0))
+        self.mathDiscussionSection2 = Section.objects.create(Class=self.math, TA=self.bob, sectionNumber=2, sectionType='Discussion', schedule=['Monday', 'Wednesday'], startTime=time(8, 0, 0), endTime=time(9, 30, 0))
+        self.mathLabSection1 = Section.objects.create(Class=self.math, TA=self.charlie, sectionNumber=3, sectionType='Lab', schedule=['Tuesday'], startTime=time(13, 0, 0), endTime=time(14, 30, 0))
+        self.mathLabSection2 = Section.objects.create(Class=self.math, TA=self.charlie, sectionNumber=4, sectionType='Lab', schedule=['Wednesday'], startTime=time(13, 0, 0), endTime=time(14, 30, 0))
+        self.historyDiscussionSection1 = Section.objects.create(Class=self.history, TA=self.alice, sectionNumber=1, sectionType='Discussion', schedule=['Monday', 'Wednesday'], startTime=time(8, 0, 0), endTime=time(9, 30, 0))
+        self.historyDiscussionSection2 = Section.objects.create(Class=self.history, TA=self.bob, sectionNumber=2, sectionType='Discussion', schedule=['Monday', 'Wednesday'], startTime=time(8, 0, 0), endTime=time(9, 30, 0))
+        self.historyLabSection1 = Section.objects.create(Class=self.history, TA=self.charlie, sectionNumber=3, sectionType='Lab', schedule=['Tuesday'], startTime=time(13, 0, 0), endTime=time(14, 30, 0))
+        self.historyLabSection2 = Section.objects.create(Class=self.history, TA=self.charlie, sectionNumber=4, sectionType='Lab', schedule=['Wednesday'], startTime=time(13, 0, 0), endTime=time(14, 30, 0))
+        self.scienceDiscussionSection1 = Section.objects.create(Class=self.science, TA=self.alice, sectionNumber=1, sectionType='Discussion', schedule=['Monday', 'Wednesday'],startTime=time(8, 0, 0), endTime=time(9, 30, 0))
+        self.scienceDiscussionSection2 = Section.objects.create(Class=self.science, TA=self.bob, sectionNumber=2, sectionType='Discussion', schedule=['Monday', 'Wednesday'], startTime=time(8, 0, 0), endTime=time(9, 30, 0))
+        self.scienceLabSection1 = Section.objects.create(Class=self.science, TA=self.charlie, sectionNumber=3, sectionType='Lab', schedule=['Tuesday'], startTime=time(13, 0, 0), endTime=time(14, 30, 0))
+        self.scienceLabSection2 = Section.objects.create(Class=self.science, TA=self.charlie, sectionNumber=4, sectionType='Lab', schedule=['Wednesday'], startTime=time(13, 0, 0), endTime=time(14, 30, 0))
+        self.englishDiscussionSection1 = Section.objects.create(Class=self.english, TA=self.alice, sectionNumber=1, sectionType='Discussion', schedule=['Monday', 'Wednesday'], startTime=time(8, 0, 0), endTime=time(9, 30, 0))
+        self.englishDiscussionSection2 = Section.objects.create(Class=self.english, TA=self.bob, sectionNumber=2, sectionType='Discussion', schedule=['Monday', 'Wednesday'], startTime=time(8, 0, 0), endTime=time(9, 30, 0))
+        self.englishLabSection1 = Section.objects.create(Class=self.english, TA=self.charlie, sectionNumber=3, sectionType='Lab', schedule=['Tuesday'], startTime=time(13, 0, 0), endTime=time(14, 30, 0))
+        self.englishLabSection2 = Section.objects.create(Class=self.english, TA=self.charlie, sectionNumber=4, sectionType='Lab', schedule=['Wednesday'], startTime=time(13, 0, 0), endTime=time(14, 30, 0))
 
     def test_list_section_length(self):
         aliceSectionList = Section.objects.filter(TA=self.alice)
@@ -82,15 +82,15 @@ class SectionUnitTestSuite(TestCase):
         self.assertEqual(self.mathDiscussionSection1.schedule, ['Tuesday'], msg='Section failed to update schedule')
 
     def test_edit_section_start_time(self):
-        self.mathDiscussionSection1.startTime = datetime(1, 0, 0)
-        self.assertEqual(self.mathDiscussionSection1.startTime, datetime(1, 0, 0), msg='Section failed to update start time')
+        self.mathDiscussionSection1.startTime = time(1, 0, 0)
+        self.assertEqual(self.mathDiscussionSection1.startTime, time(1, 0, 0), msg='Section failed to update start time')
 
     def test_edit_section_end_time(self):
-        self.mathDiscussionSection1.endTime = datetime(23, 0, 0)
-        self.assertEqual(self.mathDiscussionSection1.endTime, datetime(23, 0, 0), msg='Section failed to update end time')
+        self.mathDiscussionSection1.endTime = time(23, 0, 0)
+        self.assertEqual(self.mathDiscussionSection1.endTime, time(23, 0, 0), msg='Section failed to update end time')
 
     def test_create_section(self):
-        self.newMathDiscussion = Section.objects.create(Class=self.math, TA=self.alice, sectionNumber=1, sectionType='Discussion', schedule=['Monday', 'Wednesday'], startTime=datetime(12, 0, 0), endTime=datetime(13, 30, 0))
+        self.newMathDiscussion = Section.objects.create(Class=self.math, TA=self.alice, sectionNumber=1, sectionType='Discussion', schedule=['Monday', 'Wednesday'], startTime=time(12, 0, 0), endTime=time(13, 30, 0))
         aliceSectionList = Section.objects.filter(TA=self.alice)
         self.assertEqual(len(aliceSectionList), 5, msg='Section failed to create a new record')
 

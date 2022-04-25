@@ -1,11 +1,11 @@
 from django.test import TestCase
-from .models import ClassList, MyUser
+from BackendWork.models import ClassList, MyUser
 
 class ClassListUnitTestSuite(TestCase):
     def setUp(self):
-        self.alice = MyUser.objects.create(username='alice', password='password', name='alice', email='alice@yahoo.com', address='somewhere', phone='123-456-7890')
-        self.bob = MyUser.objects.create(username='bob', password='password123', name='bob', email='bob@yahoo.com', address='someplace', phone='123-456-7891')
-        self.charlie = MyUser.objects.create(username='charlie', password='123password', name='charlie', email='charlie@yahoo.com', address='sometown', phone='123-456-7892')
+        self.alice = MyUser.objects.create(username='alice', password='password', name='alice', email='alice@yahoo.com', address='somewhere', phone='123-456-7890', role='Instructor')
+        self.bob = MyUser.objects.create(username='bob', password='password123', name='bob', email='bob@yahoo.com', address='someplace', phone='123-456-7891', role='Instructor')
+        self.charlie = MyUser.objects.create(username='charlie', password='123password', name='charlie', email='charlie@yahoo.com', address='sometown', phone='123-456-7892', role='Instructor')
         self.math = ClassList.objects.create(name='math', owner=self.alice)
         self.history = ClassList.objects.create(name='history', owner=self.bob)
         self.science = ClassList.objects.create(name='science', owner=self.charlie)
