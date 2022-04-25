@@ -25,57 +25,134 @@
 
 <body>
 <form action="" method="post">
-    {%  csrf_token %}
-<p class="header">Add a new course</p>
-<div class="newCourseContainer">
-    <table>
-        <tr>
-            <td><input name="name" class="course-textbox" placeholder="Course Name"></td>
-            <td>
-                <select class="dropdownMenu" name="userSelect">
-                    <option value="" disabled selected>Select an instructor</option>
+    {% csrf_token %}
+    <p class="header">Add a new course</p>
+    <div class="newCourseContainer">
+        <table>
+            <tr>
+                <td><input name="name" class="course-textbox" placeholder="Course Name"></td>
+                <td>
+                    <select class="dropdownMenu" name="userSelect">
+                        <option value="" disabled selected>Select an instructor</option>
                         {% for entry in instructors %}
                             <option value= {{ entry.name }}>{{ entry.name }}</option>
                         {% endfor %}
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td><input class="course-textbox" placeholder="Meeting Times"></td>
-            <td><input class="course-textbox" placeholder="Semester"></td>
-        </tr>
-        <tr>
-            <td><input class="course-textbox" placeholder="Course Number">
-            </td>
-            <td><input class="course-textbox" placeholder="Description">
-        </tr>
-    </table>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><input class="course-textbox" placeholder="Meeting Times"></td>
+                <td><input class="course-textbox" placeholder="Semester"></td>
+            </tr>
+            <tr>
+                <td><input class="course-textbox" placeholder="Course Number">
+                </td>
+                <td><input class="course-textbox" placeholder="Description">
+            </tr>
+        </table>
 
-    <div class="submit-button">
-        <button type="submit">Create Account</button>
+        <div class="submit-button">
+            <button type="submit">Create Account</button>
+        </div>
     </div>
-</div>
-<p class="header">Add a TA to a course</p>
-<div class="assignTAContainer">
-    <table>
-        <tr>
-            <td>
-                <select required class="dropdownMenuTA">
+    <p class="header">Add a TA to a section</p>
+    <div class="assignTAContainer">
+        <table>
+            <tr>
+                <td>
+                    <select required class="dropdownMenuCourse">
+                        <option value="" disabled selected>Select a TA</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <select required class="dropdownMenuCourse">
+                        <option value="" disabled selected>Select Course</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <select required class="dropdownMenuCourse">
+                        <option value="" disabled selected>Select Section</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <div class="submit-button">
+            <button type="submit">Assign TA</button>
+        </div>
+    </div>
+
+
+</form>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <p class="header">Add a new section</p>
+    <div class="newSectionContainer">
+        <table>
+            <tr>
+
+                <select class="dropdownMenu" name="userSelect">
+                    <option value="" disabled selected>Select a Course</option>
+                    {% for entry in instructors %}
+                        <option value= {{ entry.name }}>{{ entry.name }}</option>
+                    {% endfor %}
+                </select>
+
+                <select class="dropdownMenu" name="userSelect">
                     <option value="" disabled selected>Select a TA</option>
+                    {% for entry in instructors %}
+                        <option value= {{ entry.name }}>{{ entry.name }}</option>
+                    {% endfor %}
                 </select>
-            </td>
-            <td>
-                <select required class="dropdownMenuCourse">
-                    <option value="" disabled selected>Select Course</option>
-                </select>
-            </td>
-        </tr>
-    </table>
-    <div class="submit-button">
-        <button type="submit">Assign TA</button>
-    </div>
-</div>
+            </tr>
+            <tr>
+                <td><input class="course-textbox" placeholder="Section Number"></td>
+                <td><input class="course-textbox" placeholder="Section Type"></td>
+            </tr>
+            <tr>
+                <td><input class="course-textbox" placeholder="Start Time">
+                </td>
+                <td><input class="course-textbox" placeholder="End time">
+            </tr>
+            <div class="chooseScheduleContainer">
+                <fieldset>
+                    <legend>Choose Schedule:</legend>
 
+                    <div>
+                        <input type="checkbox" name="Monday">
+                        <label for="Monday">Monday</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" name="Tuesday">
+                        <label for="Tuesday">Tuesday</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="Wednesday">
+                        <label for="Wednesday">Wednesday</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="Thursday">
+                        <label for="Thursday">Thursday</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="Friday">
+                        <label for="Friday">Friday</label>
+                    </div>
+                </fieldset>
+
+
+            </div>
+        </table>
+
+        <div class="submit-button">
+            <button type="submit">Create Account</button>
+        </div>
+    </div>
 </form>
 </body>
 </html>
