@@ -1,5 +1,5 @@
 from django.test import TestCase
-from BackendWork.models import ClassList, MyUser
+from .models import ClassList, MyUser
 
 class ClassListUnitTestSuite(TestCase):
     def setUp(self):
@@ -13,28 +13,28 @@ class ClassListUnitTestSuite(TestCase):
 
     def test_list_classlist_length(self):
         charlieClassList = ClassList.objects.filter(owner=self.charlie)
-        self.assertEqual(len(charlieClassList), 2, msg='ClassList did not filter by owner correctly')
+        self.assertEqual(len(charlieClassList), 2)
 
     def test_list_classlist_names(self):
         charlieClassList = ClassList.objects.filter(owner=self.charlie)
-        self.assertEqual(charlieClassList, [self.science, self.english], msg='ClassList did not filter by owner correctly')
+        self.assertEqual(charlieClassList, [self.science, self.english])
 
     def test_edit_owner(self):
         self.history.owner = self.charlie
-        self.assertEqual(self.charlie, self.history.owner, msg='ClassList failed to update owner')
+        self.assertEqual(self.charlie, self.history.owner)
 
     def test_edit_classlist_name(self):
         self.history.name = 'US history'
-        self.assertEqual('US history', self.history.name, msg='ClassList failed to update name')
+        self.assertEqual('US history', self.history.name)
 
     def test_delete_classlist(self):
         self.science.delete()
         charlieClassList = ClassList.objects.filter(owner=self.charlie)
-        self.assertEqual(1, len(charlieClassList), msg='ClassList failed to delete record')
+        self.assertEqual(1, len(charlieClassList))
 
     def test_create_classlist(self):
         self.english2 = ClassList.objects.create(name='english2', owner=self.charlie)
         charlieClassList = ClassList.objects.filter(owner=self.charlie)
-        self.assertEqual(3, len(charlieClassList), msg='ClassList failed to create new record')
+        self.assertEqual(3, len(charlieClassList))
 
 
