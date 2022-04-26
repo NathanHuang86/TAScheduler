@@ -1,0 +1,96 @@
+html {
+    background: rgb(145, 178, 199);
+}
+navContainer {
+    position: center;
+    height: auto;
+    width: 100%;
+}
+
+.navigation {
+    list-style-type: none;
+    background-color: #333;
+    position: sticky;
+    width: 100%;
+    overflow: auto;
+}
+
+.navigation li a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    background-color: #333;
+}
+
+.navigation li:hover a:not(.active) {
+    background-color: #D3D3D3;
+    color: #000;
+}
+
+.header {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+
+}
+
+.container {
+    margin-top: 20px;
+    width: 700px;
+    height: 350px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 6px;
+    margin-left: 500px;
+    border: 2px solid White;
+    border-radius: 15px;
+    background: white;
+    text-align: center;
+
+}
+
+.containerbox {
+    padding-left: 95px;
+}
+
+.newAccountInformation {
+
+    align-items: center;
+    width: 100%;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    outline-color: rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    text-align: center;
+    border: 2px solid #e1dede69;
+    background: #e1dede69;
+    color: grey;
+
+}
+
+.submit-button {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 10px 30px;
+}
+
+.submit-button button {
+    font-size: 20px;
+    padding: 5px 15px;
+    border: 2px solid;
+    border-radius: 15px;
+    color: white;
+    background: #91B2C7;
+    width: 280px;
+    cursor: pointer;
+    margin-left: 80px;
+}
