@@ -17,7 +17,7 @@
         <li><a>Labs</a></li>
         <li><a>People</a></li>
         <li><a>View TA Assignments</a></li>
-        <li><a>Create User</a></li>
+        <li><a href="../createAccount/">Create User</a></li>
         <li><a>Edit User</a></li>
         <li><a>Logout</a></li>
     </div>
@@ -30,7 +30,8 @@
     <div class="newCourseContainer">
         <table>
             <tr>
-                <td><input name="name" class="course-textbox" placeholder="Course Name"></td>
+                <td><input name="name" class="textbox" placeholder="Course Name"></td>
+
                 <td>
                     <select class="dropdownMenu" name="userSelect">
                         <option value="" disabled selected>Select an instructor</option>
@@ -40,19 +41,11 @@
                     </select>
                 </td>
             </tr>
-            <tr>
-                <td><input class="course-textbox" placeholder="Meeting Times"></td>
-                <td><input class="course-textbox" placeholder="Semester"></td>
-            </tr>
-            <tr>
-                <td><input class="course-textbox" placeholder="Course Number">
-                </td>
-                <td><input class="course-textbox" placeholder="Description">
-            </tr>
+
         </table>
 
         <div class="submit-button">
-            <button type="submit">Create Account</button>
+            <button type="submit">Create Course</button>
         </div>
     </div>
     <p class="header">Add a TA to a section</p>
@@ -60,21 +53,21 @@
         <table>
             <tr>
                 <td>
-                    <select required class="dropdownMenuCourse">
+                    <select name="taSelection" class="dropdownMenuCourse">
                         <option value="" disabled selected>Select a TA</option>
                     </select>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <select required class="dropdownMenuCourse">
+                    <select name="courseSelection" class="dropdownMenuCourse">
                         <option value="" disabled selected>Select Course</option>
                     </select>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <select required class="dropdownMenuCourse">
+                    <select name="sectionSelection" class="dropdownMenuCourse">
                         <option value="" disabled selected>Select Section</option>
                     </select>
                 </td>
@@ -95,7 +88,7 @@
         <table>
             <tr>
 
-                <select class="dropdownMenu" name="userSelect">
+                <select class="dropdownMenu" name="courseForSection">
                     <option value="" disabled selected>Select a Course</option>
                     {% for entry in instructors %}
                         <option value= {{ entry.name }}>{{ entry.name }}</option>
@@ -110,13 +103,13 @@
                 </select>
             </tr>
             <tr>
-                <td><input class="course-textbox" placeholder="Section Number"></td>
-                <td><input class="course-textbox" placeholder="Section Type"></td>
+                <td><input name="sectionNumber" class="course-textbox" placeholder="Section Number"></td>
+                <td><input name="sectionType" class="course-textbox" placeholder="Section Type"></td>
             </tr>
             <tr>
-                <td><input class="course-textbox" placeholder="Start Time">
+                <td><input name="startTime" class="course-textbox" placeholder="Start Time">
                 </td>
-                <td><input class="course-textbox" placeholder="End time">
+                <td><input name="endTime" class="course-textbox" placeholder="End time">
             </tr>
             <div class="chooseScheduleContainer">
                 <fieldset>

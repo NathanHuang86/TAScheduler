@@ -22,4 +22,5 @@ urlpatterns = [
     path("", Login.as_view()),
     path("createAccount/", CreateAccount.as_view()),
     path("courses/", Courses.as_view())
+
 ]

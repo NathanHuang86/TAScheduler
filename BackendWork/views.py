@@ -44,9 +44,18 @@ class CreateAccount(View):
         return render(request, "createAccount.html", {"username": m})
 
     def post(self, request):
+        role = None
+        if request.POST.get("button1") == "0":
+            role = "Teaching Assistant"
+        if request.POST.get("button1") == "1":
+            role = "Instructor"
+        if request.POST.get("button1") == "2":
+            role = "Admin"
+
         newuser = MyUser(username=request.POST["username"], password=request.POST["password"],
                          name=request.POST["name"],
-                         email=request.POST["email"], address=request.POST["address"], phone=request.POST["phone"])
+                         email=request.POST["email"], address=request.POST["address"], phone=request.POST["phone"],
+                         role=role)
 
         for names in vars(newuser).values():
             print(names)
@@ -65,8 +74,9 @@ class Courses(View):
         return render(request, "courses.html", {'instructors': instructors})
 
     def post(self, request):
-        instructors = MyUser.objects.filter(role='Instructor').values().name
-        newcourse = ClassList(name=request.POST["name"], owner=request.POST["owner"])
+        instructors = MyUser.objects.filter(role='Instructor').values()
+        d = MyUser.objects.filter(name=request.POST["userSelect"])
+        newcourse = ClassList(name=request.POST["name"], owner=d[0])
         newcourse.save()
-        print(instructors)
+
         return render(request, "courses.html", {'instructors': instructors})
