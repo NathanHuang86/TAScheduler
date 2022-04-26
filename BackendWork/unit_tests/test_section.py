@@ -1,5 +1,6 @@
 from django.test import TestCase
 from BackendWork.models import Section, MyUser, ClassList
+import datetime
 from _datetime import time
 
 class SectionUnitTestSuite(TestCase):
@@ -38,26 +39,26 @@ class SectionUnitTestSuite(TestCase):
         self.assertEqual(len(charlieSectionList), 8, msg='Section failed to filter by TA')
 
     def test_list_section_names_by_TA(self):
-        aliceSectionList = Section.objects.filter(TA=self.alice)
-        bobSectionList = Section.objects.filter(TA=self.bob)
-        charlieSectionList = Section.objects.filter(TA=self.charlie)
+        aliceSectionList = list(Section.objects.filter(TA=self.alice))
+        bobSectionList = list(Section.objects.filter(TA=self.bob))
+        charlieSectionList = list(Section.objects.filter(TA=self.charlie))
         self.assertEqual(aliceSectionList, [self.mathDiscussionSection1, self.historyDiscussionSection1, self.scienceDiscussionSection1, self.englishDiscussionSection1], msg='Section failed to filter by TA')
         self.assertEqual(bobSectionList, [self.mathDiscussionSection2, self.historyDiscussionSection2, self.scienceDiscussionSection2, self.englishDiscussionSection2], msg='Section failed to filter by TA')
         self.assertEqual(charlieSectionList, [self.mathLabSection1, self.mathLabSection2, self.historyLabSection1, self.historyLabSection2, self.scienceLabSection1, self.scienceLabSection2, self.englishLabSection1, self.englishLabSection2], msg='Section failed to filter by TA')
 
     def test_list_section_names_by_Class(self):
-        mathSectionList = Section.objects.filter(Class=self.math)
-        historySectionList = Section.objects.filter(Class=self.history)
-        scienceSectionList = Section.objects.filter(Class=self.science)
-        englishSectionList = Section.objects.filter(Class=self.english)
-        self.assertEqual(mathSectionList, [self.mathDiscussionSection1, self.mathDiscussionSection2, self.mathLabSection1, self.mathDiscussionSection2], msg='Section failed to filter by class')
-        self.assertEqual(historySectionList, [self.historyDiscussionSection1, self.historyDiscussionSection2, self.historyLabSection1, self.historyDiscussionSection2], msg='Section failed to filter by class')
+        mathSectionList = list(Section.objects.filter(Class=self.math))
+        historySectionList = list(Section.objects.filter(Class=self.history))
+        scienceSectionList = list(Section.objects.filter(Class=self.science))
+        englishSectionList = list(Section.objects.filter(Class=self.english))
+        self.assertEqual(mathSectionList, [self.mathDiscussionSection1, self.mathDiscussionSection2, self.mathLabSection1, self.mathLabSection2], msg='Section failed to filter by class')
+        self.assertEqual(historySectionList, [self.historyDiscussionSection1, self.historyDiscussionSection2, self.historyLabSection1, self.historyLabSection2], msg='Section failed to filter by class')
         self.assertEqual(scienceSectionList, [self.scienceDiscussionSection1, self.scienceDiscussionSection2, self.scienceLabSection1, self.scienceLabSection2], msg='Section failed to filter by class')
         self.assertEqual(englishSectionList, [self.englishDiscussionSection1, self.englishDiscussionSection2, self.englishLabSection1, self.englishLabSection2], msg='Section failed to filter by class')
 
     def test_list_section_names_by_Type(self):
-        discussionSectionList = Section.objects.filter(sectionType='Discussion')
-        labSectionList = Section.objects.filter(sectionType='Lab')
+        discussionSectionList = list(Section.objects.filter(sectionType='Discussion'))
+        labSectionList = list(Section.objects.filter(sectionType='Lab'))
         self.assertEqual(discussionSectionList, [self.mathDiscussionSection1, self.mathDiscussionSection2, self.historyDiscussionSection1, self.historyDiscussionSection2, self.scienceDiscussionSection1, self.scienceDiscussionSection2, self.englishDiscussionSection1, self.englishDiscussionSection2], msg='Section failed to filter by section type')
         self.assertEqual(labSectionList, [self.mathLabSection1, self.mathLabSection2, self.historyLabSection1, self.historyLabSection2, self.scienceLabSection1, self.scienceLabSection2, self.englishLabSection1, self.englishLabSection2], msg='Section failed to filter by section type')
 
@@ -98,4 +99,3 @@ class SectionUnitTestSuite(TestCase):
         self.mathDiscussionSection1.delete()
         aliceSectionList = Section.objects.filter(TA=self.alice)
         self.assertEqual(len(aliceSectionList), 3, msg='Section failed to delete a record')
-
