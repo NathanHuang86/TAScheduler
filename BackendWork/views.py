@@ -80,3 +80,11 @@ class CreateCourses(View):
         newcourse.save()
 
         return render(request, "createCourses.html", {'instructors': instructors})
+
+class Users(View):
+    def get(self, request):
+        users = MyUser.objects.filter()
+        return render(request, "users.html", {'users': users})
+
+    def post(self, request):
+        pass
