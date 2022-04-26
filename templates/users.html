@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,11 +13,11 @@
     </header>
     <div class="navigation">
         <li><a href ="/login/">Home</a></li>
-        <li><a>Courses</a></li>
+        <li><a href="../createCourses/">Create Courses</a></li>
         <li><a>Labs</a></li>
         <li><a>People</a></li>
         <li><a>View TA Assignments</a></li>
-        <li><a>Create User</a></li>
+        <li><a href="../createAccount/">Create User</a></li>
         <li><a>Edit User</a></li>
         <li><a>Logout</a></li>
     </div>
@@ -27,7 +28,15 @@
         <p class=header>Users</p>
         <div class="containerbox">
             <table>
-
+                {% for entry in users %}
+                    <p><tr> Username:{{ entry.username }} </tr>
+                    <tr> Password:{{ entry.password }} </tr>
+                    <tr> Name:{{ entry.name }} </tr>
+                    <tr> Email:{{ entry.email }} </tr>
+                    <tr> Address:{{ entry.address }} </tr>
+                    <tr> Phone:{{ entry.phone }} </tr>
+                    <tr> Role:{{ entry.role }} </tr><br></p>
+                {% endfor %}
             </table>
 
 
