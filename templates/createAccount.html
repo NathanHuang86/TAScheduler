@@ -8,16 +8,18 @@
 </head>
 
 <div class="navContainer">
-    <header class="createUserHeader">
+    <header class="header">
         <h1><a>TA Scheduler Management System</a></h1>
     </header>
     <div class="navigation">
-        <li><a>Home</a></li>
-        <li><a href="../createCourses/">Create Courses</a></li>
+        {% if sessionUser == "Admin" %}
+            <li><a href="../createAccount/">Create User</a></li>
+            <li><a href="../createCourses/">Create Courses</a></li>
+        {% endif %}
+        <li><a href="../home/">Home</a></li>
         <li><a>Labs</a></li>
         <li><a href="../users/">People</a></li>
         <li><a>View TA Assignments</a></li>
-        <li><a href="../createAccount/">Create User</a></li>
         <li><a>Edit User</a></li>
         <li><a>Logout</a></li>
     </div>

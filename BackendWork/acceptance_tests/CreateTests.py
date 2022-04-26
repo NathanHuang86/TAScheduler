@@ -46,5 +46,5 @@ class TestFailAccount(TestCase):
 
     def test_EmptyUser(self):
         ClassList(username="Sauce", owner=MyUser(username=None, password="Chic")).save()
-        with self.assertRaises(KeyError, "Key shouldn't pass through"):
+        with self.assertRaises(TypeError, "Key shouldn't pass through"):
             resp = self.client.post("/", {"username": None, "password": "Link"}, follow=True)
