@@ -67,11 +67,11 @@ class CreateAccount(View):
         return render(request, "createAccount.html", {"message": "Invalid data entered"})
 
 
-class Courses(View):
+class CreateCourses(View):
     def get(self, request):
         instructors = MyUser.objects.filter(role='Instructor')
         m = request.session["username"]
-        return render(request, "courses.html", {'instructors': instructors})
+        return render(request, "createCourses.html", {'instructors': instructors})
 
     def post(self, request):
         instructors = MyUser.objects.filter(role='Instructor').values()
@@ -79,4 +79,4 @@ class Courses(View):
         newcourse = ClassList(name=request.POST["name"], owner=d[0])
         newcourse.save()
 
-        return render(request, "courses.html", {'instructors': instructors})
+        return render(request, "createCourses.html", {'instructors': instructors})
