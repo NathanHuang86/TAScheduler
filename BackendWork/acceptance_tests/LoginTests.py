@@ -10,18 +10,17 @@ class TestLogin(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.thingList = {"Mike": {"Bobble head", "Mike Tyson"}, "Bob": {"Crackers", "Digimon"}}
+        self.thingList = {"Mike": "Mike", "Bob": "Bob"}
 
         for i in self.thingList.keys():
             temp = MyUser(username=i, password=i)
             temp.save()
-            for j in self.thingList[i]:
-                ClassList(username=j, owner=temp).save()
 
-    def test_correctName(self):
+    def test_correctLogin(self):
         for i in self.thingList.keys():
-            resp = self.client.post("/", {"username": i, "password": i}, follow=True)
-            self.assertEqual(resp.context["username"], i, "name not passed from Login to list")
+            resp = self.client.post("", {"username": i, "password": i})
+            print(self.client.get("username"))
+            assert(resp.status_code == 200, "name not passed from Login to list")
 
 
 class TestIncorrectLogin(TestCase):
@@ -30,20 +29,18 @@ class TestIncorrectLogin(TestCase):
 
     def setUp(self):
         self.client = Client()
-        self.thingList = {"Mike": {"Bobble head", "Mike Tyson"}, "Bob": {"Crackers", "Digimon"}}
+        self.thingList = {"Mike": "Mike", "Bob": "Bob"}
 
         for i in self.thingList.keys():
             temp = MyUser(username=i, password=i)
             temp.save()
-            for j in self.thingList[i]:
-                ClassList(username=j, owner=temp).save()
 
     def test_incorrectPassword(self):
         for i in self.thingList.keys():
             resp = self.client.post("/", {"username": i, "password": i}, follow=True)
-            self.assertFalse(resp.context["password"], "Bubby Kot", "Password shouldn't pass")
+            self.assertFalse(resp.status_code != 200, "Test shouldn't pass due to incorrect username.")
 
     def test_incorrectUsername(self):
         for i in self.thingList.keys():
             resp = self.client.post("/", {"username": i, "password": i}, follow=True)
-            self.assertFalse(resp.context["username"], "Bubby Kot", "Username doesn't exist")
+            self.assertFalse(resp.status_code != 200, "Test shouldn't pass due to incorrect password.")
