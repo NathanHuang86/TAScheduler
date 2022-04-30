@@ -13,14 +13,10 @@
     </header>
     <div class="navigation">
         {% if sessionUser == "Admin" %}
-            <li><a href="../createAccount/">Create User</a></li>
-            <li><a href="../createCourses/">Create Courses</a></li>
         {% endif %}
         <li><a href="../home/">Home</a></li>
-        <li><a>Labs</a></li>
-        <li><a href="../users/">People</a></li>
-        <li><a>View TA Assignments</a></li>
-        <li><a>Edit User</a></li>
+        <li><a href="../courses/">Courses</a></li>
+        <li><a href="../users/">Users</a></li>
         <li><a>Logout</a></li>
     </div>
 </div>
@@ -48,104 +44,6 @@
 
         <div class="submit-button">
             <button type="submit">Create Course</button>
-        </div>
-    </div>
-    <p class="header">Add a TA to a section</p>
-    <div class="assignTAContainer">
-        <table>
-            <tr>
-                <td>
-                    <select name="taSelection" class="dropdownMenuCourse">
-                        <option value="" disabled selected>Select a TA</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <select name="courseSelection" class="dropdownMenuCourse">
-                        <option value="" disabled selected>Select Course</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <select name="sectionSelection" class="dropdownMenuCourse">
-                        <option value="" disabled selected>Select Section</option>
-                    </select>
-                </td>
-            </tr>
-        </table>
-        <div class="submit-button">
-            <button type="submit">Assign TA</button>
-        </div>
-    </div>
-
-
-</form>
-
-<form action="" method="post">
-    {% csrf_token %}
-    <p class="header">Add a new section</p>
-    <div class="newSectionContainer">
-        <table>
-            <tr>
-
-                <select class="dropdownMenu" name="courseForSection">
-                    <option value="" disabled selected>Select a Course</option>
-                    {% for entry in instructors %}
-                        <option value= {{ entry.name }}>{{ entry.name }}</option>
-                    {% endfor %}
-                </select>
-
-                <select class="dropdownMenu" name="userSelect">
-                    <option value="" disabled selected>Select a TA</option>
-                    {% for entry in instructors %}
-                        <option value= {{ entry.name }}>{{ entry.name }}</option>
-                    {% endfor %}
-                </select>
-            </tr>
-            <tr>
-                <td><input name="sectionNumber" class="course-textbox" placeholder="Section Number"></td>
-                <td><input name="sectionType" class="course-textbox" placeholder="Section Type"></td>
-            </tr>
-            <tr>
-                <td><input name="startTime" class="course-textbox" placeholder="Start Time">
-                </td>
-                <td><input name="endTime" class="course-textbox" placeholder="End time">
-            </tr>
-            <div class="chooseScheduleContainer">
-                <fieldset>
-                    <legend>Choose Schedule:</legend>
-
-                    <div>
-                        <input type="checkbox" name="Monday">
-                        <label for="Monday">Monday</label>
-                    </div>
-
-                    <div>
-                        <input type="checkbox" name="Tuesday">
-                        <label for="Tuesday">Tuesday</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="Wednesday">
-                        <label for="Wednesday">Wednesday</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="Thursday">
-                        <label for="Thursday">Thursday</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="Friday">
-                        <label for="Friday">Friday</label>
-                    </div>
-                </fieldset>
-
-
-            </div>
-        </table>
-
-        <div class="submit-button">
-            <button type="submit">Create Account</button>
         </div>
     </div>
 </form>

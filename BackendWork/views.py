@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from BackendWork.models import ClassList, MyUser
+from BackendWork.models import ClassList, MyUser, Section
 
 
 # Create your views here.
@@ -100,5 +100,34 @@ class Users(View):
 
     def get(self, request):
         m = request.session["role"]
+        users = MyUser.objects.all()
+        return render(request, "list_of_users.html", {'sessionUser': m, 'users': users})
+
+
+class Courses(View):
+
+    def get(self, request):
+        m = request.session["role"]
+        courses = ClassList.objects.all()
+        return render(request, "list_of_courses.html", {'sessionUser': m, 'courses': courses})
+
+    def post(self, request):
+        m = request.session["role"]
+        thisCourseName = request.POST.get("thisCourse")
+        print("The course name = ", thisCourseName)
+        course = ClassList.objects.get(name=thisCourseName)
+        sections = Section.objects.filter(Class=course)
+        return render(request, "list_of_sections.html", {'sessionUser': m, 'sections': sections, 'course': course})
+
+class ViewSections(View):
+
+    def get(self, request):
+        pass
+
+class EditUser(View):
+
+    def get(self, request):
+        m = request.session["role"]
         users = MyUser.objects.filter()
-        return render(request, "users.html", {'sessionUser': m, 'users': users})
+        return render(request, "list_of_users.html", {'sessionUser': m, 'users': users})
+

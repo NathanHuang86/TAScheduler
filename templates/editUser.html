@@ -12,14 +12,10 @@
     </header>
     <div class="navigation">
         {% if sessionUser == "Admin" %}
-            <li><a href="../createAccount/">Create User</a></li>
-            <li><a href="../createCourses/">Create Courses</a></li>
         {% endif %}
         <li><a href="../home/">Home</a></li>
-        <li><a>Labs</a></li>
-        <li><a>People</a></li>
-        <li><a>View TA Assignments</a></li>
-        <li><a>Edit User</a></li>
+        <li><a href="../courses/">Courses</a></li>
+        <li><a>Users</a></li>
         <li><a>Logout</a></li>
     </div>
 </div>
@@ -31,28 +27,24 @@
     <table>
 
         <tr>
-            <td><input placeholder="Change Username" class='newAccountInformation'></td>
+            <td><input placeholder="Change Username: [insert this username]" class='newAccountInformation'></td>
         </tr>
         <tr>
-            <td><input placeholder="Change Password" class=newAccountInformation></td>
+            <td><input placeholder="Change Password: [insert this password]" class=newAccountInformation></td>
         </tr>
         <tr>
-            <td><input placeholder="Change Name" class=newAccountInformation></td>
+            <td><input placeholder="Change Name: [insert this name]" class=newAccountInformation></td>
 
         </tr>
         <tr>
-            <td><input placeholder="Change Email" class=newAccountInformation></td>
+            <td><input placeholder="Change Email: [insert this email]" class=newAccountInformation></td>
         </tr>
         <tr>
-            <td><input placeholder="Change Address" class=newAccountInformation></td>
+            <td><input placeholder="Change Address: [insert this address]" class=newAccountInformation></td>
         </tr>
         <tr>
-            <td><input placeholder="Change Phone Number" class=newAccountInformation></td>
+            <td><input placeholder="Change Phone Number: [insert this phone number]" class=newAccountInformation></td>
         </tr>
-
-        <select class="dropdownMenu">
-            <option>Select a User</option>
-        </select>
 
         <tr>
             <th class=roleLabel>Change Role:</th>

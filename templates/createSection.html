@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css\createCourses.css' %}"/>
+</head>
+
+<div class="navContainer">
+    <header class="header">
+        <h1><a>TA Scheduler Management System</a></h1>
+    </header>
+    <div class="navigation">
+        {% if sessionUser == "Admin" %}
+        {% endif %}
+        <li><a href="../home/">Home</a></li>
+        <li><a href="../courses/">Courses</a></li>
+        <li><a href="../users/">Users</a></li>
+        <li><a>Logout</a></li>
+    </div>
+</div>
+
+<body>
+<form action="" method="post">
+    {% csrf_token %}
+    <p class="header">Add a new course</p>
+    <div class="newCourseContainer">
+        <table>
+            <tr>
+                <td><input name="name" class="textbox" placeholder="Course Name"></td>
+
+                <td>
+                    <select class="dropdownMenu" name="userSelect">
+                        <option value="" disabled selected>Select an instructor</option>
+                        {% for entry in instructors %}
+                            <option value= {{ entry.name }}>{{ entry.name }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+
+        </table>
+
+        <div class="submit-button">
+            <button type="submit">Create Course</button>
+        </div>
+    </div>
+    <p class="header">Add a TA to a section</p>
+    <div class="assignTAContainer">
+        <table>
+            <tr>
+                <td>
+                    <select name="taSelection" class="dropdownMenuCourse">
+                        <option value="" disabled selected>Select a TA</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <select name="courseSelection" class="dropdownMenuCourse">
+                        <option value="" disabled selected>Select Course</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <select name="sectionSelection" class="dropdownMenuCourse">
+                        <option value="" disabled selected>Select Section</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <div class="submit-button">
+            <button type="submit">Assign TA</button>
+        </div>
+    </div>
+
+
+</form>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <p class="header">Add a new section</p>
+    <div class="newSectionContainer">
+        <table>
+            <tr>
+
+                <select class="dropdownMenu" name="courseForSection">
+                    <option value="" disabled selected>Select a Course</option>
+                    {% for entry in instructors %}
+                        <option value= {{ entry.name }}>{{ entry.name }}</option>
+                    {% endfor %}
+                </select>
+
+                <select class="dropdownMenu" name="userSelect">
+                    <option value="" disabled selected>Select a TA</option>
+                    {% for entry in instructors %}
+                        <option value= {{ entry.name }}>{{ entry.name }}</option>
+                    {% endfor %}
+                </select>
+            </tr>
+            <tr>
+                <td><input name="sectionNumber" class="course-textbox" placeholder="Section Number"></td>
+                <td><input name="sectionType" class="course-textbox" placeholder="Section Type"></td>
+            </tr>
+            <tr>
+                <td><input name="startTime" class="course-textbox" placeholder="Start Time">
+                </td>
+                <td><input name="endTime" class="course-textbox" placeholder="End time">
+            </tr>
+            <div class="chooseScheduleContainer">
+                <fieldset>
+                    <legend>Choose Schedule:</legend>
+
+                    <div>
+                        <input type="checkbox" name="Monday">
+                        <label for="Monday">Monday</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" name="Tuesday">
+                        <label for="Tuesday">Tuesday</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="Wednesday">
+                        <label for="Wednesday">Wednesday</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="Thursday">
+                        <label for="Thursday">Thursday</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="Friday">
+                        <label for="Friday">Friday</label>
+                    </div>
+                </fieldset>
+
+
+            </div>
+        </table>
+
+        <div class="submit-button">
+            <button type="submit">Create Account</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

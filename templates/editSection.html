@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Section</title>
+    <link rel="stylesheet" type="text/css" href="../TAScheduler/static/css/editUser.css">
+</head>
+
+<div class="navContainer">
+    <header class="header">
+        <h1><a>TA Scheduler Management System</a></h1>
+    </header>
+    <div class="navigation">
+        {% if sessionUser == "Admin" %}
+        {% endif %}
+        <li><a href="../home/">Home</a></li>
+        <li><a href="../courses/">Courses</a></li>
+        <li><a>Users</a></li>
+        <li><a>Logout</a></li>
+    </div>
+</div>
+
+
+<body>
+<div class="container">
+    <p class=subHeader>Edit Section</p>
+    <table>
+
+        <tr>
+            <td><input placeholder="Change Class: [insert this section class]" class='newAccountInformation'></td>
+        </tr>
+        <tr>
+            <td><input placeholder="Change TA: [insert this section TA]" class=newAccountInformation></td>
+        </tr>
+        <tr>
+            <td><input placeholder="Change Section Number: [insert this section number]" class=newAccountInformation></td>
+        </tr>
+        <tr>
+            <td><input placeholder="Change Type: [insert this section type]" class=newAccountInformation></td>
+        </tr>
+        <tr>
+            <td><input placeholder="Change Schedule: [insert this section schedule]" class=newAccountInformation></td>
+        </tr>
+        <tr>
+            <td><input placeholder="Change Start Time: [insert this section start time]" class=newAccountInformation></td>
+        </tr>
+        <tr>
+            <td><input placeholder="Change End Time: [insert this section start time]" class=newAccountInformation></td>
+        </tr>
+    </table>
+    <div class="submit-button">
+        <button type="submit">Save Changes</button>
+    </div>
+</div>
+</body>
+</html>
