@@ -111,18 +111,17 @@ class Courses(View):
         courses = ClassList.objects.all()
         return render(request, "list_of_courses.html", {'sessionUser': m, 'courses': courses})
 
-    def post(self, request):
-        m = request.session["role"]
-        thisCourseName = request.POST.get("thisCourse")
-        print("The course name = ", thisCourseName)
-        course = ClassList.objects.get(name=thisCourseName)
-        sections = Section.objects.filter(Class=course)
-        return render(request, "list_of_sections.html", {'sessionUser': m, 'sections': sections, 'course': course})
 
-class ViewSections(View):
+class Sections(View):
 
     def get(self, request):
-        pass
+        name = request.POST["thisCourse"]
+        print("This course name = ", name)
+        thisClass = ClassList.objects.get(name=name)
+        print("The course name = ", thisClass.name)
+        sections = Section.objects.filter(Class=thisClass)
+        return render(request, "list_of_sections.html", {'sections': sections, 'course': thisClass})
+
 
 class EditUser(View):
 
