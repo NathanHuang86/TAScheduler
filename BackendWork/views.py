@@ -111,6 +111,13 @@ class Courses(View):
         courses = ClassList.objects.all()
         return render(request, "list_of_courses.html", {'sessionUser': m, 'courses': courses})
 
+    def post(self, request):
+        m = request.session["role"]
+        thisCourseName = request.POST['thisCourse']
+        print("ThisCourse =", request.POST['thisCourse'])
+        thisCourse = ClassList.objects.get(name=thisCourseName)
+        sections = Section.objects.filter(Class=thisCourse)
+        return render(request, "list_of_sections.html", {'sessionUser': m, 'course': thisCourse, 'sections': sections})
 
 class Sections(View):
 
