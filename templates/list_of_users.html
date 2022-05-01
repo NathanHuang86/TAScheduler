@@ -46,7 +46,10 @@
                     <td>{{ i.phone }}</td>
                     <td>{{ i.role }}</td>
                     <td>
-                        <a href="../editUser/"><button>Edit</button></a>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <button name="thisUser" value="{{ i.username }}">Edit</button>
+                        </form>
                     </td>
                     <td>
                         <button>Delete</button>
@@ -55,9 +58,9 @@
                 {% endfor %}
         </table>
 
-    <div class="submit-button">
-        <a href="../createAccount/"><button name="createAccountSubmit">Create Account</button></a>
-            </div>
+        <div class="submit-button">
+            <a href="../createAccount/"><button name="createAccountSubmit">Create Account</button></a>
+        </div>
 
     </div>
 </div>

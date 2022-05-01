@@ -103,6 +103,13 @@ class Users(View):
         users = MyUser.objects.all()
         return render(request, "list_of_users.html", {'sessionUser': m, 'users': users})
 
+    def post(self, request):
+        m = request.session["role"]
+        thisUsername = request.POST['thisUser']
+        print("thisUsername =", request.POST['thisUser'])
+        thisUser = MyUser.objects.get(username=thisUsername)
+        return render(request, "editUser.html", {'sessionUser': m, 'thisUser': thisUser})
+
 
 class Courses(View):
 
@@ -112,12 +119,23 @@ class Courses(View):
         return render(request, "list_of_courses.html", {'sessionUser': m, 'courses': courses})
 
     def post(self, request):
-        m = request.session["role"]
-        thisCourseName = request.POST['thisCourse']
-        print("ThisCourse =", request.POST['thisCourse'])
-        thisCourse = ClassList.objects.get(name=thisCourseName)
-        sections = Section.objects.filter(Class=thisCourse)
-        return render(request, "list_of_sections.html", {'sessionUser': m, 'course': thisCourse, 'sections': sections})
+
+        # print("thisCourseSections =", request.POST['thisCourseSections'])
+        # print("thisCourseEdit =", request.POST['thisCourseEdit'])
+
+        if request.POST.get('thisCourseSections'):
+            m = request.session["role"]
+            thisCourseName = request.POST['thisCourseSections']
+            thisCourse = ClassList.objects.get(name=thisCourseName)
+            sections = Section.objects.filter(Class=thisCourse)
+            return render(request, "list_of_sections.html", {'sessionUser': m, 'course': thisCourse, 'sections': sections})
+
+        elif request.POST.get('thisCourseEdit'):
+            m = request.session["role"]
+            thisCourseName = request.POST['thisCourseEdit']
+            thisCourse = ClassList.objects.get(name=thisCourseName)
+            return render(request, "editCourse.html", {'sessionUser': m, 'course': thisCourse})
+
 
 class Sections(View):
 

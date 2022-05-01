@@ -15,7 +15,7 @@
         {% endif %}
         <li><a href="../home/">Home</a></li>
         <li><a href="../courses/">Courses</a></li>
-        <li><a>Users</a></li>
+        <li><a href="../users/">Users</a></li>
         <li><a href="/">Logout</a></li>
     </div>
 </div>
@@ -23,31 +23,30 @@
 
 <body>
 <div class="container">
-    <p class=subHeader>Edit User</p>
+    <p class=subHeader>Edit User: {{ thisUser.username }}</p>
     <table>
 
         <tr>
-            <td><input placeholder="Change Username: [insert this username]" class='newAccountInformation'></td>
+            <td><input placeholder="Change Username: {{ thisUser.username }}" class='newAccountInformation'></td>
         </tr>
         <tr>
-            <td><input placeholder="Change Password: [insert this password]" class=newAccountInformation></td>
+            <td><input placeholder="Change Password: {{ thisUser.password }}" class=newAccountInformation></td>
         </tr>
         <tr>
-            <td><input placeholder="Change Name: [insert this name]" class=newAccountInformation></td>
+            <td><input placeholder="Change Name: {{ thisUser.name }}" class=newAccountInformation></td>
+        </tr>
+        <tr>
+            <td><input placeholder="Change Email: {{ thisUser.email }}" class=newAccountInformation></td>
+        </tr>
+        <tr>
+            <td><input placeholder="Change Address: {{ thisUser.address }}" class=newAccountInformation></td>
+        </tr>
+        <tr>
+            <td><input placeholder="Change Phone Number: {{ thisUser.phone }}" class=newAccountInformation></td>
+        </tr>
 
-        </tr>
         <tr>
-            <td><input placeholder="Change Email: [insert this email]" class=newAccountInformation></td>
-        </tr>
-        <tr>
-            <td><input placeholder="Change Address: [insert this address]" class=newAccountInformation></td>
-        </tr>
-        <tr>
-            <td><input placeholder="Change Phone Number: [insert this phone number]" class=newAccountInformation></td>
-        </tr>
-
-        <tr>
-            <th class=roleLabel>Change Role:</th>
+            <th class=roleLabel>Change Role: {{ thisUser.role }}</th>
             <td>
                 <input type="radio" name="permission">
                 <label>TA</label>

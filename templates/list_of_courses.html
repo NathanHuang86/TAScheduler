@@ -36,7 +36,10 @@
                     <td>{{ i.name }}</td>
                     <td>{{ i.owner }}</td>
                     <td>
-                        <a href="../editCourse/"><button>Edit</button></a>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <button name="thisCourseEdit" value="{{ i.name }}">Edit</button>
+                        </form>
                     </td>
                     <td>
                         <button>Delete</button>
@@ -44,7 +47,7 @@
                     <td>
                     <form action="" method="post">
                         {% csrf_token %}
-                        <button name="thisCourse" value="{{ i.name }}">View Sections</button>
+                        <button name="thisCourseSections" value="{{ i.name }}">View Sections</button>
                     </form>
                     </td>
                     </tr>
