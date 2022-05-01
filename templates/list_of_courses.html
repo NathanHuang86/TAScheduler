@@ -44,7 +44,7 @@
                     <td>
                     <form action="" method="post">
                         {% csrf_token %}
-                        <button name="thisCourse" value={{ i.name }}>View Sections</button>
+                        <button name="thisCourse" value="{{ i.name }}">View Sections</button>
                     </form>
                     </td>
                     </tr>
