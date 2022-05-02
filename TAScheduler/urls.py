@@ -26,8 +26,8 @@ urlpatterns = [
     path("courses/sections/", Sections.as_view()),
     path("createAccount/", CreateAccount.as_view()),
     path("createCourses/", CreateCourses.as_view()),
-    path("createSection/", CreateSection.as_view()),
+    path("courses/createSection/", CreateSection.as_view()),
     path("users/editUser/", EditUser.as_view()),
     path("courses/editCourse/", EditCourses.as_view()),
-    path("editSection/", EditSection.as_view())
+    path("courses/sections/editSection/", EditSection.as_view())
 ]

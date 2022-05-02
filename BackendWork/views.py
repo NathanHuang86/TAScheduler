@@ -94,10 +94,8 @@ class Sections(View):
         return render(request, "list_of_sections.html", {'sessionUser': m, 'course': thisCourse, 'sections': sections})
 
     def post(self, request):
-        m = request.session["role"]
-        thisUsername = request.POST['thisUser']
-        thisUser = MyUser.objects.get(username=thisUsername)
-        return render(request, "editUser.html", {'sessionUser': m, 'thisUser': thisUser})
+        request.session['thisSection'] = request.POST['thisSection']
+        return redirect("editSection/")
 
 
 class CreateAccount(View):
@@ -173,7 +171,7 @@ class EditSection(View):
         m = request.session["role"]
         thisCourseName = request.session["thisCourse"]
         thisCourse = ClassList.objects.get(name=thisCourseName)
-        thisSection = Section.objects.get(Class=thisCourse, sectionNumber=request.POST['thisSection'])
+        thisSection = Section.objects.get(Class=thisCourse, sectionNumber=request.session['thisSection'])
         return render(request, "editSection.html", {'sessionUser': m, 'section': thisSection})
 
 
