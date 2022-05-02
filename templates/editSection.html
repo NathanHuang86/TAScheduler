@@ -23,29 +23,29 @@
 
 <body>
 <div class="container">
-    <p class=subHeader>Edit Section</p>
+    <p class=subHeader>Edit Section: {{ section.Class.name }} {{ section.sectionType }} {{ section.sectionNumber }}</p>
     <table>
 
         <tr>
-            <td><input placeholder="Change Class: [insert this section class]" class='newAccountInformation'></td>
+            <td><input placeholder="Change Class: {{ section.Class }}" class='newAccountInformation'></td>
         </tr>
         <tr>
-            <td><input placeholder="Change TA: [insert this section TA]" class=newAccountInformation></td>
+            <td><input placeholder="Change TA: {{ section.TA }}" class=newAccountInformation></td>
         </tr>
         <tr>
-            <td><input placeholder="Change Section Number: [insert this section number]" class=newAccountInformation></td>
+            <td><input placeholder="Change Section Number: {{ section.sectionNumber }}" class=newAccountInformation></td>
         </tr>
         <tr>
-            <td><input placeholder="Change Type: [insert this section type]" class=newAccountInformation></td>
+            <td><input placeholder="Change Type: {{ section.sectionType }}" class=newAccountInformation></td>
         </tr>
         <tr>
-            <td><input placeholder="Change Schedule: [insert this section schedule]" class=newAccountInformation></td>
+            <td><input placeholder="Change Schedule: {{ section.schedule }}" class=newAccountInformation></td>
         </tr>
         <tr>
-            <td><input placeholder="Change Start Time: [insert this section start time]" class=newAccountInformation></td>
+            <td><input placeholder="Change Start Time: {{ section.startTime }}" class=newAccountInformation></td>
         </tr>
         <tr>
-            <td><input placeholder="Change End Time: [insert this section start time]" class=newAccountInformation></td>
+            <td><input placeholder="Change End Time: {{ section.endTime }}" class=newAccountInformation></td>
         </tr>
     </table>
     <div class="submit-button">

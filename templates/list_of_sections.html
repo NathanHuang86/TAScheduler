@@ -43,7 +43,10 @@
                     <td>{{ i.endTime }}</td>
 
                     <td>
-                        <a href="../editUser/"><button>Edit</button></a>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <button name="thisSection" value="{{ i.sectionNumber }}">Edit</button>
+                        </form>
                     </td>
                     <td>
                         <button>Delete</button>

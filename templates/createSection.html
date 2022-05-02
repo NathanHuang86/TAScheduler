@@ -24,85 +24,26 @@
 <body>
 <form action="" method="post">
     {% csrf_token %}
-    <p class="header">Add a new course</p>
-    <div class="newCourseContainer">
-        <table>
-            <tr>
-                <td><input name="name" class="textbox" placeholder="Course Name"></td>
-
-                <td>
-                    <select class="dropdownMenu" name="userSelect">
-                        <option value="" disabled selected>Select an instructor</option>
-                        {% for entry in instructors %}
-                            <option value= {{ entry.name }}>{{ entry.name }}</option>
-                        {% endfor %}
-                    </select>
-                </td>
-            </tr>
-
-        </table>
-
-        <div class="submit-button">
-            <button type="submit">Create Course</button>
-        </div>
-    </div>
-    <p class="header">Add a TA to a section</p>
-    <div class="assignTAContainer">
-        <table>
-            <tr>
-                <td>
-                    <select name="taSelection" class="dropdownMenuCourse">
-                        <option value="" disabled selected>Select a TA</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <select name="courseSelection" class="dropdownMenuCourse">
-                        <option value="" disabled selected>Select Course</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <select name="sectionSelection" class="dropdownMenuCourse">
-                        <option value="" disabled selected>Select Section</option>
-                    </select>
-                </td>
-            </tr>
-        </table>
-        <div class="submit-button">
-            <button type="submit">Assign TA</button>
-        </div>
-    </div>
-
-
-</form>
-
-<form action="" method="post">
-    {% csrf_token %}
-    <p class="header">Add a new section</p>
+    <p class="header">Add a new section for {{ course.name }}</p>
     <div class="newSectionContainer">
         <table>
             <tr>
-
-                <select class="dropdownMenu" name="courseForSection">
-                    <option value="" disabled selected>Select a Course</option>
-                    {% for entry in instructors %}
-                        <option value= {{ entry.name }}>{{ entry.name }}</option>
-                    {% endfor %}
-                </select>
-
                 <select class="dropdownMenu" name="userSelect">
                     <option value="" disabled selected>Select a TA</option>
-                    {% for entry in instructors %}
-                        <option value= {{ entry.name }}>{{ entry.name }}</option>
+                    {% for i in TAs %}
+                        <option value= {{ i.name }}>{{ i.name }}</option>
                     {% endfor %}
                 </select>
             </tr>
             <tr>
                 <td><input name="sectionNumber" class="course-textbox" placeholder="Section Number"></td>
-                <td><input name="sectionType" class="course-textbox" placeholder="Section Type"></td>
+                <td>
+                    <select class="dropdownMenu" name="userSelect">
+                        <option value="" disabled selected>Section Type</option>
+                                <option value=Lab>Lab</option>
+                                <option value=Discussion>Discussion</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td><input name="startTime" class="course-textbox" placeholder="Start Time">
@@ -141,7 +82,7 @@
         </table>
 
         <div class="submit-button">
-            <button type="submit">Create Account</button>
+            <button type="submit">Submit</button>
         </div>
     </div>
 </form>
