@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css\users.css' %}"/>
+</head>
+
+<div class="navContainer">
+    <header class="header">
+        <h1><a>TA Scheduler Management System</a></h1>
+    </header>
+    <div class="navigation">
+        {% if sessionUser == "Admin" %}
+        {% endif %}
+        <li><a href="/home/">Home</a></li>
+        <li><a href="/courses/">Courses</a></li>
+        <li><a href="/users/">Users</a></li>
+        <li><a href="/">Logout</a></li>
+    </div>
+</div>
+
+<body>
+<div class="container">
+    <p class=header>{{ course }} Sections</p>
+    <div class="containerbox">
+        <table>
+            <tr>
+                <th>TA</th>
+                <th>Section Number</th>
+                <th>Section Type</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+            </tr>
+            <tr>
+
+                {% for i in sections %}
+                    <td>{{ i.TA }}</td>
+                    <td>{{ i.sectionNumber }}</td>
+                    <td>{{ i.sectionType }}</td>
+                    <td>{{ i.startTime }}</td>
+                    <td>{{ i.endTime }}</td>
+
+                    <td>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <button name="thisSection" value="{{ i.sectionNumber }}">Edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <button>Delete</button>
+                    </td>
+                    </tr>
+                {% endfor %}
+        </table>
+
+    <div class="submit-button">
+        <a href="../createSection/"><button name="createSectionSubmit">Create Section</button></a>
+            </div>
+
+    </div>
+</div>
+</div>
+</body>
+</html>
+

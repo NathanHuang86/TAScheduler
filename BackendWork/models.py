@@ -16,9 +16,6 @@ class MyUser(models.Model):
     def __str__(self):
         return self.username
 
-    def getName(self):
-        return self.name
-
 
 class ClassList(models.Model):
     name = models.CharField(max_length=20)
@@ -38,3 +35,6 @@ class Section(models.Model):
     schedule = MultiSelectField(max_length=30, choices=SCHEDULE_CHOICES)
     startTime = models.TimeField(default=time(0, 0, 0))
     endTime = models.TimeField(default=time(0, 0, 0))
+
+    def __str__(self):
+        return self.Class.name + " " + self.sectionType + " " + str(self.sectionNumber)

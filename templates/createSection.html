@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css\createCourses.css' %}"/>
+</head>
+
+<div class="navContainer">
+    <header class="header">
+        <h1><a>TA Scheduler Management System</a></h1>
+    </header>
+    <div class="navigation">
+        {% if sessionUser == "Admin" %}
+        {% endif %}
+        <li><a href="/home/">Home</a></li>
+        <li><a href="/courses/">Courses</a></li>
+        <li><a href="/users/">Users</a></li>
+        <li><a href="/">Logout</a></li>
+    </div>
+</div>
+
+<body>
+<form action="" method="post">
+    {% csrf_token %}
+    <p class="header">Add a new section for {{ course.name }}</p>
+    <div class="newSectionContainer">
+        <table>
+            <tr>
+                <select class="dropdownMenu" name="userSelect">
+                    <option value="" disabled selected>Select a TA</option>
+                    {% for i in TAs %}
+                        <option value= {{ i.name }}>{{ i.name }}</option>
+                    {% endfor %}
+                </select>
+            </tr>
+            <tr>
+                <td><input name="sectionNumber" class="course-textbox" placeholder="Section Number"></td>
+                <td>
+                    <select class="dropdownMenu" name="userSelect">
+                        <option value="" disabled selected>Section Type</option>
+                                <option value=Lab>Lab</option>
+                                <option value=Discussion>Discussion</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><input name="startTime" class="course-textbox" placeholder="Start Time">
+                </td>
+                <td><input name="endTime" class="course-textbox" placeholder="End time">
+            </tr>
+            <div class="chooseScheduleContainer">
+                <fieldset>
+                    <legend>Choose Schedule:</legend>
+
+                    <div>
+                        <input type="checkbox" name="Monday">
+                        <label for="Monday">Monday</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" name="Tuesday">
+                        <label for="Tuesday">Tuesday</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="Wednesday">
+                        <label for="Wednesday">Wednesday</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="Thursday">
+                        <label for="Thursday">Thursday</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="Friday">
+                        <label for="Friday">Friday</label>
+                    </div>
+                </fieldset>
+
+
+            </div>
+        </table>
+
+        <div class="submit-button">
+            <button type="submit">Submit</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

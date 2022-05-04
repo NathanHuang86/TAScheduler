@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User</title>
+    <link rel="stylesheet" type="text/css" href="../TAScheduler/static/css/editUser.css">
+</head>
+
+<div class="navContainer">
+    <header class="header">
+        <h1><a>TA Scheduler Management System</a></h1>
+    </header>
+    <div class="navigation">
+        {% if sessionUser == "Admin" %}
+        {% endif %}
+        <li><a href="/home/">Home</a></li>
+        <li><a href="/courses/">Courses</a></li>
+        <li><a href="/users/">Users</a></li>
+        <li><a href="/">Logout</a></li>
+    </div>
+</div>
+
+
+<body>
+<div class="container">
+    <p class=subHeader>Edit Course {{ course }}</p>
+    <table>
+
+        <tr>
+            <td><input placeholder="Change Name: {{ course.name }}" class='newAccountInformation'></td>
+        </tr>
+        <tr>
+            <td><input placeholder="Change Instructor: {{ course.owner }}" class=newAccountInformation></td>
+        </tr>
+    </table>
+    <div class="submit-button">
+        <button type="submit">Save Changes</button>
+    </div>
+</div>
+</body>
+</html>

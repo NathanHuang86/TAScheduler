@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from BackendWork.models import ClassList, MyUser
+from BackendWork.models import ClassList, MyUser, Section
 
 
 # Create your views here.
@@ -47,6 +47,57 @@ class Home(View):
         return render(request, "home.html", {'sessionUser': m})
 
 
+class Users(View):
+
+    def get(self, request):
+        m = request.session["role"]
+        users = MyUser.objects.all()
+        return render(request, "list_of_users.html", {'sessionUser': m, 'users': users})
+
+    def post(self, request):
+        thisUsername = request.POST['thisUser']
+        request.session['thisUser'] = thisUsername
+        return redirect("editUser/")
+
+
+class Courses(View):
+
+    def get(self, request):
+        m = request.session["role"]
+        courses = ClassList.objects.all()
+        return render(request, "list_of_courses.html", {'sessionUser': m, 'courses': courses})
+
+    def post(self, request):
+
+        # print("thisCourseSections =", request.POST['thisCourseSections'])
+        # print("thisCourseEdit =", request.POST['thisCourseEdit'])
+
+        if request.POST.get('thisCourseSections'):
+            thisCourseName = request.POST['thisCourseSections']
+            thisCourse = ClassList.objects.get(name=thisCourseName)
+            request.session["thisCourse"] = thisCourse.name
+            return redirect("sections/")
+
+        elif request.POST.get('thisCourseEdit'):
+            thisCourseName = request.POST['thisCourseEdit']
+            request.session["thisCourse"] = thisCourseName
+            return redirect("editCourse/")
+
+
+class Sections(View):
+
+    def get(self, request):
+        m = request.session["role"]
+        thisCourseName = request.session["thisCourse"]
+        thisCourse = ClassList.objects.get(name=thisCourseName)
+        sections = Section.objects.filter(Class=thisCourse)
+        return render(request, "list_of_sections.html", {'sessionUser': m, 'course': thisCourse, 'sections': sections})
+
+    def post(self, request):
+        request.session['thisSection'] = request.POST['thisSection']
+        return redirect("editSection/")
+
+
 class CreateAccount(View):
 
     def get(self, request):
@@ -78,12 +129,21 @@ class CreateAccount(View):
         return render(request, "createAccount.html", {'sessionUser': m})
 
 
+class CreateSection(View):
+
+    def get(self, request):
+        m = request.session["role"]
+        thisCourseName = request.session["thisCourse"]
+        thisCourse = ClassList.objects.get(name=thisCourseName)
+        TAs = MyUser.objects.filter(role='Teaching Assistant')
+        return render(request, "createSection.html", {'sessionUser': m, 'course': thisCourse, 'TAs': TAs})
+
+
 class CreateCourses(View):
 
     def get(self, request):
         instructors = MyUser.objects.filter(role='Instructor')
         m = request.session["role"]
-        print(m)
         return render(request, "createCourses.html", {'instructors': instructors, 'sessionUser': m})
 
     def post(self, request):
@@ -96,9 +156,29 @@ class CreateCourses(View):
         return render(request, "createCourses.html", {'instructors': instructors, 'sessionUser': m})
 
 
-class Users(View):
+class EditUser(View):
 
     def get(self, request):
         m = request.session["role"]
-        users = MyUser.objects.filter()
-        return render(request, "users.html", {'sessionUser': m, 'users': users})
+        thisUserName = request.session["thisUser"]
+        thisUser = MyUser.objects.get(username=thisUserName)
+        return render(request, "editUser.html", {'sessionUser': m, 'thisUser': thisUser})
+
+
+class EditSection(View):
+
+    def get(self, request):
+        m = request.session["role"]
+        thisCourseName = request.session["thisCourse"]
+        thisCourse = ClassList.objects.get(name=thisCourseName)
+        thisSection = Section.objects.get(Class=thisCourse, sectionNumber=request.session['thisSection'])
+        return render(request, "editSection.html", {'sessionUser': m, 'section': thisSection})
+
+
+class EditCourses(View):
+
+    def get(self, request):
+        m = request.session["role"]
+        thisCourseName = request.session["thisCourse"]
+        thisCourse = ClassList.objects.get(name=thisCourseName)
+        return render(request, "editCourse.html", {'sessionUser': m, 'course': thisCourse})
