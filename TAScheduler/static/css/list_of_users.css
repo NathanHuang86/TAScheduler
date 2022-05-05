@@ -1,81 +1,6 @@
 html {
     background: rgb(145, 178, 199);
 }
-
-.body-content {
-    padding-top: 14.25vh;
-}
-
-.createUserHeader {
-    font-family: 'Ubuntu', sans-serif;
-    font-weight: bold;
-    font-size: 24px;
-    text-align: center;
-
-}
-
-.header {
-    font-family: 'Ubuntu', sans-serif;
-    font-weight: bold;
-    font-size: 24px;
-    text-align: center;
-
-}
-.container {
-    width: 700px;
-    height: 300px;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid White;
-    border-radius: 15px;
-    background: white;
-    text-align: center;
-    margin-left: 380px;
-    margin-top: 20px;
-
-}
-
-.containerbox {
-    display: grid;
-}
-
-.newAccountInformation {
-
-    align-items: center;
-    width: 100%;
-    font-size: 14px;
-    letter-spacing: 1px;
-    padding: 10px 20px;
-    border-radius: 20px;
-    outline-color: rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    border: 2px solid rgba(0, 0, 0, 0.3);
-    text-align: center;
-    border: 2px solid #e1dede69;
-    background: #e1dede69;
-    color: grey;
-
-}
-
-.submit-button {
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    padding: 10px 30px;
-}
-
-.submit-button button {
-    font-size: 20px;
-    padding: 5px 15px;
-    border: 2px solid;
-    border-radius: 15px;
-    color: white;
-    background: #91B2C7;
-    width: 280px;
-    cursor: pointer;
-}
-
 navContainer {
     position: center;
     height: auto;
@@ -105,3 +30,73 @@ navContainer {
     color: #000;
 }
 
+.header {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+
+}
+.th, td{
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+.container {
+    margin-top: 20px;
+    width: 1000px;
+    height: 325px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 6px;
+    margin-left: 220px;
+    border: 2px solid White;
+    border-radius: 15px;
+    background: white;
+    text-align: center;
+}
+
+.containerbox {
+    display: grid;
+    width: 1000px;
+    gap: 50px;
+}
+
+.newAccountInformation {
+
+    align-items: center;
+    width: 100%;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    outline-color: rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    text-align: center;
+    border: 2px solid #e1dede69;
+    background: #e1dede69;
+    color: grey;
+
+}
+
+.submit-button {
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+}
+
+.submit-button button {
+    font-size: 20px;
+    padding: 5px 15px;
+    border: 2px solid;
+    border-radius: 15px;
+    color: white;
+    background: #91B2C7;
+    width: 280px;
+    cursor: pointer;
+    margin-left: 25px;
+}

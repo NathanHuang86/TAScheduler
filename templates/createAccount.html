@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Account</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css\createAccount.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/createAccount.css' %}"/>
 </head>
 
 <div class="navContainer">
@@ -23,8 +23,8 @@
 
 <body>
 <form action="" method="post">
-    {%  csrf_token %}
-<div class="body-content">
+    {% csrf_token %}
+
     <div class="container">
         <p class=createUserHeader>Create Account</p>
 
@@ -43,7 +43,11 @@
                     <td><input placeholder="Address" name="address" class=newAccountInformation></td>
                     <td><input placeholder="Phone Number" name="phone" class=newAccountInformation></td>
                 </tr>
-                <tr>
+
+
+            </table>
+            <div class="permission">
+            <tr>
                     <th>Account Permission</th>
                     <td>
                         <input type="radio" name="button1" value=0>
@@ -54,15 +58,14 @@
                         <label>Admin</label>
                     </td>
                 </tr>
+            </div>
 
-            </table>
             <div class="submit-button">
                 <button name="createAccountSubmit">Submit</button>
             </div>
 
         </div>
     </div>
-</div>
 </form>
 </body>
 </html>

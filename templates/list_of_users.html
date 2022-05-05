@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Users</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css\users.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/list_of_users.css' %}"/>
 </head>
 
 <div class="navContainer">
@@ -54,16 +54,15 @@
                     <td>
                         <button>Delete</button>
                     </td>
-                    </tr>
+            </tr>
                 {% endfor %}
         </table>
-
+    </div>
         <div class="submit-button">
             <a href="../createAccount/"><button name="createAccountSubmit">Create Account</button></a>
         </div>
 
-    </div>
-</div>
+
 </div>
 </body>
 </html>

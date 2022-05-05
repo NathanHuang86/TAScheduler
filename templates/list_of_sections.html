@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Courses</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css\users.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/list_of_sections.css' %}"/>
 </head>
 
 <div class="navContainer">
@@ -54,13 +54,12 @@
                     </tr>
                 {% endfor %}
         </table>
-
-    <div class="submit-button">
-        <a href="../createSection/"><button name="createSectionSubmit">Create Section</button></a>
-            </div>
-
     </div>
-</div>
+    <div class="submit-button">
+        <a href="../createSection/">
+            <button name="createSectionSubmit">Create Section</button>
+        </a>
+    </div>
 </div>
 </body>
 </html>

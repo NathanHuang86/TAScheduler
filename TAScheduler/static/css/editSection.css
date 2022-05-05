@@ -1,4 +1,4 @@
-html {
+html{
     background: rgb(145, 178, 199);
 }
 
@@ -24,7 +24,7 @@ html {
     justify-content: center;
     align-items: center;
     margin-bottom: 6px;
-    margin-left: 400px;
+    margin-left: 375px;
     border: 2px solid White;
     border-radius: 15px;
     background: white;
@@ -32,7 +32,8 @@ html {
 
 }
 .containerbox{
-    margin-left: 75px;
+    margin-left:75px;
+
 }
 
 .dropdownMenu {
@@ -115,12 +116,9 @@ navContainer {
     background: #91B2C7;
     width: 280px;
     cursor: pointer;
-    margin-left: 15px;
-    margin-top: 10px;
+    margin-left: 80px;
 }
 
-.permission{
-    margin-right: 50px;
-
-
+.roleLabel {
+    text-align: end;
 }

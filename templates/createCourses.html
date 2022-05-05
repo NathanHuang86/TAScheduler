@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Courses</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css\createCourses.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/createCourses.css' %}"/>
 </head>
 
 <div class="navContainer">
@@ -24,12 +24,16 @@
 <body>
 <form action="" method="post">
     {% csrf_token %}
-    <p class="header">Add a new course</p>
+
+<div class="container">
+<p class="header">Add a new course</p>
     <div class="newCourseContainer">
+
         <table>
             <tr>
                 <td><input name="name" class="textbox" placeholder="Course Name"></td>
-
+            </tr>
+            <tr>
                 <td>
                     <select class="dropdownMenu" name="userSelect">
                         <option value="" disabled selected>Select an instructor</option>
@@ -41,11 +45,12 @@
             </tr>
 
         </table>
-
+    </div>
         <div class="submit-button">
             <button type="submit">Submit</button>
         </div>
-    </div>
+
+</div>
 </form>
 </body>
 </html>

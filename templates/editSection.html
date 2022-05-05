@@ -1,9 +1,12 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Edit Section</title>
-    <link rel="stylesheet" type="text/css" href="../TAScheduler/static/css/editUser.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/editSection.css' %}"/>
+    {#    <link rel="stylesheet" type="text/css" href="../TAScheduler/static/css/editSection.css">#}
+
 </head>
 
 <div class="navContainer">
@@ -24,30 +27,33 @@
 <body>
 <div class="container">
     <p class=subHeader>Edit Section: {{ section.Class.name }} {{ section.sectionType }} {{ section.sectionNumber }}</p>
-    <table>
+    <div class="containerbox">
+        <table>
 
-        <tr>
-            <td><input placeholder="Change Class: {{ section.Class }}" class='newAccountInformation'></td>
-        </tr>
-        <tr>
-            <td><input placeholder="Change TA: {{ section.TA }}" class=newAccountInformation></td>
-        </tr>
-        <tr>
-            <td><input placeholder="Change Section Number: {{ section.sectionNumber }}" class=newAccountInformation></td>
-        </tr>
-        <tr>
-            <td><input placeholder="Change Type: {{ section.sectionType }}" class=newAccountInformation></td>
-        </tr>
-        <tr>
-            <td><input placeholder="Change Schedule: {{ section.schedule }}" class=newAccountInformation></td>
-        </tr>
-        <tr>
-            <td><input placeholder="Change Start Time: {{ section.startTime }}" class=newAccountInformation></td>
-        </tr>
-        <tr>
-            <td><input placeholder="Change End Time: {{ section.endTime }}" class=newAccountInformation></td>
-        </tr>
-    </table>
+            <tr>
+                <td><input placeholder="Change Class: {{ section.Class }}" class='newAccountInformation'></td>
+            </tr>
+            <tr>
+                <td><input placeholder="Change TA: {{ section.TA }}" class=newAccountInformation></td>
+            </tr>
+            <tr>
+                <td><input placeholder="Change Section Number: {{ section.sectionNumber }}" class=newAccountInformation>
+                </td>
+            </tr>
+            <tr>
+                <td><input placeholder="Change Type: {{ section.sectionType }}" class=newAccountInformation></td>
+            </tr>
+            <tr>
+                <td><input placeholder="Change Schedule: {{ section.schedule }}" class=newAccountInformation></td>
+            </tr>
+            <tr>
+                <td><input placeholder="Change Start Time: {{ section.startTime }}" class=newAccountInformation></td>
+            </tr>
+            <tr>
+                <td><input placeholder="Change End Time: {{ section.endTime }}" class=newAccountInformation></td>
+            </tr>
+        </table>
+    </div>
     <div class="submit-button">
         <button type="submit">Save Changes</button>
     </div>

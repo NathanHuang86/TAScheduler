@@ -2,16 +2,28 @@ html {
     background: rgb(145, 178, 199);
 }
 
+.body-content {
+    padding-top: 14.25vh;
+}
+
+.createUserHeader {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+
+}
+
 .header {
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
     font-size: 24px;
     text-align: center;
-}
 
- .container{
+}
+.container {
     width: 700px;
-    height: 225px;
+    height: 425px;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -19,39 +31,14 @@ html {
     border-radius: 15px;
     background: white;
     text-align: center;
+    margin-left: 380px;
     margin-top: 20px;
-    margin-left: 375px
 
 }
-.newCourseContainer {
-    display: grid;
-}
 
-.submit-button {
-    display: flex;
-    flex-direction: column;
-    margin-left: 20px;
-    margin-bottom: 100px;
-}
-
-
-.submit-button button {
-
-    font-size: 20px;
-    padding: 5px 15px;
-    border: 2px solid;
-    border-radius: 15px;
-    color: white;
-    background: #91B2C7;
-    width: 500px;
-    cursor: pointer;
-    margin-left: 75px;
-    margin-top:10px;
-}
-
-.textbox{
+.course-textbox{
     align-items: center;
-    width: 75%;
+    width: 100%;
     font-size: 14px;
     letter-spacing: 1px;
     padding: 10px 20px;
@@ -67,7 +54,7 @@ html {
 
 .dropdownMenu{
     align-content: center;
-    width: 75%;
+    width: 100%;
     font-size: 14px;
     letter-spacing: 1px;
     background: rgba(136, 126, 126, 0.04);
@@ -80,39 +67,27 @@ html {
     margin-top: 10px;
     color: grey;
 }
-
-.dropdownMenuTA {
-    width: 247%;
-    font-size: 14px;
-    letter-spacing: 1px;
-    background: rgba(136, 126, 126, 0.04);
-    border-radius: 20px;
-    outline-width: 20px;
-    outline-color: #333333;
-    box-sizing: border-box;
-    border: 2px solid rgba(0, 0, 0, 0.3);
-    text-align: center;
-    margin-bottom: 5px;
-    margin-top: 10px;
-    color: grey;
-    margin-left: 10px;
-
+.containerbox{
+    display: grid;
 }
 
-.dropdownMenuCourse {
-    width: 480%;
-    font-size: 14px;
-    letter-spacing: 1px;
-    background: rgba(136, 126, 126, 0.04);
-    border-radius: 20px;
-    outline-width: 20px;
-    outline-color: #333333;
-    box-sizing: border-box;
-    border: 2px solid rgba(0, 0, 0, 0.3);
-    text-align: center;
-    margin-bottom: 5px;
-    margin-top: 10px;
-    color: grey;
+.submit-button {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 10px 30px;
+}
+
+.submit-button button {
+    font-size: 20px;
+    padding: 5px 15px;
+    border: 2px solid;
+    border-radius: 15px;
+    color: white;
+    background: #91B2C7;
+    width: 280px;
+    cursor: pointer;
+    margin-left: 180px;
 }
 
 navContainer {
@@ -143,3 +118,4 @@ navContainer {
     background-color: #D3D3D3;
     color: #000;
 }
+

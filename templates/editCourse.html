@@ -1,9 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit User</title>
-    <link rel="stylesheet" type="text/css" href="../TAScheduler/static/css/editUser.css">
+    <title>Edit Course</title>
+    <link rel="stylesheet" type="text/css" href="{% static "css/editCourse.css" %}"/>
 </head>
 
 <div class="navContainer">
@@ -23,16 +24,16 @@
 
 <body>
 <div class="container">
-    <p class=subHeader>Edit Course {{ course }}</p>
-    <table>
+    <p class="header">Edit Course {{ course }}</p>
+    <div class="containerbox">
+        <table>
 
-        <tr>
-            <td><input placeholder="Change Name: {{ course.name }}" class='newAccountInformation'></td>
-        </tr>
-        <tr>
-            <td><input placeholder="Change Instructor: {{ course.owner }}" class=newAccountInformation></td>
-        </tr>
-    </table>
+            <tr>
+                <td><input placeholder="Change Name: {{ course.name }}" class='newAccountInformation'></td>
+                <td><input placeholder="Change Instructor: {{ course.owner }}" class=newAccountInformation></td>
+            </tr>
+        </table>
+    </div>
     <div class="submit-button">
         <button type="submit">Save Changes</button>
     </div>

@@ -33,20 +33,20 @@ navContainer {
 .header {
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 25px;
     text-align: center;
 
 }
 
-.container {
+.container{
     margin-top: 20px;
     width: 700px;
-    height: 350px;
+    height: 190px;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     margin-bottom: 6px;
-    margin-left: 500px;
+    margin-left: 380px;
     border: 2px solid White;
     border-radius: 15px;
     background: white;
@@ -54,12 +54,12 @@ navContainer {
 
 }
 
-.containerbox {
-    padding-left: 95px;
+.containerbox{
+    display: grid;
+    gap: 50px;
 }
 
-.newAccountInformation {
-
+.newAccountInformation{
     align-items: center;
     width: 100%;
     font-size: 14px;
@@ -92,5 +92,5 @@ navContainer {
     background: #91B2C7;
     width: 280px;
     cursor: pointer;
-    margin-left: 80px;
+    margin-left: 175px;
 }
