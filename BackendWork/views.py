@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect
 from django.views import View
+
 from BackendWork.models import ClassList, MyUser, Section
 
 
 # Create your views here.
 
-
 class Login(View):
     def get(self, request):
+        if request.session.get("user"):
+            print("Popped User: " + request.session.pop("user"))
         return render(request, "login.html", {})
 
     def post(self, request):
@@ -27,32 +29,33 @@ class Login(View):
             print("Bad password")
             return render(request, "login.html", {"message": "Password is incorrect."})
         else:
-            request.session["role"] = m.role
-            print(m.role)
+            request.session["user"] = m.username
             return redirect("home/")
 
 
 class Home(View):
 
     def get(self, request):
-        m = request.session["role"]
-        return render(request, "home.html", {'sessionUser': m})
+        if request.session.get("user"):
+            return render(request, "login.html", {})
+        return render(request, "home.html", {'sessionUser': MyUser.objects.get(username=request.session["user"]).role})
 
 
 class Users(View):
 
     def get(self, request):
-        m = request.session["role"]
-        users = MyUser.objects.all()
-        return render(request, "users.html", {'sessionUser': m, 'users': users})
+        if not request.session.get("user"):
+            return render(request, "login.html", {})
+        return render(request, "users.html", {'sessionUser': MyUser.objects.get(username=request.session["user"]).role,
+                                              'users': MyUser.objects.all()})
 
     def post(self, request):
         if request.POST.get('editUser'):
             request.session["userEdit"] = request.POST['editUser']
-            m = request.session["role"]
-            users = MyUser.objects.all()
-            return render(request, "users.html", {'sessionUser': m, 'users': users,
-                                                          'editingUser': request.session.pop('userEdit')})
+            return render(request, "users.html",
+                          {'sessionUser': MyUser.objects.get(username=request.session["user"]).role,
+                           'users': MyUser.objects.all(),
+                           'editingUser': request.session.pop('userEdit')})
 
         elif request.POST.get('cancelEdit'):
             m = request.session["role"]
@@ -77,19 +80,20 @@ class Users(View):
             if request.POST.get("role"):
                 onFile.role = request.POST.get("role")
             onFile.save()
-
-            m = request.session["role"]
-            users = MyUser.objects.all()
-
-            return render(request, "users.html", {'sessionUser': m, 'users': users})
+            return render(request, "users.html",
+                          {'sessionUser': MyUser.objects.get(username=request.session["user"]).role,
+                           'users': MyUser.objects.all()})
 
 
 class Courses(View):
 
     def get(self, request):
+        if not request.session.get("user"):
+            return render(request, "login.html", {})
         m = request.session["role"]
-        courses = ClassList.objects.all()
-        return render(request, "courses.html", {'sessionUser': m, 'courses': courses})
+        return render(request, "courses.html",
+                      {'sessionUser': MyUser.objects.get(username=request.session["user"]).role,
+                       'courses': ClassList.objects.all()})
 
     def post(self, request):
 
@@ -111,11 +115,11 @@ class Courses(View):
 class Sections(View):
 
     def get(self, request):
-        m = request.session["role"]
-        thisCourseName = request.session["thisCourse"]
-        thisCourse = ClassList.objects.get(name=thisCourseName)
-        sections = Section.objects.filter(Class=thisCourse)
-        return render(request, "sections.html", {'sessionUser': m, 'course': thisCourse, 'sections': sections,})
+        return render(request, "sections.html",
+                      {'sessionUser': MyUser.objects.get(username=request.session["user"]).role,
+                       'course': ClassList.objects.get(name=request.session["thisCourse"]),
+                       'sections': Section.objects.filter(
+                           Class=ClassList.objects.get(name=request.session["thisCourse"]))})
 
     def post(self, request):
         request.session['thisSection'] = request.POST['thisSection']
@@ -125,8 +129,8 @@ class Sections(View):
 class CreateAccount(View):
 
     def get(self, request):
-        m = request.session["role"]
-        return render(request, "createAccount.html", {'sessionUser': m})
+        return render(request, "createAccount.html",
+                      {'sessionUser': MyUser.objects.get(username=request.session["user"]).role})
 
     def post(self, request):
         role = None
@@ -148,61 +152,57 @@ class CreateAccount(View):
                 print("Didn't go through.")
                 return render(request, "createAccount.html", {"message": "Invalid data entered"})
 
-        m = request.session["role"]
         newuser.save()
-        return render(request, "createAccount.html", {'sessionUser': m})
+        return render(request, "createAccount.html",
+                      {'sessionUser': MyUser.objects.get(username=request.session["user"]).role})
 
 
 class CreateSection(View):
 
     def get(self, request):
-        m = request.session["role"]
-        thisCourseName = request.session["thisCourse"]
-        thisCourse = ClassList.objects.get(name=thisCourseName)
-        TAs = MyUser.objects.filter(role='Teaching Assistant')
-        return render(request, "createSection.html", {'sessionUser': m, 'course': thisCourse, 'TAs': TAs})
+        return render(request, "createSection.html",
+                      {'sessionUser': MyUser.objects.get(username=request.session["user"]).role,
+                       'course': ClassList.objects.get(name=request.session["thisCourse"]),
+                       'users': MyUser.objects.filter(role='Teaching Assistant')})
 
 
 class CreateCourses(View):
 
     def get(self, request):
-        instructors = MyUser.objects.filter(role='Instructor')
-        m = request.session["role"]
-        return render(request, "createCourse.html", {'instructors': instructors, 'sessionUser': m})
+        return render(request, "createCourse.html",
+                      {'instructors': MyUser.objects.filter(role='Instructor'),
+                       'sessionUser': MyUser.objects.get(username=request.session["user"]).role})
 
     def post(self, request):
-        instructors = MyUser.objects.filter(role='Instructor').values()
         d = MyUser.objects.filter(name=request.POST["userSelect"])
         newcourse = ClassList(name=request.POST["name"], owner=d[0])
-
-        m = request.session["role"]
         newcourse.save()
-        return render(request, "createCourse.html", {'instructors': instructors, 'sessionUser': m})
+
+        return render(request, "createCourse.html",
+                      {'instructors': MyUser.objects.filter(role='Instructor').values(),
+                       'sessionUser': MyUser.objects.get(username=request.session["user"]).role})
 
 
 class EditUser(View):
 
     def get(self, request):
-        m = request.session["role"]
-        thisUserName = request.session["thisUser"]
-        thisUser = MyUser.objects.get(username=thisUserName)
-        return render(request, "editUser.html", {'sessionUser': m, 'thisUser': thisUser})
+        return render(request, "editUser.html",
+                      {'sessionUser': MyUser.objects.get(username=request.session["user"]).role,
+                       'thisUser': MyUser.objects.get(username=request.session["thisUser"])})
 
 
 class EditSection(View):
 
     def get(self, request):
-        m = request.session["role"]
-        thisCourseName = request.session["thisCourse"]
-        thisCourse = ClassList.objects.get(name=thisCourseName)
-        thisSection = Section.objects.get(Class=thisCourse, sectionNumber=request.session['thisSection'])
-        return render(request, "editSection.html", {'sessionUser': m, 'section': thisSection})
+        return render(request, "editSection.html",
+                      {'sessionUser': MyUser.objects.get(username=request.session["user"]).role,
+                       'section': Section.objects.get(Class=ClassList.objects.get(name=request.session["thisCourse"]),
+                                                      sectionNumber=request.session['thisSection'])})
 
 
 class AssignedUsers(View):
 
     def get(self, request):
-        m = request.session["role"]
-        thisCourseName = request.session["thisCourse"]
-        thisCourse = ClassList.objects.get(name=thisCourseName)
-        return render(request, "assignedUsers.html", {'sessionUser': m, 'course': thisCourse})
+        return render(request, "assignedUsers.html",
+                      {'sessionUser': MyUser.objects.get(username=request.session["user"]).role,
+                       'course': ClassList.objects.get(name=request.session["thisCourse"])})

@@ -31,7 +31,7 @@
                 <tr>
                     <select class="dropdownMenu" name="userSelect">
                         <option value="" disabled selected>Select a TA</option>
-                        {% for i in TAs %}
+                        {% for i in users %}
                             <option value= {{ i.name }}>{{ i.name }}</option>
                         {% endfor %}
                     </select>
