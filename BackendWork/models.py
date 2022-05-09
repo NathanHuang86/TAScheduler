@@ -7,7 +7,7 @@ class ClassList(models.Model):
     TERM_CHOICES = (('Summer', 'SUMMER'), ('Fall', 'FALL'), ('Winter', 'WINTER'), ('Spring', 'SPRING'))
     name = models.CharField(max_length=20, unique=True)
     term = models.CharField(max_length=30, choices=TERM_CHOICES, default='Fall')
-    year = models.IntegerField(default= 2022)
+    year = models.IntegerField(default=2022)
 
     def __str__(self):
         return self.name
@@ -22,7 +22,7 @@ class MyUser(models.Model):
     address = models.CharField(max_length=72)
     phone = models.CharField(max_length=10)
     role = models.CharField(max_length=30, choices=ROLE_CHOICES, default='Teaching Assistant')
-    assignedClass = models.ForeignKey(ClassList, on_delete=models.SET_NULL, null=True)
+    assignedClasses = models.ManyToManyField(ClassList, null=True)
 
     def __str__(self):
         return self.username
