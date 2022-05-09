@@ -61,6 +61,13 @@ class Users(View):
             users = MyUser.objects.all()
             return render(request, "users.html", {'sessionUser': m, 'users': users,
                                                           'editingUser': request.session.pop('userEdit')})
+
+        elif request.POST.get('cancelEdit'):
+            m = request.session["role"]
+            users = MyUser.objects.all()
+            print("cancel Edit here")
+            return render(request, "users.html", {'sessionUser': m, 'users': users})
+
         elif request.POST.get('saveUser'):
             onFile = MyUser.objects.get(username=request.POST['saveUser'])
             print(onFile.username)
@@ -91,7 +98,7 @@ class Courses(View):
     def get(self, request):
         m = request.session["role"]
         courses = ClassList.objects.all()
-        return render(request, "list_of_courses.html", {'sessionUser': m, 'courses': courses})
+        return render(request, "courses.html", {'sessionUser': m, 'courses': courses})
 
     def post(self, request):
 
@@ -117,7 +124,7 @@ class Sections(View):
         thisCourseName = request.session["thisCourse"]
         thisCourse = ClassList.objects.get(name=thisCourseName)
         sections = Section.objects.filter(Class=thisCourse)
-        return render(request, "list_of_sections.html", {'sessionUser': m, 'course': thisCourse, 'sections': sections})
+        return render(request, "sections.html", {'sessionUser': m, 'course': thisCourse, 'sections': sections})
 
     def post(self, request):
         request.session['thisSection'] = request.POST['thisSection']
@@ -170,7 +177,7 @@ class CreateCourses(View):
     def get(self, request):
         instructors = MyUser.objects.filter(role='Instructor')
         m = request.session["role"]
-        return render(request, "createCourses.html", {'instructors': instructors, 'sessionUser': m})
+        return render(request, "createCourse.html", {'instructors': instructors, 'sessionUser': m})
 
     def post(self, request):
         instructors = MyUser.objects.filter(role='Instructor').values()
@@ -179,7 +186,7 @@ class CreateCourses(View):
 
         m = request.session["role"]
         newcourse.save()
-        return render(request, "createCourses.html", {'instructors': instructors, 'sessionUser': m})
+        return render(request, "createCourse.html", {'instructors': instructors, 'sessionUser': m})
 
 
 class EditUser(View):

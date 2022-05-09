@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Users</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/list_of_users.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/users.css' %}"/>
 </head>
 
 <div class="navContainer">
@@ -51,6 +51,9 @@
                              <td>
                                  <button name="saveUser" value="{{ i.username }}">Save</button>
                          </form>
+                         <td>
+                             <button>Cancel</button>
+                         </td>
                     </td>
                     {% else %}
                          <td>{{ i.username }}</td>
