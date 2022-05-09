@@ -6,14 +6,6 @@ from BackendWork.models import ClassList, MyUser, Section
 # Create your views here.
 
 
-class Landing(View):
-    def post(self, request):
-        if request.method == 'POST' and 'loginSubmit' in request.POST:
-            Login.post(self, request)
-        elif request.method == 'POST' and 'createAccountSubmit' in request.POST:
-            CreateAccount.post(self, request)
-
-
 class Login(View):
     def get(self, request):
         return render(request, "login.html", {})
@@ -110,10 +102,10 @@ class Courses(View):
             request.session["thisCourse"] = thisCourse.name
             return redirect("sections/")
 
-        elif request.POST.get('thisCourseEdit'):
-            thisCourseName = request.POST['thisCourseEdit']
+        elif request.POST.get('assignedUser'):
+            thisCourseName = request.POST['assignedUser']
             request.session["thisCourse"] = thisCourseName
-            return redirect("editCourse/")
+            return redirect("assignedUsers/")
 
 
 class Sections(View):
@@ -123,7 +115,7 @@ class Sections(View):
         thisCourseName = request.session["thisCourse"]
         thisCourse = ClassList.objects.get(name=thisCourseName)
         sections = Section.objects.filter(Class=thisCourse)
-        return render(request, "sections.html", {'sessionUser': m, 'course': thisCourse, 'sections': sections})
+        return render(request, "sections.html", {'sessionUser': m, 'course': thisCourse, 'sections': sections,})
 
     def post(self, request):
         request.session['thisSection'] = request.POST['thisSection']
@@ -207,10 +199,10 @@ class EditSection(View):
         return render(request, "editSection.html", {'sessionUser': m, 'section': thisSection})
 
 
-class EditCourses(View):
+class AssignedUsers(View):
 
     def get(self, request):
         m = request.session["role"]
         thisCourseName = request.session["thisCourse"]
         thisCourse = ClassList.objects.get(name=thisCourseName)
-        return render(request, "editCourse.html", {'sessionUser': m, 'course': thisCourse})
+        return render(request, "assignedUsers.html", {'sessionUser': m, 'course': thisCourse})

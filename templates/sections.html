@@ -27,7 +27,8 @@
     <div class="containerbox">
         <table>
             <tr>
-                <th>TA</th>
+                <th>Role</th>
+                <th>User</th>
                 <th>Section Number</th>
                 <th>Section Type</th>
                 <th>Start Time</th>
@@ -36,7 +37,8 @@
             <tr>
 
                 {% for i in sections %}
-                    <td>{{ i.TA }}</td>
+                    <td>{{ i.assignedUser.role }}</td>
+                    <td>{{ i.assignedUser }}</td>
                     <td>{{ i.sectionNumber }}</td>
                     <td>{{ i.sectionType }}</td>
                     <td>{{ i.startTime }}</td>

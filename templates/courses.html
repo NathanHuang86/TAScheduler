@@ -28,18 +28,19 @@
         <table>
             <tr>
                 <th>Course Name</th>
-                <th>Instructor</th>
+                <th>Term</th>
+                <th>Year</th>
             </tr>
             <tr>
 
                 {% for i in courses %}
                     <td>{{ i.name }}</td>
-                    <td>{{ i.owner }}</td>
-
+                    <td>{{ i.term }}</td>
+                    <td>{{ i.year }}</td>
                     <td>
                         <form action="" method="post">
                             {% csrf_token %}
-                            <button name="thisCourseEdit" value="{{ i.name }}">Edit</button>
+                            <button name="assignedUser" value="{{ i.name }}">Assigned Users</button>
                         </form>
                     </td>
 
