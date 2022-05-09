@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/list_of_users.css' %}"/>
+</head>
+
+<div class="navContainer">
+    <header class="header">
+        <h1><a>TA Scheduler Management System</a></h1>
+    </header>
+    <div class="navigation">
+        {% if sessionUser == "Admin" %}
+        {% endif %}
+        <li><a href="/home/">Home</a></li>
+        <li><a href="/courses/">Courses</a></li>
+        <li><a href="/users/">Users</a></li>
+        <li><a href="/">Logout</a></li>
+    </div>
+</div>
+
+<body>
+<div class="container">
+    <p class=header>Users</p>
+    <div class="containerbox">
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Role</th>
+            </tr>
+            <tr>
+
+                {% for i in users %}
+                     {% if editingUser == i.username %}
+                         <form action="" method="post">
+                         {% csrf_token %}
+                             <td><input name="username" placeholder="{{ i.username }}"></td>
+                             <td><input name="password" placeholder="{{ i.password }}"></td>
+                             <td><input name="name" placeholder="{{ i.name }}"></td>
+                             <td><input name="email" placeholder="{{ i.email }}"></td>
+                             <td><input name="address" placeholder="{{ i.address }}"></td>
+                             <td><input name="phone" placeholder="{{ i.phone }}"></td>
+                             <td><input name="role" placeholder="{{ i.role }}"></td>
+                             <td>
+                                 <button name="saveUser" value="{{ i.username }}">Save</button>
+                         </form>
+                    </td>
+                    {% else %}
+                         <td>{{ i.username }}</td>
+                         <td>{{ i.password }}</td>
+                         <td>{{ i.name }}</td>
+                         <td>{{ i.email }}</td>
+                         <td>{{ i.address }}</td>
+                         <td>{{ i.phone }}</td>
+                         <td>{{ i.role }}</td>
+                         <td>
+                             <form action="" method="post">
+                                 {% csrf_token %}
+                                 <button name="editUser" value="{{ i.username }}">Edit</button>
+                             </form>
+                         </td>
+                     {% endif %}
+                    <td>
+                        <button>Delete</button>
+                    </td>
+            </tr>
+                {% endfor %}
+        </table>
+    </div>
+        <div class="submit-button">
+            <a href="../createAccount/"><button name="createAccountSubmit">Create Account</button></a>
+        </div>
+</div>
+</body>
+</html>

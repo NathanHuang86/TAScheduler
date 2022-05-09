@@ -52,12 +52,38 @@ class Users(View):
     def get(self, request):
         m = request.session["role"]
         users = MyUser.objects.all()
-        return render(request, "list_of_users.html", {'sessionUser': m, 'users': users})
+        return render(request, "users.html", {'sessionUser': m, 'users': users})
 
     def post(self, request):
-        thisUsername = request.POST['thisUser']
-        request.session['thisUser'] = thisUsername
-        return redirect("editUser/")
+        if request.POST.get('editUser'):
+            request.session["userEdit"] = request.POST['editUser']
+            m = request.session["role"]
+            users = MyUser.objects.all()
+            return render(request, "users.html", {'sessionUser': m, 'users': users,
+                                                          'editingUser': request.session.pop('userEdit')})
+        elif request.POST.get('saveUser'):
+            onFile = MyUser.objects.get(username=request.POST['saveUser'])
+            print(onFile.username)
+            print(request.post["username"])
+
+            if request.post["username"] is not onFile.username:
+                onFile.username = request.post["username"]
+            if request.post["name"] != onFile.name:
+                onFile.name = request.post["name"]
+            if request.post["password"] != onFile.password:
+                onFile.password = request.post["password"]
+            if request.post["email"] != onFile.email:
+                onFile.email = request.post["email"]
+            if request.post["phone"] != onFile.phone:
+                onFile.phone = request.post["phone"]
+            if request.post["role"] != onFile.role:
+                onFile.role = request.post["role"]
+            onFile.save()
+
+            m = request.session["role"]
+            users = MyUser.objects.all()
+
+            return render(request, "users.html", {'sessionUser': m, 'users': users})
 
 
 class Courses(View):
