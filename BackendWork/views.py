@@ -36,9 +36,7 @@ class Login(View):
 class Home(View):
 
     def get(self, request):
-        if request.session.get("user"):
-            return render(request, "login.html", {})
-        return render(request, "home.html", {'sessionUser': MyUser.objects.get(username=request.session["user"]).role})
+        return render(request, "home.html", {'role': MyUser.objects.get(username=request.session["user"]).role})
 
 
 class Users(View):
@@ -88,8 +86,6 @@ class Users(View):
 class Courses(View):
 
     def get(self, request):
-        if not request.session.get("user"):
-            return render(request, "login.html", {})
         m = request.session["role"]
         return render(request, "courses.html",
                       {'sessionUser': MyUser.objects.get(username=request.session["user"]).role,
