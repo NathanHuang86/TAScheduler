@@ -230,4 +230,5 @@ class AssignedUsers(View):
             return redirect("/")
         return render(request, "assignedUsers.html",
                       {'sessionUser': MyUser.objects.get(username=request.session["user"]),
-                       'course': ClassList.objects.get(name=request.session["thisCourse"])})
+                       'course': ClassList.objects.get(name=request.session["thisCourse"]),
+                       'users': MyUser.objects.filter(assignedClasses=ClassList.objects.get(name=request.session["thisCourse"]))})

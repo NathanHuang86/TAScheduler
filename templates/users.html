@@ -44,13 +44,32 @@
                      {% if editingUser == i.username %}
                          <form action="" method="post">
                          {% csrf_token %}
-                             <td><input name="username" value={{ i.username }} placeholder="{{ i.username }}"></td>
+                             <td><input name="username" placeholder="{{ i.username }}"></td>
                              <td><input name="password" placeholder="{{ i.password }}"></td>
                              <td><input name="name" placeholder="{{ i.name }}"></td>
                              <td><input name="email" placeholder="{{ i.email }}"></td>
                              <td><input name="address" placeholder="{{ i.address }}"></td>
                              <td><input name="phone" placeholder="{{ i.phone }}"></td>
-                             <td><input name="role" placeholder="{{ i.role }}"></td>
+                             <td><select name="role" class="dropdownMenu">
+                                 {% if i.role == 'Admin' %}
+                                 <option value="Admin" selected>Admin</option>
+                                 {% else %}
+                                 <option value="Admin">Admin</option>
+                                 {% endif %}
+                                 {% if i.role == 'Instructor' %}
+                                 <option value="Instructor" selected>Instructor</option>
+                                     {% else %}
+                                 <option value="Instructor">Instructor</option>
+                                 {% endif %}
+                                 {% if i.role == 'Teaching Assistant' %}
+                                 <option value="Teaching Assistant" selected>Teaching Assistant</option>
+                                     {% else %}
+                                 <option value="Teaching Assistant">Teaching Assistant</option>
+                                 {% endif %}
+
+
+                             </select>
+                            </td>
                              <td>
                                  <button name="saveUser" value="{{ i.username }}">Save</button>
                          </form>

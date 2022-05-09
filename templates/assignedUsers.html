@@ -30,15 +30,26 @@
     <p class="header">Assigned Users {{ course }}</p>
     <div class="containerbox">
         <table>
-
             <tr>
-                <td><input placeholder="Change Name: {{ course.name }}" class='newAccountInformation'></td>
-                <td><input placeholder="Change Instructor: {{ course.owner }}" class=newAccountInformation></td>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Role</th>
             </tr>
+            <tr>
+                {% for i in users %}
+                    <td><input name="username" value={{ i.username }} placeholder="{{ i.username }}"></td>
+                    <td><input name="name" placeholder="{{ i.name }}"></td>
+                    <td><input name="role" placeholder="{{ i.role }}"></td>
+                    </td>
+                         <td>{{ i.username }}</td>
+                         <td>{{ i.name }}</td>
+                         <td>{{ i.role }}</td>
+                    <td>
+                        <button>Delete</button>
+                    </td>
+            </tr>
+                {% endfor %}
         </table>
-    </div>
-    <div class="submit-button">
-        <button type="submit">Save Changes</button>
     </div>
 </div>
 </body>
