@@ -1,4 +1,7 @@
 {% load static %}
+{% if sessionUser.username == "" %}
+        <meta http-equiv="Refresh" content="0; url='/'" />
+{% endif %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
