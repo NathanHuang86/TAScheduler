@@ -71,20 +71,19 @@ class Users(View):
         elif request.POST.get('saveUser'):
             onFile = MyUser.objects.get(username=request.POST['saveUser'])
             print(onFile.username)
-            print(request.post["username"])
 
-            if request.post["username"] is not onFile.username:
-                onFile.username = request.post["username"]
-            if request.post["name"] != onFile.name:
-                onFile.name = request.post["name"]
-            if request.post["password"] != onFile.password:
-                onFile.password = request.post["password"]
-            if request.post["email"] != onFile.email:
-                onFile.email = request.post["email"]
-            if request.post["phone"] != onFile.phone:
-                onFile.phone = request.post["phone"]
-            if request.post["role"] != onFile.role:
-                onFile.role = request.post["role"]
+            if request.POST.get("username"):
+                onFile.username = request.POST.get("username")
+            if request.POST.get("name"):
+                onFile.name = request.POST.get("name")
+            if request.POST.get("password"):
+                onFile.password = request.POST.get("password")
+            if request.POST.get("email"):
+                onFile.email = request.POST.get("email")
+            if request.POST.get("phone"):
+                onFile.phone = request.POST.get("phone")
+            if request.POST.get("role"):
+                onFile.role = request.POST.get("role")
             onFile.save()
 
             m = request.session["role"]
