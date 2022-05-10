@@ -5,7 +5,7 @@ from _datetime import time
 
 class ClassList(models.Model):
     TERM_CHOICES = (('Summer', 'SUMMER'), ('Fall', 'FALL'), ('Winter', 'WINTER'), ('Spring', 'SPRING'))
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=20, unique=True)
     term = models.CharField(max_length=30, choices=TERM_CHOICES, default='Fall')
     year = models.IntegerField(default=2022)
 
@@ -36,7 +36,7 @@ class Section(models.Model):
     SECTION_TYPE_CHOICES = (('Discussion', 'DISCUSSION'), ('Lab', 'LAB'), ('Lecture', 'LECTURE'))
     Class = models.ForeignKey(ClassList, on_delete=models.SET_NULL, null=True)
     assignedUser = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=True)
-    sectionNumber = models.IntegerField(default=0)
+    sectionNumber = models.IntegerField(default=0, unique=True)
     sectionType = models.CharField(max_length=30, choices=SECTION_TYPE_CHOICES, default='Discussion')
     monday = models.BooleanField(default=False)
     tuesday = models.BooleanField(default=False)

@@ -1,6 +1,6 @@
 {% load static %}
 {% if sessionUser.username == "" %}
-        <meta http-equiv="Refresh" content="0; url='/'" />
+    <meta http-equiv="Refresh" content="0; url='/'"/>
 {% endif %}
 <!DOCTYPE html>
 <html lang="en">
@@ -41,13 +41,13 @@
                     <td><input name="name" placeholder="{{ i.name }}"></td>
                     <td><input name="role" placeholder="{{ i.role }}"></td>
                     </td>
-                         <td>{{ i.username }}</td>
-                         <td>{{ i.name }}</td>
-                         <td>{{ i.role }}</td>
+                    <td>{{ i.username }}</td>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.role }}</td>
                     <td>
                         <button>Delete</button>
                     </td>
-            </tr>
+                    </tr>
                 {% endfor %}
         </table>
     </div>

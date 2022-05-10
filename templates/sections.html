@@ -43,25 +43,49 @@
                 <th>Friday</th>
             </tr>
             <tr>
-
                 {% for i in sections %}
-                    <td>{{ i.assignedUser.role }}</td>
-                    <td>{{ i.assignedUser }}</td>
-                    <td>{{ i.sectionNumber }}</td>
-                    <td>{{ i.sectionType }}</td>
-                    <td>{{ i.startTime }}</td>
-                    <td>{{ i.endTime }}</td>
-                    <td>{{ i.monday }}</td>
-                    <td>{{ i.tuesday }}</td>
-                    <td>{{ i.wednesday }}</td>
-                    <td>{{ i.thursday }}</td>
-                    <td>{{ i.friday }}</td>
-                    <td>
-                    {% if sessionUser.role == "Admin" %}
-                        <button>Delete</button>
+                    {% if editingSection == i.sectionNumber %}
+                        <td>{{ i.assignedUser.role }}</td>
+                        <td><input name="assignedUser" placeholder="{{ i.assignedUser }}"></td>
+                        <td><input name="sectionNumber" placeholder="{{ i.sectionNumber }}"></td>
+                        <td><select class="dropdownMenu" name="sectionType" placeholder="{{ i.sectionType }}">
+
+                        </select></td>
+                        <td><input type=time name="startTime" class="course-textbox" value="{{ i.startTime }}"></td>
+                        <td><input type=time name="endTime" class="course-textbox" value="{{ i.endTime }}"></td>
+                        <td><input type="checkbox" name="monday" value="{{ i.monday }}"></td>
+                        <td><input type="checkbox" name="tuesday" value="{{ i.tuesday }}"></td>
+                        <td><input type="checkbox" name="wednesday" value="{{ i.wednesday }}"></td>
+                        <td><input type="checkbox" name="thursday" value="{{ i.thursday }}"></td>
+                        <td><input type="checkbox" name="friday" value="{{ i.friday }}"></td>
+                    {% else %}
+                        <td>{{ i.assignedUser.role }}</td>
+                        <td>{{ i.assignedUser }}</td>
+                        <td>{{ i.sectionNumber }}</td>
+                        <td>{{ i.sectionType }}</td>
+                        <td>{{ i.startTime }}</td>
+                        <td>{{ i.endTime }}</td>
+                        <td>{{ i.monday }}</td>
+                        <td>{{ i.tuesday }}</td>
+                        <td>{{ i.wednesday }}</td>
+                        <td>{{ i.thursday }}</td>
+                        <td>{{ i.friday }}</td>
+                        {% if sessionUser.role == "Admin" %}
+                        <td>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <button name="editSection" value="{{ i.sectionNumber }}">Edit</button>
+                            </form>
+                        </td>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <td>
+                                    <button name="deleteSection" value="{{ i.sectionNumber }}">Delete</button>
+                                </td>
+                            </form>
+                        {% endif %}
+                        </tr>
                     {% endif %}
-                    </td>
-                    </tr>
                 {% endfor %}
         </table>
     </div>
