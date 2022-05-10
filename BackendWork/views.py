@@ -68,7 +68,14 @@ class Users(View):
             onFile = MyUser.objects.get(username=request.POST['saveUser'])
 
             if request.POST.get("username"):
-                onFile.username = request.POST.get("username")
+                if len(MyUser.objects.filter(username=request.POST.get("username"))) == 0:
+                    onFile.username = request.POST.get("username")
+                else:
+                    errorMessage = "Error: Username '" + request.POST.get("username") + "' is already in use."
+                    return render(request, "users.html",
+                                  {'sessionUser': MyUser.objects.get(username=request.session["user"]),
+                                   'users': MyUser.objects.all(),
+                                   'error': errorMessage})
             if request.POST.get("name"):
                 onFile.name = request.POST.get("name")
             if request.POST.get("password"):
@@ -146,20 +153,19 @@ class CreateAccount(View):
         if request.POST.get("button1") == "2":
             role = "Admin"
 
-        newuser = MyUser(username=request.POST["username"], password=request.POST["password"],
+        if len(MyUser.objects.filter(username=request.POST["username"])) == 0:
+            newuser = MyUser(username=request.POST["username"], password=request.POST["password"],
                          name=request.POST["name"],
                          email=request.POST["email"], address=request.POST["address"], phone=request.POST["phone"],
                          role=role)
-
-        for names in vars(newuser).values():
-            print(names)
-            if names == "":
-                print("Didn't go through.")
-                return render(request, "createAccount.html", {"message": "Invalid data entered"})
-
-        newuser.save()
-        return render(request, "createAccount.html",
-                      {'sessionUser': MyUser.objects.get(username=request.session["user"])})
+            newuser.save()
+            successMessage = "Account '" + request.POST["username"] + "' created."
+            return render(request, "createAccount.html",
+                      {'sessionUser': MyUser.objects.get(username=request.session["user"]), 'success': successMessage})
+        else:
+            errorMessage = "Error: Username '" + request.POST["username"] + "' is already in use."
+            return render(request, "createAccount.html",
+                      {'sessionUser': MyUser.objects.get(username=request.session["user"]), 'error': errorMessage})
 
 
 class CreateSection(View):
