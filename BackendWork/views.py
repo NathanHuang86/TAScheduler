@@ -195,17 +195,18 @@ class Sections(View):
         elif request.POST.get('saveSection'):
             onFile = Section.objects.get(sectionNumber=int(request.POST['saveSection']))
 
-            if not len(request.POST.get("sectionNumber")) == 0 and not Section.objects.filter(sectionNumber=request.POST.get("sectionNumber"), Class=ClassList.objects.get(name=request.session["thisCourse"])):
-                onFile.sectionNumber = int(request.POST.get("sectionNumber"))
-            else:
-                errorMessage = "Section Number " + str(request.POST.get("sectionNumber")) + " already exists."
+            if request.POST.get('sectionNumber'):
+                if len(Section.objects.filter(Class=ClassList.objects.get(name=request.session['thisCourse']), sectionNumber=request.POST.get('sectionNumber'))) != 0:
+                    errorMessage = "Section Number " + str(request.POST.get("sectionNumber")) + " already exists."
 
-                return render(request, "sections.html",
-                              {'sessionUser': MyUser.objects.get(username=request.session["user"]),
-                               'course': ClassList.objects.get(name=request.session["thisCourse"]),
-                               'sections': Section.objects.filter(
-                                   Class=ClassList.objects.get(name=request.session["thisCourse"])),
-                               'error': errorMessage})
+                    return render(request, "sections.html",
+                                  {'sessionUser': MyUser.objects.get(username=request.session["user"]),
+                                   'course': ClassList.objects.get(name=request.session["thisCourse"]),
+                                   'sections': Section.objects.filter(
+                                       Class=ClassList.objects.get(name=request.session["thisCourse"])),
+                                   'error': errorMessage})
+                else:
+                    onFile.sectionNumber = int(request.POST.get("sectionNumber"))
 
             if request.POST.get("assignedUser"):
                 onFile.assignedUser = MyUser.objects.get(username=request.POST.get("assignedUser"))
