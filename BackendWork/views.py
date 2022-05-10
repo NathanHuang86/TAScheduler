@@ -39,7 +39,9 @@ class Home(View):
             request.session["user"]
         except:
             return redirect("/")
-        return render(request, "home.html", {'sessionUser': MyUser.objects.get(username=request.session["user"])})
+        return render(request, "home.html", {'sessionUser': MyUser.objects.get(username=request.session["user"]),
+                                             'courses': MyUser.objects.get(username=request.session["user"]).assignedClasses.all(),
+                                             'sections': Section.objects.filter(assignedUser=MyUser.objects.get(username=request.session["user"]))})
 
 
 class Users(View):

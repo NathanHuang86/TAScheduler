@@ -25,12 +25,11 @@
 </div>
 
 <body>
-
-</div>
-<h1 class="subHeader"> {{ sessionUser }}'s Home</h1>
-<div>
-    <table>
-            My info:
+<p class="header">{{ sessionUser.username }}'s Home</p>
+<div class="container">
+    <p class=header>My Info</p>
+    <div class="containerbox">
+        <table>
             <tr>
                 <th>Username</th>
                 <th>Password</th>
@@ -41,85 +40,68 @@
                 <th>Role</th>
             </tr>
             <tr>
-                <td>{{ thisUser.username }}</td>
-                <td>{{ thisUser.password }}</td>
-                <td>{{ thisUser.name }}</td>
-                <td>{{ thisUser.email }}</td>
-                <td>{{ thisUser.address }}</td>
-                <td>{{ thisUser.phone }}</td>
-                <td>{{ thisUser.role }}</td>
+                <td>{{ sessionUser.username }}</td>
+                <td>{{ sessionUser.password }}</td>
+                <td>{{ sessionUser.name }}</td>
+                <td>{{ sessionUser.email }}</td>
+                <td>{{ sessionUser.address }}</td>
+                <td>{{ sessionUser.phone }}</td>
+                <td>{{ sessionUser.role }}</td>
             </tr>
-            <form action="" method="post">
-                {% csrf_token %}
-            <button name="edit" value="edit">Edit</button>
-            </form>
         </table>
-    <h1 class="header">Your Courses</h1>
-    <table>
-            <tr>
-                <th>Course Name</th>
-                <th>Instructor</th>
-            </tr>
-            <tr>
-
-                {% for i in courses %}
-                    <td>{{ i.name }}</td>
-                    <td>{{ i.owner }}</td>
-
-                    <td>
-                        <form action="" method="post">
-                            {% csrf_token %}
-                            <button name="thisCourseEdit" value="{{ i.name }}">Edit</button>
-                        </form>
-                    </td>
-
-                    <td>
-                        <button>Delete</button>
-                    </td>
-                    <td>
-
-                    <form action="" method="post">
-                        {% csrf_token %}
-                        <button name="thisCourseSections" value="{{ i.name }}">View Sections</button>
-                    </form>
-
-                    </td>
-                    </tr>
-                {% endfor %}
-        </table>
+    </div>
+</div>
+<div class="container">
+    <p class=header>My Assigned Courses</p>
+    <div class="containerbox">
         <table>
             <tr>
-                <th>TA</th>
-                <th>Section Number</th>
+                <th>Course Name</th>
+                <th>Term</th>
+                <th>Year</th>
+            </tr>
+                {% for i in courses %}
+                    <tr><td>{{ i.name }}</td>
+                    <td>{{ i.term }}</td>
+                    <td>{{ i.year }}</td></tr>
+                {% endfor %}
+        </table>
+    </div>
+</div>
+<div class="container">
+    <p class=header>My Assigned Sections</p>
+    <div class="containerbox">
+        <table>
+            <tr>
+                <th>Course</th>
                 <th>Section Type</th>
+                <th>Section Number</th>
+                <th>Assigned User</th>
                 <th>Start Time</th>
                 <th>End Time</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
             </tr>
-            <tr>
-
                 {% for i in sections %}
-                    <td>{{ i.TA }}</td>
-                    <td>{{ i.sectionNumber }}</td>
+                    <tr>
+                    <td>{{ i.Class }}</td>
                     <td>{{ i.sectionType }}</td>
+                    <td>{{ i.sectionNumber }}</td>
+                    <td>{{ i.assignedUser }}</td>
                     <td>{{ i.startTime }}</td>
                     <td>{{ i.endTime }}</td>
-
-                    <td>
-                        <form action="" method="post">
-                            {% csrf_token %}
-                            <button name="thisSection" value="{{ i.sectionNumber }}">Edit</button>
-                        </form>
-                    </td>
-                    <td>
-                        <button>Delete</button>
-                    </td>
+                    <td>{{ i.monday }}</td>
+                    <td>{{ i.tuesday }}</td>
+                    <td>{{ i.wednesday }}</td>
+                    <td>{{ i.thursday }}</td>
+                    <td>{{ i.friday }}</td>
                     </tr>
                 {% endfor %}
         </table>
-    <div class="container">
-
     </div>
-
 </div>
 </body>
 </html>
