@@ -351,6 +351,12 @@ class CreateCourses(View):
                        'sessionUser': MyUser.objects.get(username=request.session["user"])})
 
     def post(self, request):
+        if len(ClassList.objects.filter(name=request.POST["name"])) != 0:
+            errorMessage = "Course '" + request.POST["name"] + "' already exists."
+            return render(request, "createCourse.html",
+                          {'instructors': MyUser.objects.filter(role='Instructor').values(),
+                           'sessionUser': MyUser.objects.get(username=request.session["user"]),
+                           'error': errorMessage})
         ClassList(name=request.POST["name"], term=request.POST["term"], year=request.POST["year"]).save()
         successMessage = "Course '" + request.POST["name"] + "' created."
         return render(request, "createCourse.html",
