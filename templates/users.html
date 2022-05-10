@@ -30,11 +30,15 @@
     <div class="containerbox">
         <table>
             <tr>
-                <th>Username</th>
-                <th>Password</th>
+                {% if sessionUser.role == "Admin" %}
+                    <th>Username</th>
+                    <th>Password</th>
+                {% endif %}
                 <th>Name</th>
                 <th>Email</th>
-                <th>Address</th>
+                {% if sessionUser.role == "Admin" %}
+                    <th>Address</th>
+                {% endif %}
                 <th>Phone</th>
                 <th>Role</th>
             </tr>
@@ -66,35 +70,45 @@
                          </td>
                     </td>
                     {% else %}
-                         <td>{{ i.username }}</td>
-                         <td>{{ i.password }}</td>
+                         {% if sessionUser.role == "Admin" %}
+                             <td>{{ i.username }}</td>
+                             <td>{{ i.password }}</td>
+                         {% endif %}
                          <td>{{ i.name }}</td>
                          <td>{{ i.email }}</td>
-                         <td>{{ i.address }}</td>
-                         <td>{{ i.phone }}</td>
+                         {% if sessionUser.role == "Admin" %}
+                             <td>{{ i.address }}</td>
+                             {% endif %}
+                             <td>{{ i.phone }}</td>
                          <td>{{ i.role }}</td>
+                         {% if sessionUser.role == "Admin" %}
                          <td>
                              <form action="" method="post">
                                  {% csrf_token %}
                                  <button name="editUser" value="{{ i.username }}">Edit</button>
                              </form>
                          </td>
+                         {% endif %}
                      {% endif %}
-                    <form action="" method="post">
-                        {% csrf_token %}
-                    <td>
-                        <button name="deleteUser" value="{{ i.username }}">Delete</button>
-                    </td>
-                    </form>
+                    {% if sessionUser.role == "Admin" %}
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <td>
+                                <button name="deleteUser" value="{{ i.username }}">Delete</button>
+                            </td>
+                        </form>
+                    {% endif %}
             </tr>
                 {% endfor %}
         </table>
     </div>
         {{ error }}
         {{ success }}
+    {% if sessionUser.role == "Admin" %}
         <div class="submit-button">
             <a href="../createAccount/"><button name="createAccountSubmit">Create Account</button></a>
         </div>
+    {% endif %}
 </div>
 </body>
 </html>

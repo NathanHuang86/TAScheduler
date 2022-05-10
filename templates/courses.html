@@ -53,19 +53,22 @@
                     </form>
                     </td>
                     <td>
+                    {% if sessionUser.role == "Admin" %}
                         <form action="" method="post">
                             {% csrf_token %}
                             <button name="deleteCourse" value="{{ i.id }}">Delete</button>
                         </form>
+                    {% endif %}
                     </td>
                     </tr>
                 {% endfor %}
         </table>
     </div>
-
+{% if sessionUser.role == "Admin" %}
     <div class="submit-button">
         <a href="../createCourses/"><button name="createCourseSubmit">Create Course</button></a>
-            </div>
+    </div>
+{% endif %}
 {{ success }}
 
 </div>
