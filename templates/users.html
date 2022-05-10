@@ -1,6 +1,6 @@
 {% load static %}
 {% if sessionUser.username == "" %}
-        <meta http-equiv="Refresh" content="0; url='/'" />
+    <meta http-equiv="Refresh" content="0; url='/'"/>
 {% endif %}
 <!DOCTYPE html>
 <html lang="en">
@@ -45,57 +45,61 @@
             <tr>
 
                 {% for i in users %}
-                     {% if editingUser == i.username %}
-                         <form action="" method="post">
-                         {% csrf_token %}
-                             <td><input name="username" placeholder="{{ i.username }}"></td>
-                             <td><input name="password" placeholder="{{ i.password }}"></td>
-                             <td><input name="name" placeholder="{{ i.name }}"></td>
-                             <td><input name="email" placeholder="{{ i.email }}"></td>
-                             <td><input name="address" placeholder="{{ i.address }}"></td>
-                             <td><input name="phone" placeholder="{{ i.phone }}"></td>
-                             <td><select name="role" class="dropdownMenu">
-                                 <option value="Admin" {% if i.role == 'Admin' %}selected{% endif %}>Admin</option>
-                                 <option value="Instructor" {% if i.role == 'Instructor' %}selected{% endif %}>Instructor</option>
-                                 <option value="Teaching Assistant" {% if i.role == 'Teaching Assistant' %}selected{% endif %}>Teaching Assistant</option>
-                             </select>
+                    {% if editingUser == i.username %}
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <td><input name="username" placeholder="{{ i.username }}"></td>
+                            <td><input name="password" placeholder="{{ i.password }}"></td>
+                            <td><input name="name" placeholder="{{ i.name }}"></td>
+                            <td><input name="email" placeholder="{{ i.email }}"></td>
+                            <td><input name="address" placeholder="{{ i.address }}"></td>
+                            <td><input name="phone" placeholder="{{ i.phone }}"></td>
+                            <td><select name="role" class="dropdownMenu">
+                                <option value="Admin" {% if i.role == 'Admin' %}selected{% endif %}>Admin</option>
+                                <option value="Instructor" {% if i.role == 'Instructor' %}selected{% endif %}>
+                                    Instructor
+                                </option>
+                                <option value="Teaching Assistant"
+                                        {% if i.role == 'Teaching Assistant' %}selected{% endif %}>Teaching Assistant
+                                </option>
+                            </select>
                             </td>
-                             <td>
-                                 <button name="saveEditUser" value="{{ i.username }}">Save</button>
-                         </form>
-                         <td>
-                             <a href="/users/">
-                                 <button>Cancel</button>
-                             </a>
-                         </td>
-                    </td>
+                            <td>
+                                <button name="saveEditUser" value="{{ i.username }}">Save</button>
+                        </form>
+                        <td>
+                            <a href="/users/">
+                                <button>Cancel</button>
+                            </a>
+                        </td>
+                        </td>
                     {% else %}
-                         {% if sessionUser.role == "Admin" %}
-                             <td>{{ i.username }}</td>
-                             <td>{{ i.password }}</td>
-                         {% endif %}
-                         <td>{{ i.name }}</td>
-                         <td>{{ i.email }}</td>
-                         {% if sessionUser.role == "Admin" %}
-                             <td>{{ i.address }}</td>
-                             {% endif %}
-                             <td>{{ i.phone }}</td>
-                         <td>{{ i.role }}</td>
-                         <form action="" method="post">
+                        {% if sessionUser.role == "Admin" %}
+                            <td>{{ i.username }}</td>
+                            <td>{{ i.password }}</td>
+                        {% endif %}
+                        <td>{{ i.name }}</td>
+                        <td>{{ i.email }}</td>
+                        {% if sessionUser.role == "Admin" %}
+                            <td>{{ i.address }}</td>
+                        {% endif %}
+                        <td>{{ i.phone }}</td>
+                        <td>{{ i.role }}</td>
+                        <form action="" method="post">
                             {% csrf_token %}
                             <td>
                                 <button name="viewAssignments" value="{{ i.username }}">Assignments</button>
                             </td>
                         </form>
-                         {% if sessionUser.role == "Admin" %}
-                         <td>
-                             <form action="" method="post">
-                                 {% csrf_token %}
-                                 <button name="editUser" value="{{ i.username }}">Edit</button>
-                             </form>
-                         </td>
-                         {% endif %}
-                     {% endif %}
+                        {% if sessionUser.role == "Admin" %}
+                            <td>
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    <button name="editUser" value="{{ i.username }}">Edit</button>
+                                </form>
+                            </td>
+                        {% endif %}
+                    {% endif %}
                     {% if sessionUser.role == "Admin" %}
                         <form action="" method="post">
                             {% csrf_token %}
@@ -104,15 +108,17 @@
                             </td>
                         </form>
                     {% endif %}
-            </tr>
+                    </tr>
                 {% endfor %}
         </table>
     </div>
-        {{ error }}
-        {{ success }}
+    {{ error }}
+    {{ success }}
     {% if sessionUser.role == "Admin" %}
         <div class="submit-button">
-            <a href="../createAccount/"><button name="createAccountSubmit">Create Account</button></a>
+            <a href="../createAccount/">
+                <button name="createAccountSubmit">Create Account</button>
+            </a>
         </div>
     {% endif %}
 </div>
