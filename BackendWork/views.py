@@ -53,7 +53,43 @@ class Users(View):
                                               'users': MyUser.objects.all()})
 
     def post(self, request):
-        if request.POST.get('editUser'):
+        if request.POST.get('saveEditUser'):
+            onFile = MyUser.objects.get(username=request.POST['saveEditUser'])
+            if request.POST.get("username"):
+                if len(MyUser.objects.filter(username=request.POST.get("username"))) == 0:
+                    onFile.username = request.POST.get("username")
+                else:
+                    errorMessage = "Error: Username '" + request.POST.get("username") + "' is already in use."
+                    return render(request, "users.html",
+                                  {'sessionUser': MyUser.objects.get(username=request.session["user"]),
+                                   'users': MyUser.objects.all(),
+                                   'error': errorMessage})
+            madeChange = False
+            successMessage = ""
+            if request.POST.get("name"):
+                onFile.name = request.POST.get("name")
+                madeChange = True
+            if request.POST.get("password"):
+                onFile.password = request.POST.get("password")
+                madeChange = True
+            if request.POST.get("email"):
+                onFile.email = request.POST.get("email")
+                madeChange = True
+            if request.POST.get("phone"):
+                onFile.phone = request.POST.get("phone")
+                madeChange = True
+            if onFile.role != request.POST.get("role"):
+                onFile.role = request.POST.get("role")
+                madeChange = True
+            onFile.save()
+            if madeChange:
+                successMessage = "User '" + request.POST.get("saveEditUser") + "' edited."
+            return render(request, "users.html",
+                          {'sessionUser': MyUser.objects.get(username=request.session["user"]),
+                           'users': MyUser.objects.all(),
+                           'success': successMessage})
+
+        elif request.POST.get('editUser'):
             request.session["userEdit"] = request.POST['editUser']
             return render(request, "users.html",
                           {'sessionUser': MyUser.objects.get(username=request.session["user"]),
@@ -64,33 +100,13 @@ class Users(View):
             users = MyUser.objects.all()
             return render(request, "users.html", {'sessionUser': MyUser.objects.get(username=request.session["user"]), 'users': users})
 
-        elif request.POST.get('saveUser'):
-            onFile = MyUser.objects.get(username=request.POST['saveUser'])
-
-            if request.POST.get("username"):
-                if len(MyUser.objects.filter(username=request.POST.get("username"))) == 0:
-                    onFile.username = request.POST.get("username")
-                else:
-                    errorMessage = "Error: Username '" + request.POST.get("username") + "' is already in use."
-                    return render(request, "users.html",
-                                  {'sessionUser': MyUser.objects.get(username=request.session["user"]),
-                                   'users': MyUser.objects.all(),
-                                   'error': errorMessage})
-            if request.POST.get("name"):
-                onFile.name = request.POST.get("name")
-            if request.POST.get("password"):
-                onFile.password = request.POST.get("password")
-            if request.POST.get("email"):
-                onFile.email = request.POST.get("email")
-            if request.POST.get("phone"):
-                onFile.phone = request.POST.get("phone")
-            if request.POST.get("role"):
-                onFile.role = request.POST.get("role")
-            onFile.save()
+        elif request.POST.get("deleteUser"):
+            MyUser.objects.get(username=request.POST.get("deleteUser")).delete()
+            successMessage = "User '" + request.POST.get("deleteUser") + "' deleted."
             return render(request, "users.html",
                           {'sessionUser': MyUser.objects.get(username=request.session["user"]),
-                           'users': MyUser.objects.all()})
-
+                           'users': MyUser.objects.all(),
+                           'success': successMessage})
 
 class Courses(View):
 

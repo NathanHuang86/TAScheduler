@@ -71,7 +71,7 @@
                              </select>
                             </td>
                              <td>
-                                 <button name="saveUser" value="{{ i.username }}">Save</button>
+                                 <button name="saveEditUser" value="{{ i.username }}">Save</button>
                          </form>
                          <td>
                              <a href="/users/">
@@ -94,14 +94,18 @@
                              </form>
                          </td>
                      {% endif %}
+                    <form action="" method="post">
+                        {% csrf_token %}
                     <td>
-                        <button>Delete</button>
+                        <button name="deleteUser" value="{{ i.username }}">Delete</button>
                     </td>
+                    </form>
             </tr>
                 {% endfor %}
         </table>
     </div>
         {{ error }}
+        {{ success }}
         <div class="submit-button">
             <a href="../createAccount/"><button name="createAccountSubmit">Create Account</button></a>
         </div>
