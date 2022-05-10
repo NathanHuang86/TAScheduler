@@ -40,9 +40,12 @@
                     <td>{{ i.username }}</td>
                     <td>{{ i.name }}</td>
                     <td>{{ i.role }}</td>
-                    <td>
-                        <button>Unassign</button>
-                    </td>
+                    <form action="" method="post">
+                                {% csrf_token %}
+                                <td>
+                                    <button name="unassignUser" value="{{ i.username }}">Unassign</button>
+                                </td>
+                            </form>
                     </tr>
                 {% endfor %}
         </table>

@@ -311,6 +311,20 @@ class AssignedUsers(View):
                                assignedClasses=ClassList.objects.get(name=request.session["thisCourse"])),
                            'success': successMessage})
 
+        if request.POST.get('unassignUser'):
+            assignUser = MyUser.objects.get(username=request.POST.get('unassignUser'))
+            assignUser.assignedClasses.remove(ClassList.objects.get(name=request.session["thisCourse"]))
+            assignUser.save()
+            successMessage = "Unassigned '" + assignUser.username + "' from " + request.session["thisCourse"] + "."
+            return render(request, "assignedUsers.html",
+                          {'sessionUser': MyUser.objects.get(username=request.session["user"]),
+                           'course': ClassList.objects.get(name=request.session["thisCourse"]),
+                           'assignedUsers': MyUser.objects.filter(
+                               assignedClasses=ClassList.objects.get(name=request.session["thisCourse"])),
+                           'unassignedUsers': MyUser.objects.exclude(
+                               assignedClasses=ClassList.objects.get(name=request.session["thisCourse"])),
+                           'success': successMessage})
+
         errorMessage = "No user selected."
         return render(request, "assignedUsers.html",
                       {'sessionUser': MyUser.objects.get(username=request.session["user"]),
