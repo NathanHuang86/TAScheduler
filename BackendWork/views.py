@@ -57,17 +57,19 @@ class Users(View):
 
     def post(self, request):
         if request.POST.get('saveEditUser'):
+            madeChange = False
             onFile = MyUser.objects.get(username=request.POST['saveEditUser'])
             if request.POST.get("username"):
                 if len(MyUser.objects.filter(username=request.POST.get("username"))) == 0:
-                    onFile.username = request.POST.get("username")
+                    if (MyUser.objects.get(username=request.POST['saveEditUser']) != request.POST['username']):
+                        onFile.username = request.POST.get("username")
+                        madeChange = True
                 else:
                     errorMessage = "Error: Username '" + request.POST.get("username") + "' is already in use."
                     return render(request, "users.html",
                                   {'sessionUser': MyUser.objects.get(username=request.session["user"]),
                                    'users': MyUser.objects.all(),
                                    'error': errorMessage})
-            madeChange = False
             successMessage = ""
             if request.POST.get("name"):
                 onFile.name = request.POST.get("name")
@@ -86,7 +88,8 @@ class Users(View):
                 madeChange = True
             onFile.save()
             if madeChange:
-                successMessage = "User '" + request.POST.get("saveEditUser") + "' edited."
+                successMessage = "User '" + onFile.username + "' edited."
+
             return render(request, "users.html",
                           {'sessionUser': MyUser.objects.get(username=request.session["user"]),
                            'users': MyUser.objects.all(),
