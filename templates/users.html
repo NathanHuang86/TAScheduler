@@ -81,6 +81,12 @@
                              {% endif %}
                              <td>{{ i.phone }}</td>
                          <td>{{ i.role }}</td>
+                         <form action="" method="post">
+                            {% csrf_token %}
+                            <td>
+                                <button name="viewAssignments" value="{{ i.username }}">Assignments</button>
+                            </td>
+                        </form>
                          {% if sessionUser.role == "Admin" %}
                          <td>
                              <form action="" method="post">

@@ -108,7 +108,9 @@ class Users(View):
                           {'sessionUser': MyUser.objects.get(username=request.session["user"]),
                            'users': MyUser.objects.all(),
                            'success': successMessage})
-
+        elif request.POST.get("viewAssignments"):
+            request.session["userAssignments"] = request.POST.get("viewAssignments")
+            return redirect("userAssignments/")
 
 class Courses(View):
 
@@ -334,3 +336,11 @@ class AssignedUsers(View):
                        'unassignedUsers': MyUser.objects.exclude(
                            assignedClasses=ClassList.objects.get(name=request.session["thisCourse"])),
                        'error': errorMessage})
+
+
+class UserAssignments(View):
+    def get(self, request):
+
+        return render(request, "userAssignments.html", {'sessionUser': MyUser.objects.get(username=request.session['userAssignments']),
+                                                        'courses': MyUser.objects.get(username=request.session['userAssignments']).assignedClasses.all(),
+                                                        'sections': Section.objects.filter(assignedUser=MyUser.objects.get(username=request.session['userAssignments']))})
