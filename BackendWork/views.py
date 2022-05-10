@@ -340,7 +340,7 @@ class AssignedUsers(View):
 
 class UserAssignments(View):
     def get(self, request):
-
-        return render(request, "userAssignments.html", {'sessionUser': MyUser.objects.get(username=request.session['userAssignments']),
+        return render(request, "userAssignments.html", {'sessionUser': MyUser.objects.get(username=request.session['user']),
+                                                        'viewingUser': MyUser.objects.get(username=request.session['userAssignments']),
                                                         'courses': MyUser.objects.get(username=request.session['userAssignments']).assignedClasses.all(),
                                                         'sections': Section.objects.filter(assignedUser=MyUser.objects.get(username=request.session['userAssignments']))})

@@ -1,0 +1,70 @@
+{% load static %}
+{% if sessionUser.username == "" %}
+    <meta http-equiv="Refresh" content="0; url='/'"/>
+{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Course</title>
+    <link rel="stylesheet" type="text/css" href="{% static "css/editCourse.css" %}"/>
+</head>
+
+<div class="navContainer">
+    <header class="header">
+        <h1><a>TA Scheduler Management System</a></h1>
+    </header>
+    <div class="navigation">
+        {% if sessionUser == "Admin" %}
+        {% endif %}
+        <li><a href="/home/">Home</a></li>
+        <li><a href="/courses/">Courses</a></li>
+        <li><a href="/users/">Users</a></li>
+        <li><a href="/">Logout</a></li>
+    </div>
+</div>
+
+
+<body>
+<div class="container">
+    <p class="header">Assigned Users for {{ course }}</p>
+    <div class="containerbox">
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Role</th>
+            </tr>
+                {% for i in assignedUsers %}
+                    <tr>
+                    <td>{{ i.username }}</td>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.role }}</td>
+                    <form action="" method="post">
+                                {% csrf_token %}
+                                <td>
+                                    <button name="unassignUser" value="{{ i.username }}">Unassign</button>
+                                </td>
+                            </form>
+                    </tr>
+                {% endfor %}
+        </table>
+        <form action="" method="post">
+        {% csrf_token %}
+            <select class="dropdownMenu" name="assignUser">
+                <option value="" disabled selected>Assign User</option>
+                {% for i in unassignedUsers %}
+                    <option value="{{ i.username }}">{{ i.username }}</option>
+                {% endfor %}
+            </select>
+            <div class="submit-button">
+            <button type="submit">Assign</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{{ success }}
+{{ error }}
+</body>
+</html>
