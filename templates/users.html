@@ -51,23 +51,9 @@
                              <td><input name="address" placeholder="{{ i.address }}"></td>
                              <td><input name="phone" placeholder="{{ i.phone }}"></td>
                              <td><select name="role" class="dropdownMenu">
-                                 {% if i.role == 'Admin' %}
-                                 <option value="Admin" selected>Admin</option>
-                                 {% else %}
-                                 <option value="Admin">Admin</option>
-                                 {% endif %}
-                                 {% if i.role == 'Instructor' %}
-                                 <option value="Instructor" selected>Instructor</option>
-                                     {% else %}
-                                 <option value="Instructor">Instructor</option>
-                                 {% endif %}
-                                 {% if i.role == 'Teaching Assistant' %}
-                                 <option value="Teaching Assistant" selected>Teaching Assistant</option>
-                                     {% else %}
-                                 <option value="Teaching Assistant">Teaching Assistant</option>
-                                 {% endif %}
-
-
+                                 <option value="Admin" {% if i.role == 'Admin' %}selected{% endif %}>Admin</option>
+                                 <option value="Instructor" {% if i.role == 'Instructor' %}selected{% endif %}>Instructor</option>
+                                 <option value="Teaching Assistant" {% if i.role == 'Teaching Assistant' %}selected{% endif %}>Teaching Assistant</option>
                              </select>
                             </td>
                              <td>

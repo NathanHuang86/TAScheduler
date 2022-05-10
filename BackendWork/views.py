@@ -121,17 +121,15 @@ class Courses(View):
 
     def post(self, request):
         if request.POST.get('thisCourseSections'):
-            thisCourseName = request.POST['thisCourseSections']
-            thisCourse = ClassList.objects.get(name=thisCourseName)
-            request.session["thisCourse"] = thisCourse.name
+            request.session["thisCourse"] = request.POST['thisCourseSections']
             return redirect("sections/")
 
         elif request.POST.get('assignedUser'):
-            thisCourseName = request.POST['assignedUser']
-            request.session["thisCourse"] = thisCourseName
+            request.session["thisCourse"] = request.POST['assignedUser']
             return redirect("assignedUsers/")
 
         elif request.POST.get('deleteCourse'):
+            #TODO should delete sections on the course as well
             courseName = ClassList.objects.get(id=request.POST.get('deleteCourse')).name
             ClassList.objects.get(id=request.POST.get('deleteCourse')).delete()
             successMessage = "Course '" + courseName + "' deleted."
@@ -150,9 +148,9 @@ class Sections(View):
             return redirect("/")
         return render(request, "sections.html",
                       {'sessionUser': MyUser.objects.get(username=request.session["user"]),
-                       'course': ClassList.objects.get(name=request.session["thisCourse"]),
+                       'course': ClassList.objects.get(id=request.session["thisCourse"]),
                        'sections': Section.objects.filter(
-                           Class=ClassList.objects.get(name=request.session["thisCourse"]))})
+                           Class=ClassList.objects.get(id=request.session["thisCourse"]))})
 
     def post(self, request):
         request.session['thisSection'] = request.POST['thisSection']
@@ -202,8 +200,17 @@ class CreateSection(View):
             return redirect("/")
         return render(request, "createSection.html",
                       {'sessionUser': MyUser.objects.get(username=request.session["user"]),
-                       'course': ClassList.objects.get(name=request.session["thisCourse"]),
+                       'course': ClassList.objects.get(id=request.session["thisCourse"]),
                        'users': MyUser.objects.filter(role='Teaching Assistant')})
+
+    def post(self, request):
+        Section.objects.create(Class=ClassList.objects.get(id=request.session["thisCourse"]), assignedUser=MyUser.objects.get(username=request.POST["assignedUser"]), sectionNumber=request.POST["sectionNumber"], sectionType=request.POST["sectionType"], monday=request.POST["Monday"], tuesday=request.POST["Tuesday"], wednesday=request.POST["Wednesday"], thursday=request.POST["Thursday"], friday=request.POST["Friday"], startTime=request.POST["startTime"], endTime=request.POST["endTime"]).save()
+        successMessage = 'Section ' + request.POST['sectionType'] + ' ' + request.POST['sectionNumber'] + ' created for Class ' + ClassList.objects.get(id=request.session["thisCourse"]).name + "."
+        return render(request, "createSection.html",
+                      {'sessionUser': MyUser.objects.get(username=request.session["user"]),
+                       'course': ClassList.objects.get(id=request.session["thisCourse"]),
+                       'users': MyUser.objects.filter(role='Teaching Assistant'),
+                       'success': successMessage})
 
 
 class CreateCourses(View):
@@ -260,5 +267,5 @@ class AssignedUsers(View):
             return redirect("/")
         return render(request, "assignedUsers.html",
                       {'sessionUser': MyUser.objects.get(username=request.session["user"]),
-                       'course': ClassList.objects.get(name=request.session["thisCourse"]),
+                       'course': ClassList.objects.get(id=request.session["thisCourse"]),
                        'users': MyUser.objects.filter(assignedClasses=ClassList.objects.get(name=request.session["thisCourse"]))})

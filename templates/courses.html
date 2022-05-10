@@ -43,23 +43,20 @@
                     <td>
                         <form action="" method="post">
                             {% csrf_token %}
-                            <button name="assignedUser" value="{{ i.name }}">Assigned Users</button>
+                            <button name="assignedUser" value="{{ i.id }}">Assigned Users</button>
                         </form>
                     </td>
-
+                    <td>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <button name="thisCourseSections" value="{{ i.id }}">View Sections</button>
+                    </form>
+                    </td>
                     <td>
                         <form action="" method="post">
                             {% csrf_token %}
                             <button name="deleteCourse" value="{{ i.id }}">Delete</button>
                         </form>
-                    </td>
-                    <td>
-
-                    <form action="" method="post">
-                        {% csrf_token %}
-                        <button name="thisCourseSections" value="{{ i.name }}">View Sections</button>
-                    </form>
-
                     </td>
                     </tr>
                 {% endfor %}

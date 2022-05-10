@@ -36,6 +36,11 @@
                 <th>Section Type</th>
                 <th>Start Time</th>
                 <th>End Time</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
             </tr>
             <tr>
 
@@ -46,13 +51,11 @@
                     <td>{{ i.sectionType }}</td>
                     <td>{{ i.startTime }}</td>
                     <td>{{ i.endTime }}</td>
-
-                    <td>
-                        <form action="" method="post">
-                            {% csrf_token %}
-                            <button name="thisSection" value="{{ i.sectionNumber }}">Edit</button>
-                        </form>
-                    </td>
+                    <td>{{ i.monday }}</td>
+                    <td>{{ i.tuesday }}</td>
+                    <td>{{ i.wednesday }}</td>
+                    <td>{{ i.thursday }}</td>
+                    <td>{{ i.friday }}</td>
                     <td>
                         <button>Delete</button>
                     </td>

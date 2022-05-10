@@ -32,27 +32,28 @@
         <div class="containerbox">
             <table>
                 <tr>
-                    <select class="dropdownMenu" name="userSelect">
-                        <option value="" disabled selected>Select a TA</option>
+                    <select class="dropdownMenu" name="assignedUser">
+                        <option value="" disabled selected>Assign a User</option>
                         {% for i in users %}
-                            <option value= {{ i.name }}>{{ i.name }}</option>
+                            <option value="{{ i.username }}">{{ i.username }}</option>
                         {% endfor %}
                     </select>
                 </tr>
                 <tr>
                     <td><input name="sectionNumber" class="course-textbox" placeholder="Section Number"></td>
                     <td>
-                        <select class="dropdownMenu" name="userSelect">
+                        <select class="dropdownMenu" name="sectionType">
                             <option value="" disabled selected>Section Type</option>
+                            <option value=Lecture>Lecture</option>
                             <option value=Lab>Lab</option>
                             <option value=Discussion>Discussion</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <td><input name="startTime" class="course-textbox" placeholder="Start Time">
+                    <td>Start Time<input type=time name="startTime" class="course-textbox" placeholder="Start Time">
                     </td>
-                    <td><input name="endTime" class="course-textbox" placeholder="End time">
+                    <td>End Time<input type=time name="endTime" class="course-textbox" placeholder="End time">
                 </tr>
 
                 <tr>
@@ -60,24 +61,24 @@
                         <legend>Choose Schedule:</legend>
 
                         <div>
-                            <input type="checkbox" name="Monday">
+                            <input type="checkbox" name="Monday" value="True">
                             <label for="Monday">Monday</label>
                         </div>
 
                         <div>
-                            <input type="checkbox" name="Tuesday">
+                            <input type="checkbox" name="Tuesday" value="True">
                             <label for="Tuesday">Tuesday</label>
                         </div>
                         <div>
-                            <input type="checkbox" name="Wednesday">
+                            <input type="checkbox" name="Wednesday" value="True">
                             <label for="Wednesday">Wednesday</label>
                         </div>
                         <div>
-                            <input type="checkbox" name="Thursday">
+                            <input type="checkbox" name="Thursday" value="True">
                             <label for="Thursday">Thursday</label>
                         </div>
                         <div>
-                            <input type="checkbox" name="Friday">
+                            <input type="checkbox" name="Friday" value="True">
                             <label for="Friday">Friday</label>
                         </div>
                     </fieldset>
@@ -90,6 +91,7 @@
             <button type="submit">Submit</button>
         </div>
     </div>
+    {{ success }}
 </form>
 </body>
 </html>
