@@ -23,10 +23,8 @@ class Login(View):
         except:
             noSuchUser = True
         if noSuchUser:
-            print("No such user")
             return render(request, "login.html", {"message": "No such user exists."})
         elif badPassword:
-            print("Bad password")
             return render(request, "login.html", {"message": "Password is incorrect."})
         else:
             request.session["user"] = m.username
