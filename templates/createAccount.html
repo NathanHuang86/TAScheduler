@@ -35,12 +35,12 @@
 
             <table>
                 <tr>
-                    <td><input placeholder="Username" name="username" class='newAccountInformation'></td>
-                    <td><input placeholder="Password" name="password" class=newAccountInformation></td>
+                    <td><input placeholder="Username" name="username" class='newAccountInformation' required></td>
+                    <td><input placeholder="Password" name="password" class=newAccountInformation required></td>
                 </tr>
                 <tr>
-                    <td><input placeholder="Name" name="name" class=newAccountInformation></td>
-                    <td><input placeholder="Email" name="email" class=newAccountInformation></td>
+                    <td><input placeholder="Name" name="name" class=newAccountInformation required></td>
+                    <td><input placeholder="Email" name="email" class=newAccountInformation required></td>
                 </tr>
                 <tr>
                     <td><input placeholder="Address" name="address" class=newAccountInformation></td>
@@ -53,7 +53,7 @@
             <tr>
                     <th>Account Permission</th>
                     <td>
-                        <input type="radio" name="button1" value=0>
+                        <input type="radio" name="button1" value=0 required>
                         <label>TA</label>
                         <input type="radio" name="button1" value=1>
                         <label>Instructor</label>

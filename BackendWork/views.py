@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect
 from django.views import View
 
 from BackendWork.models import ClassList, MyUser, Section
-from datetime import time
 
 
 # Create your views here.
@@ -59,38 +58,29 @@ class Users(View):
 
     def post(self, request):
         if request.POST.get('saveEditUser'):
-            madeChange = False
             onFile = MyUser.objects.get(username=request.POST['saveEditUser'])
-            if request.POST.get("username"):
-                if len(MyUser.objects.filter(username=request.POST.get("username"))) == 0:
-                    if (MyUser.objects.get(username=request.POST['saveEditUser']) != request.POST['username']):
-                        onFile.username = request.POST.get("username")
-                        madeChange = True
-                else:
-                    errorMessage = "Error: Username '" + request.POST.get("username") + "' is already in use."
-                    return render(request, "users.html",
-                                  {'sessionUser': MyUser.objects.get(username=request.session["user"]),
-                                   'users': MyUser.objects.all(),
-                                   'error': errorMessage})
+            if len(MyUser.objects.filter(username=request.POST.get("username"))) != 0:
+                errorMessage = "Error: Username '" + request.POST.get("username") + "' is already in use."
+                return render(request, "users.html",
+                              {'sessionUser': MyUser.objects.get(username=request.session["user"]),
+                               'users': MyUser.objects.all(),
+                               'error': errorMessage})
+            else:
+                onFile.username = request.POST.get("username")
+
             successMessage = ""
             if request.POST.get("name"):
                 onFile.name = request.POST.get("name")
-                madeChange = True
             if request.POST.get("password"):
                 onFile.password = request.POST.get("password")
-                madeChange = True
             if request.POST.get("email"):
                 onFile.email = request.POST.get("email")
-                madeChange = True
             if request.POST.get("phone"):
                 onFile.phone = request.POST.get("phone")
-                madeChange = True
             if onFile.role != request.POST.get("role"):
                 onFile.role = request.POST.get("role")
-                madeChange = True
             onFile.save()
-            if madeChange:
-                successMessage = "User '" + onFile.username + "' edited."
+            successMessage = "User '" + onFile.username + "' edited."
 
             return render(request, "users.html",
                           {'sessionUser': MyUser.objects.get(username=request.session["user"]),
