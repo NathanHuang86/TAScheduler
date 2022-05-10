@@ -44,19 +44,21 @@
             <tr>
                 {% for i in sections %}
                     {% if editingSection == i.sectionNumber %}
-                        <td>{{ i.assignedUser.role }}</td>
-                        <td><input name="assignedUser" placeholder="{{ i.assignedUser }}"></td>
-                        <td><input name="sectionNumber" placeholder="{{ i.sectionNumber }}"></td>
-                        <td><select class="dropdownMenu" name="sectionType" placeholder="{{ i.sectionType }}">
-
+                        <td><select class="dropdownMenu" name="sectionType">
+                            <option value=Lecture {% if i.sectionType == "Lecture" %}selected{% endif %}>Lecture</option>
+                            <option value=Lab {% if i.sectionType == "Lab" %}selected{% endif %}>Lab</option>
+                            <option value=Discussion {% if i.sectionType == "Discussion" %}selected{% endif %}>Discussion</option>
                         </select></td>
-                        <td><input type=time name="startTime" class="course-textbox" value="{{ i.startTime }}"></td>
-                        <td><input type=time name="endTime" class="course-textbox" value="{{ i.endTime }}"></td>
-                        <td><input type="checkbox" name="monday" value="{{ i.monday }}"></td>
-                        <td><input type="checkbox" name="tuesday" value="{{ i.tuesday }}"></td>
-                        <td><input type="checkbox" name="wednesday" value="{{ i.wednesday }}"></td>
-                        <td><input type="checkbox" name="thursday" value="{{ i.thursday }}"></td>
-                        <td><input type="checkbox" name="friday" value="{{ i.friday }}"></td>
+                        <td><input name="sectionNumber" placeholder="{{ i.sectionNumber }}"></td>
+                        <td><input name="assignedUser" placeholder="{{ i.assignedUser }}"></td>
+                        <td><input type=time name="startTime" class="course-textbox" value={{ startTime }}></td>
+                        <td><input type=time name="endTime" class="course-textbox" value={{ endTime }}></td>
+                        <td><input type="checkbox" name="monday" value="{{ i.monday }}" {% if i.monday %}checked{% endif %}></td>
+                        <td><input type="checkbox" name="tuesday" value="{{ i.tuesday }}" {% if i.tuesday %}checked{% endif %}></td>
+                        <td><input type="checkbox" name="wednesday" value="{{ i.wednesday }}" {% if i.wednesday %}checked{% endif %}></td>
+                        <td><input type="checkbox" name="thursday" value="{{ i.thursday }}" {% if i.thursday %}checked{% endif %}></td>
+                        <td><input type="checkbox" name="friday" value="{{ i.friday }}" {% if i.friday %}checked{% endif %}></td>
+                        </tr>
                     {% else %}
                         <td>{{ i.sectionType }}</td>
                         <td>{{ i.sectionNumber }}</td>

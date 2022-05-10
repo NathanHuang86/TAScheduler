@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 
 from BackendWork.models import ClassList, MyUser, Section
+from datetime import time
 
 
 # Create your views here.
@@ -156,13 +157,15 @@ class Sections(View):
     def post(self, request):
         if request.POST.get('editSection'):
             request.session["thisSection"] = request.POST['editSection']
-            print("Editing Section: " + request.session["thisSection"])
+            print("Start time: " + Section.objects.get(Class=ClassList.objects.get(name=request.session["thisCourse"]), sectionNumber=request.session['thisSection']).startTime.strftime("%H:%M:%S"))
             return render(request, "sections.html",
                           {'sessionUser': MyUser.objects.get(username=request.session["user"]),
                            'course': ClassList.objects.get(name=request.session["thisCourse"]),
                            'sections': Section.objects.filter(
                                Class=ClassList.objects.get(name=request.session["thisCourse"])),
-                           'editingSection': request.session.pop('thisSection')})
+                           'startTime': Section.objects.get(Class=ClassList.objects.get(name=request.session["thisCourse"]), sectionNumber=request.session['thisSection']).startTime.strftime("%H:%M"),
+                           'endTime': Section.objects.get(Class=ClassList.objects.get(name=request.session["thisCourse"]), sectionNumber=request.session['thisSection']).endTime.strftime("%H:%M"),
+                           'editingSection': int(request.session.pop('thisSection'))})
 
         if request.POST.get('deleteSection'):
             sectionType = Section.objects.get(sectionNumber=request.POST.get('deleteSection')).sectionType
@@ -174,6 +177,7 @@ class Sections(View):
                            'sections': Section.objects.filter(
                                Class=ClassList.objects.get(name=request.session["thisCourse"])),
                            'success': successMessage})
+
 
 class CreateAccount(View):
 
@@ -276,31 +280,6 @@ class CreateCourses(View):
                       {'instructors': MyUser.objects.filter(role='Instructor').values(),
                        'sessionUser': MyUser.objects.get(username=request.session["user"]),
                        'success': successMessage})
-
-
-class EditUser(View):
-
-    def get(self, request):
-        try:
-            request.session["user"]
-        except:
-            return redirect("/")
-        return render(request, "editUser.html",
-                      {'sessionUser': MyUser.objects.get(username=request.session["user"]),
-                       'thisUser': MyUser.objects.get(username=request.session["thisUser"])})
-
-
-class EditSection(View):
-
-    def get(self, request):
-        try:
-            request.session["user"]
-        except:
-            return redirect("/")
-        return render(request, "editSection.html",
-                      {'sessionUser': MyUser.objects.get(username=request.session["user"]),
-                       'section': Section.objects.get(Class=ClassList.objects.get(name=request.session["thisCourse"]),
-                                                      sectionNumber=request.session['thisSection'])})
 
 
 class AssignedUsers(View):
