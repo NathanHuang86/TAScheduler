@@ -227,7 +227,7 @@ class CreateSection(View):
         return render(request, "createSection.html",
                       {'sessionUser': MyUser.objects.get(username=request.session["user"]),
                        'course': ClassList.objects.get(name=request.session["thisCourse"]),
-                       'users': MyUser.objects.filter(role='Teaching Assistant')})
+                       'users': MyUser.objects.filter(assignedClasses=ClassList.objects.get(name=request.session["thisCourse"]))})
 
     def post(self, request):
         if len(Section.objects.filter(Class=ClassList.objects.get(name=request.session["thisCourse"]), sectionNumber=request.POST.get('sectionNumber'))) != 0:
@@ -239,10 +239,11 @@ class CreateSection(View):
                            'success': errorMessage})
 
         newSection = Section.objects.create(Class=ClassList.objects.get(name=request.session["thisCourse"]),
-                               assignedUser=MyUser.objects.get(username=request.POST["assignedUser"]),
                                sectionNumber=request.POST["sectionNumber"], sectionType=request.POST["sectionType"],
                                startTime=request.POST["startTime"], endTime=request.POST["endTime"])
 
+        if request.POST.get('assignedUser'):
+            newSection.assignedUser = MyUser.objects.get(username=request.POST["assignedUser"])
         if request.POST.get('Monday'):
             newSection.monday = True
         if request.POST.get('Tuesday'):
