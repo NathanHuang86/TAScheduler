@@ -164,6 +164,16 @@ class Sections(View):
                                Class=ClassList.objects.get(name=request.session["thisCourse"])),
                            'editingSection': request.session.pop('thisSection')})
 
+        if request.POST.get('deleteSection'):
+            sectionType = Section.objects.get(sectionNumber=request.POST.get('deleteSection')).sectionType
+            Section.objects.get(sectionNumber=request.POST.get('deleteSection')).delete()
+            successMessage = sectionType + ' ' + request.POST.get('deleteSection') + ' deleted.'
+            return render(request, "sections.html",
+                          {'sessionUser': MyUser.objects.get(username=request.session["user"]),
+                           'course': ClassList.objects.get(name=request.session["thisCourse"]),
+                           'sections': Section.objects.filter(
+                               Class=ClassList.objects.get(name=request.session["thisCourse"])),
+                           'success': successMessage})
 
 class CreateAccount(View):
 
@@ -212,14 +222,33 @@ class CreateSection(View):
                        'users': MyUser.objects.filter(role='Teaching Assistant')})
 
     def post(self, request):
-        Section.objects.create(Class=ClassList.objects.get(name=request.session["thisCourse"]),
+        if len(Section.objects.filter(sectionNumber=request.POST.get('sectionNumber'))) != 0:
+            errorMessage = 'Section number ' + request.POST.get('sectionNumber') + ' already exists.'
+            return render(request, "createSection.html",
+                          {'sessionUser': MyUser.objects.get(username=request.session["user"]),
+                           'course': ClassList.objects.get(name=request.session["thisCourse"]),
+                           'users': MyUser.objects.filter(role='Teaching Assistant'),
+                           'success': errorMessage})
+
+        newSection = Section.objects.create(Class=ClassList.objects.get(name=request.session["thisCourse"]),
                                assignedUser=MyUser.objects.get(username=request.POST["assignedUser"]),
                                sectionNumber=request.POST["sectionNumber"], sectionType=request.POST["sectionType"],
-                               monday=request.POST["Monday"], tuesday=request.POST["Tuesday"],
-                               wednesday=request.POST["Wednesday"], thursday=request.POST["Thursday"],
-                               friday=request.POST["Friday"], startTime=request.POST["startTime"],
-                               endTime=request.POST["endTime"]).save()
-        successMessage = 'Section ' + request.POST['sectionType'] + ' ' + request.POST[
+                               startTime=request.POST["startTime"], endTime=request.POST["endTime"])
+
+        if request.POST.get('Monday'):
+            newSection.monday = True
+        if request.POST.get('Tuesday'):
+            newSection.tuesday = True
+        if request.POST.get('Wednesday'):
+            newSection.wednesday = True
+        if request.POST.get('Thursday'):
+            newSection.thursday = True
+        if request.POST.get('Friday'):
+            newSection.friday = True
+
+        newSection.save()
+
+        successMessage = request.POST['sectionType'] + ' ' + request.POST[
             'sectionNumber'] + ' created for Class ' + ClassList.objects.get(
             name=request.session["thisCourse"]).name + "."
         return render(request, "createSection.html",
