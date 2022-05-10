@@ -27,7 +27,7 @@
 
 <body>
 <div class="container">
-    <p class="header">Assigned Users {{ course }}</p>
+    <p class="header">Assigned Users for {{ course }}</p>
     <div class="containerbox">
         <table>
             <tr>
@@ -35,22 +35,33 @@
                 <th>Name</th>
                 <th>Role</th>
             </tr>
-            <tr>
-                {% for i in users %}
-                    <td><input name="username" value={{ i.username }} placeholder="{{ i.username }}"></td>
-                    <td><input name="name" placeholder="{{ i.name }}"></td>
-                    <td><input name="role" placeholder="{{ i.role }}"></td>
-                    </td>
+                {% for i in assignedUsers %}
+                    <tr>
                     <td>{{ i.username }}</td>
                     <td>{{ i.name }}</td>
                     <td>{{ i.role }}</td>
                     <td>
-                        <button>Delete</button>
+                        <button>Unassign</button>
                     </td>
                     </tr>
                 {% endfor %}
         </table>
+        <form action="" method="post">
+        {% csrf_token %}
+            <select class="dropdownMenu" name="assignUser">
+                <option value="" disabled selected>Assign User</option>
+                {% for i in unassignedUsers %}
+                    <option value="{{ i.username }}">{{ i.username }}</option>
+                {% endfor %}
+            </select>
+            <div class="submit-button">
+            <button type="submit">Assign</button>
+            </div>
+        </form>
     </div>
 </div>
+
+{{ success }}
+{{ error }}
 </body>
 </html>

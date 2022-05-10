@@ -226,7 +226,7 @@ class CreateSection(View):
                        'users': MyUser.objects.filter(role='Teaching Assistant')})
 
     def post(self, request):
-        if len(Section.objects.filter(sectionNumber=request.POST.get('sectionNumber'))) != 0:
+        if len(Section.objects.filter(Class=ClassList.objects.get(name=request.session["thisCourse"]), sectionNumber=request.POST.get('sectionNumber'))) != 0:
             errorMessage = 'Section number ' + request.POST.get('sectionNumber') + ' already exists.'
             return render(request, "createSection.html",
                           {'sessionUser': MyUser.objects.get(username=request.session["user"]),
@@ -292,5 +292,31 @@ class AssignedUsers(View):
         return render(request, "assignedUsers.html",
                       {'sessionUser': MyUser.objects.get(username=request.session["user"]),
                        'course': ClassList.objects.get(name=request.session["thisCourse"]),
-                       'users': MyUser.objects.filter(
-                           assignedClasses=ClassList.objects.get(name=request.session["thisCourse"]))})
+                       'assignedUsers': MyUser.objects.filter(
+                           assignedClasses=ClassList.objects.get(name=request.session["thisCourse"])),
+                       'unassignedUsers': MyUser.objects.exclude(assignedClasses=ClassList.objects.get(name=request.session["thisCourse"]))})
+
+    def post(self, request):
+        if request.POST.get('assignUser'):
+            assignUser = MyUser.objects.get(username=request.POST.get('assignUser'))
+            assignUser.assignedClasses.add(ClassList.objects.get(name=request.session["thisCourse"]))
+            assignUser.save()
+            successMessage = "Assigned '" + assignUser.username + "' to " + request.session["thisCourse"] + "."
+            return render(request, "assignedUsers.html",
+                          {'sessionUser': MyUser.objects.get(username=request.session["user"]),
+                           'course': ClassList.objects.get(name=request.session["thisCourse"]),
+                           'assignedUsers': MyUser.objects.filter(
+                               assignedClasses=ClassList.objects.get(name=request.session["thisCourse"])),
+                           'unassignedUsers': MyUser.objects.exclude(
+                               assignedClasses=ClassList.objects.get(name=request.session["thisCourse"])),
+                           'success': successMessage})
+
+        errorMessage = "No user selected."
+        return render(request, "assignedUsers.html",
+                      {'sessionUser': MyUser.objects.get(username=request.session["user"]),
+                       'course': ClassList.objects.get(name=request.session["thisCourse"]),
+                       'assignedUsers': MyUser.objects.filter(
+                           assignedClasses=ClassList.objects.get(name=request.session["thisCourse"])),
+                       'unassignedUsers': MyUser.objects.exclude(
+                           assignedClasses=ClassList.objects.get(name=request.session["thisCourse"])),
+                       'error': errorMessage})

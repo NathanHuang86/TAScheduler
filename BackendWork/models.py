@@ -22,7 +22,7 @@ class MyUser(models.Model):
     address = models.CharField(max_length=72)
     phone = models.CharField(max_length=10)
     role = models.CharField(max_length=30, choices=ROLE_CHOICES, default='Teaching Assistant')
-    assignedClasses = models.ManyToManyField(ClassList, null=True)
+    assignedClasses = models.ManyToManyField(ClassList, null=True, blank=True)
 
     def __str__(self):
         return self.username
@@ -35,8 +35,8 @@ class Section(models.Model):
     SCHEDULE_CHOICES = (('Sunday', 'SUNDAY'), ('Monday', 'MONDAY'), ('Tuesday', 'TUESDAY'), ('Wednesday', 'WEDNESDAY'), ('Thursday', 'THURSDAY'), ('Friday', 'FRIDAY'), ('Saturday', 'SATURDAY'))
     SECTION_TYPE_CHOICES = (('Discussion', 'DISCUSSION'), ('Lab', 'LAB'), ('Lecture', 'LECTURE'))
     Class = models.ForeignKey(ClassList, on_delete=models.SET_NULL, null=True)
-    assignedUser = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=True)
-    sectionNumber = models.IntegerField(default=0, unique=True)
+    assignedUser = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=True, blank=True)
+    sectionNumber = models.IntegerField(default=0)
     sectionType = models.CharField(max_length=30, choices=SECTION_TYPE_CHOICES, default='Discussion')
     monday = models.BooleanField(default=False)
     tuesday = models.BooleanField(default=False)
