@@ -135,8 +135,8 @@ class Courses(View):
             return redirect("assignedUsers/")
 
         elif request.POST.get('deleteCourse'):
-            # TODO should delete sections on the course as well
             courseName = ClassList.objects.get(name=request.POST.get('deleteCourse')).name
+            oldSections = Section.objects.filter(Class=ClassList.objects.get(name=request.POST.get('deleteCourse'))).delete()
             ClassList.objects.get(name=request.POST.get('deleteCourse')).delete()
             successMessage = "Course '" + courseName + "' deleted."
             return render(request, "courses.html",
@@ -161,7 +161,6 @@ class Sections(View):
     def post(self, request):
         if request.POST.get('editSection'):
             request.session["thisSection"] = request.POST['editSection']
-            print("Start time: " + Section.objects.get(Class=ClassList.objects.get(name=request.session["thisCourse"]), sectionNumber=request.session['thisSection']).startTime.strftime("%H:%M:%S"))
             return render(request, "sections.html",
                           {'sessionUser': MyUser.objects.get(username=request.session["user"]),
                            'course': ClassList.objects.get(name=request.session["thisCourse"]),
@@ -172,8 +171,8 @@ class Sections(View):
                            'editingSection': int(request.session.pop('thisSection'))})
 
         if request.POST.get('deleteSection'):
-            sectionType = Section.objects.get(sectionNumber=request.POST.get('deleteSection')).sectionType
-            Section.objects.get(sectionNumber=request.POST.get('deleteSection')).delete()
+            sectionType = Section.objects.get(Class=ClassList.objects.get(name=request.session['thisCourse']), sectionNumber=request.POST.get('deleteSection')).sectionType
+            Section.objects.get(Class=ClassList.objects.get(name=request.session['thisCourse']), sectionNumber=request.POST.get('deleteSection')).delete()
             successMessage = sectionType + ' ' + request.POST.get('deleteSection') + ' deleted.'
             return render(request, "sections.html",
                           {'sessionUser': MyUser.objects.get(username=request.session["user"]),
@@ -239,9 +238,12 @@ class CreateSection(View):
                            'success': errorMessage})
 
         newSection = Section.objects.create(Class=ClassList.objects.get(name=request.session["thisCourse"]),
-                               sectionNumber=request.POST["sectionNumber"], sectionType=request.POST["sectionType"],
-                               startTime=request.POST["startTime"], endTime=request.POST["endTime"])
+                               sectionNumber=request.POST["sectionNumber"], sectionType=request.POST["sectionType"])
 
+        if request.POST.get('startTime'):
+            newSection.startTime = request.POST['startTime']
+        if request.POST.get('endTime'):
+            newSection.endTime = request.POST['endTime']
         if request.POST.get('assignedUser'):
             newSection.assignedUser = MyUser.objects.get(username=request.POST["assignedUser"])
         if request.POST.get('Monday'):

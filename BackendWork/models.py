@@ -43,5 +43,8 @@ class Section(models.Model):
     wednesday = models.BooleanField(default=False)
     thursday = models.BooleanField(default=False)
     friday = models.BooleanField(default=False)
-    startTime = models.TimeField(default=time(0, 0, 0))
-    endTime = models.TimeField(default=time(0, 0, 0))
+    startTime = models.TimeField(default=time(0,0,0))
+    endTime = models.TimeField(default=time(0,0,0))
+
+    def __str__(self):
+        return self.Class.name + " " + self.sectionType + " " + str(self.sectionNumber)
