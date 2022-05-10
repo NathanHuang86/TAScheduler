@@ -5,7 +5,7 @@ from _datetime import time
 
 class ClassList(models.Model):
     TERM_CHOICES = (('Summer', 'SUMMER'), ('Fall', 'FALL'), ('Winter', 'WINTER'), ('Spring', 'SPRING'))
-    name = models.CharField(max_length=20, unique=True)
+    name = models.CharField(max_length=20)
     term = models.CharField(max_length=30, choices=TERM_CHOICES, default='Fall')
     year = models.IntegerField(default=2022)
 

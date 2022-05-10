@@ -38,21 +38,37 @@
             </tr>
             <tr>
                 <td>
-                    <select class="dropdownMenu" name="userSelect">
-                        <option value="" disabled selected>Select an instructor</option>
-                        {% for entry in instructors %}
-                            <option value= {{ entry.name }}>{{ entry.name }}</option>
-                        {% endfor %}
+                    <select class="dropdownMenu" name="term">
+                        <option value="" disabled selected>Term</option>
+                            <option value="Fall">Fall</option>
+                            <option value="Spring">Spring</option>
+                            <option value="Summer">Summer</option>
+                            <option value="Winter">Winter</option>
                     </select>
                 </td>
             </tr>
-
+            <tr>
+                <td>
+                    <select class="dropdownMenu" name="year">
+                        <option value="" disabled selected>year</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                            <option value="2028">2028</option>
+                            <option value="2029">2029</option>
+                            <option value="2030">2030</option>
+                    </select>
+                </td>
+            </tr>
         </table>
     </div>
         <div class="submit-button">
             <button type="submit">Submit</button>
         </div>
-
+    {{ success }}
 </div>
 </form>
 </body>

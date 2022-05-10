@@ -131,6 +131,15 @@ class Courses(View):
             request.session["thisCourse"] = thisCourseName
             return redirect("assignedUsers/")
 
+        elif request.POST.get('deleteCourse'):
+            courseName = ClassList.objects.get(id=request.POST.get('deleteCourse')).name
+            ClassList.objects.get(id=request.POST.get('deleteCourse')).delete()
+            successMessage = "Course '" + courseName + "' deleted."
+            return render(request, "courses.html",
+                          {'sessionUser': MyUser.objects.get(username=request.session["user"]),
+                           'courses': ClassList.objects.all(),
+                           'success': successMessage})
+
 
 class Sections(View):
 
@@ -209,13 +218,12 @@ class CreateCourses(View):
                        'sessionUser': MyUser.objects.get(username=request.session["user"])})
 
     def post(self, request):
-        d = MyUser.objects.filter(name=request.POST["userSelect"])
-        newcourse = ClassList(name=request.POST["name"], owner=d[0])
-        newcourse.save()
-
+        ClassList(name=request.POST["name"], term=request.POST["term"], year=request.POST["year"]).save()
+        successMessage = "Course '" + request.POST["name"] + "' created."
         return render(request, "createCourse.html",
                       {'instructors': MyUser.objects.filter(role='Instructor').values(),
-                       'sessionUser': MyUser.objects.get(username=request.session["user"])})
+                       'sessionUser': MyUser.objects.get(username=request.session["user"]),
+                       'success': successMessage})
 
 
 class EditUser(View):
