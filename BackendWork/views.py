@@ -44,6 +44,51 @@ class Home(View):
                                              'sections': Section.objects.filter(
                                                  assignedUser=MyUser.objects.get(username=request.session["user"]))})
 
+    def post(self, request):
+        if request.POST.get("editUser"):
+            return render(request, "home.html", {'sessionUser': MyUser.objects.get(username=request.session["user"]),
+                                                 'courses': MyUser.objects.get(
+                                                     username=request.session["user"]).assignedClasses.all(),
+                                                 'sections': Section.objects.filter(
+                                                     assignedUser=MyUser.objects.get(
+                                                         username=request.session["user"])),
+                                                 'editing': "allowed"})
+
+        elif request.POST.get("saveEditUser"):
+            onFile = MyUser.objects.get(username=request.POST["saveEditUser"])
+
+            if request.POST.get("username"):
+                if len(MyUser.objects.filter(username=request.POST.get("username"))) != 0:
+                    errorMessage = "Error: Username '" + request.POST.get("username") + "' is already in use."
+                    return render(request, "home.html",
+                                  {'sessionUser': MyUser.objects.get(username=request.session["user"]),
+                                   'users': MyUser.objects.all(),
+                                   'error': errorMessage})
+                else:
+                    onFile.username = request.POST.get("username")
+
+            if request.POST.get("name"):
+                onFile.name = request.POST.get("name")
+            if request.POST.get("password"):
+                onFile.password = request.POST.get("password")
+            if request.POST.get("email"):
+                onFile.email = request.POST.get("email")
+            if request.POST.get("phone"):
+                onFile.phone = request.POST.get("phone")
+            onFile.save()
+            request.session["user"] = onFile.username
+            successMessage = "User '" + onFile.username + "' edited."
+
+            return render(request, "home.html", {'sessionUser': MyUser.objects.get(username=request.session["user"]),
+                                                 'courses': MyUser.objects.get(
+                                                     username=request.session["user"]).assignedClasses.all(),
+                                                 'sections': Section.objects.filter(
+                                                     assignedUser=MyUser.objects.get(
+                                                         username=request.session["user"])),
+                                                 'success': successMessage})
+
+
+
 
 class Users(View):
 
@@ -59,16 +104,17 @@ class Users(View):
     def post(self, request):
         if request.POST.get('saveEditUser'):
             onFile = MyUser.objects.get(username=request.POST['saveEditUser'])
-            if len(MyUser.objects.filter(username=request.POST.get("username"))) != 0:
-                errorMessage = "Error: Username '" + request.POST.get("username") + "' is already in use."
-                return render(request, "users.html",
-                              {'sessionUser': MyUser.objects.get(username=request.session["user"]),
-                               'users': MyUser.objects.all(),
-                               'error': errorMessage})
-            else:
-                onFile.username = request.POST.get("username")
 
-            successMessage = ""
+            if request.POST.get("username"):
+                if len(MyUser.objects.filter(username=request.POST.get("username"))) != 0:
+                    errorMessage = "Error: Username '" + request.POST.get("username") + "' is already in use."
+                    return render(request, "users.html",
+                                  {'sessionUser': MyUser.objects.get(username=request.session["user"]),
+                                   'users': MyUser.objects.all(),
+                                   'error': errorMessage})
+                else:
+                    onFile.username = request.POST.get("username")
+
             if request.POST.get("name"):
                 onFile.name = request.POST.get("name")
             if request.POST.get("password"):

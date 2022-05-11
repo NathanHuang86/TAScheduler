@@ -40,13 +40,38 @@
                 <th>Role</th>
             </tr>
             <tr>
-                <td>{{ sessionUser.username }}</td>
-                <td>{{ sessionUser.password }}</td>
-                <td>{{ sessionUser.name }}</td>
-                <td>{{ sessionUser.email }}</td>
-                <td>{{ sessionUser.address }}</td>
-                <td>{{ sessionUser.phone }}</td>
-                <td>{{ sessionUser.role }}</td>
+                {% if editing == "allowed" %}
+                    <form action="" method="post">
+                    {% csrf_token %}
+                        <td><input name="username" placeholder="{{ sessionUser.username }}"></td>
+                        <td><input name="password" placeholder="{{ sessionUser.password }}"></td>
+                        <td><input name="name" placeholder="{{ sessionUser.name }}"></td>
+                        <td><input name="email" placeholder="{{ sessionUser.email }}"></td>
+                        <td><input name="address" placeholder="{{ sessionUser.address }}"></td>
+                        <td><input name="phone" placeholder="{{ sessionUser.phone }}"></td>
+                        <td>{{ sessionUser.role }}</td>
+                        <td>
+                            <button name="saveEditUser" value="{{ sessionUser.username }}">Save</button>
+                    </form>
+                    <td>
+                        <a href="/">
+                            <button>Cancel</button>
+                        </a>
+                {% else %}
+                    <td>{{ sessionUser.username }}</td>
+                    <td>{{ sessionUser.password }}</td>
+                    <td>{{ sessionUser.name }}</td>
+                    <td>{{ sessionUser.email }}</td>
+                    <td>{{ sessionUser.address }}</td>
+                    <td>{{ sessionUser.phone }}</td>
+                    <td>{{ sessionUser.role }}</td>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <td>
+                            <button name="editUser" value="{{ sessionUser.username }}">Edit</button>
+                        </td>
+                    </form>
+                {% endif %}
             </tr>
         </table>
     </div>
