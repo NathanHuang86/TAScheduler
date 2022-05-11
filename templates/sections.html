@@ -52,6 +52,7 @@
                             </select></td>
                             <td><input name="sectionNumber" placeholder="{{ i.sectionNumber }}"></td>
                             <td><select class="dropdownMenu" name="assignedUser">
+                                    <option></option>
                                 {% for x in courseUsers %}
                                     <option value="{{ x.username }}" {% if i.assignedUser.username == x.username %}selected{% endif %}>{{ x.username }}</option>
                                 {% endfor %}
@@ -127,4 +128,3 @@
 </div>
 </body>
 </html>
-
