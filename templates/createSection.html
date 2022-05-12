@@ -1,6 +1,6 @@
 {% load static %}
 {% if sessionUser.username == "" %}
-        <meta http-equiv="Refresh" content="0; url='/'" />
+    <meta http-equiv="Refresh" content="0; url='/'"/>
 {% endif %}
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +42,7 @@
                 <tr>
                     <td><input name="sectionNumber" class="course-textbox" placeholder="Section Number" required></td>
                     <td>
-                        <select class="dropdownMenu" name="sectionType" required>
+                        <select class="dropdownMenuSection" name="sectionType" required>
                             <option value="" disabled selected>Section Type</option>
                             <option value=Lecture>Lecture</option>
                             <option value=Lab>Lab</option>
@@ -91,8 +91,12 @@
             <button type="submit">Submit</button>
         </div>
     </div>
-    {{ success }}
-    {{ error }}
+    <div class="messageSuccess">
+        {{ success }}
+    </div>
+    <div class="messageError">
+        {{ error }}
+    </div>
 </form>
 </body>
 </html>

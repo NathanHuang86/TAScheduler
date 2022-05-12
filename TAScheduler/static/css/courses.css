@@ -35,18 +35,17 @@ navContainer {
     font-weight: bold;
     font-size: 24px;
     text-align: center;
-
 }
 
 .container {
     margin-top: 20px;
     width: 1000px;
-    height: 250px;
+    height: auto;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-bottom: 6px;
-    margin-left: 220px;
+    margin-top: 25px;
+    margin-left: 420px;
     border: 2px solid White;
     border-radius: 15px;
     background: white;
@@ -64,6 +63,19 @@ navContainer {
     border-left: 1px solid #ddd;
     border-top: 1px solid #ddd;
     border-right: 1px solid #ddd;
+}
+
+.messageSuccess {
+    height: auto;
+    border: 2px solid White;
+    border-radius: 5px;
+    background: white;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: green;
 }
 
 .newAccountInformation {
@@ -87,7 +99,7 @@ navContainer {
 .submit-button {
     display: flex;
     flex-direction: column;
-    margin-right: 55px;
+    margin-right: 60px;
     margin-top: 25px;
 }
 

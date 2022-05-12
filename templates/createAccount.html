@@ -1,6 +1,6 @@
 {% load static %}
 {% if sessionUser.username == "" %}
-        <meta http-equiv="Refresh" content="0; url='/'" />
+    <meta http-equiv="Refresh" content="0; url='/'"/>
 {% endif %}
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +50,7 @@
 
             </table>
             <div class="permission">
-            <tr>
+                <tr>
                     <th>Account Permission</th>
                     <td>
                         <input type="radio" name="button1" value=0 required>
@@ -69,8 +69,12 @@
 
         </div>
     </div>
-    {{ error }}
-    {{ success }}
+    <div class="messageSuccess">
+        {{ success }}
+    </div>
+    <div class="messageError">
+        {{ error }}
+    </div>
 </form>
 </body>
 </html>

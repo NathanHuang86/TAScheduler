@@ -112,8 +112,12 @@
                 {% endfor %}
         </table>
     </div>
-    {{ error }}
-    {{ success }}
+    <div class="messageSuccess">
+        {{ success }}
+    </div>
+    <div class="messageError">
+        {{ error }}
+    </div>
     {% if sessionUser.role == "Admin" %}
         <div class="submit-button">
             <a href="../createAccount/">

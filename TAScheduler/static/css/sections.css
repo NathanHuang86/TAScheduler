@@ -40,8 +40,8 @@ navContainer {
 
 .container {
     margin-top: 20px;
-    width: 1000px;
-    height: 210px;
+    width: 1500px;
+    height: auto;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -99,4 +99,5 @@ navContainer {
     width: 280px;
     cursor: pointer;
     margin-left: 80px;
+    margin-top: 15px;
 }

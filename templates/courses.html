@@ -1,6 +1,6 @@
 {% load static %}
 {% if sessionUser.username == "" %}
-        <meta http-equiv="Refresh" content="0; url='/'" />
+    <meta http-equiv="Refresh" content="0; url='/'"/>
 {% endif %}
 <!DOCTYPE html>
 <html lang="en">
@@ -47,30 +47,34 @@
                         </form>
                     </td>
                     <td>
-                    <form action="" method="post">
-                        {% csrf_token %}
-                        <button name="thisCourseSections" value="{{ i.name }}">View Sections</button>
-                    </form>
-                    </td>
-                    <td>
-                    {% if sessionUser.role == "Admin" %}
                         <form action="" method="post">
                             {% csrf_token %}
-                            <button name="deleteCourse" value="{{ i.name }}">Delete</button>
+                            <button name="thisCourseSections" value="{{ i.name }}">View Sections</button>
                         </form>
-                    {% endif %}
+                    </td>
+                    <td>
+                        {% if sessionUser.role == "Admin" %}
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <button name="deleteCourse" value="{{ i.name }}">Delete</button>
+                            </form>
+                        {% endif %}
                     </td>
                     </tr>
                 {% endfor %}
         </table>
     </div>
-{% if sessionUser.role == "Admin" %}
-    <div class="submit-button">
-        <a href="../createCourses/"><button name="createCourseSubmit">Create Course</button></a>
-    </div>
-{% endif %}
-{{ success }}
+    {% if sessionUser.role == "Admin" %}
+        <div class="submit-button">
+            <a href="../createCourses/">
+                <button name="createCourseSubmit">Create Course</button>
+            </a>
+        </div>
+    {% endif %}
 
+<div class="messageSuccess">
+    {{ success }}
+</div>
 </div>
 </div>
 </body>
