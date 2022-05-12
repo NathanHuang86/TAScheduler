@@ -40,13 +40,13 @@ navContainer {
 
 .container{
     margin-top: 20px;
-    width: 700px;
-    height: 190px;
+    width: 1000px;
+    height: auto;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     margin-bottom: 6px;
-    margin-left: 380px;
+    margin-left: 420px;
     border: 2px solid White;
     border-radius: 15px;
     background: white;
@@ -54,10 +54,19 @@ navContainer {
 
 }
 
-.containerbox{
+.containerbox {
     display: grid;
     gap: 50px;
+    margin: auto;
 }
+
+.th, td{
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
 
 .newAccountInformation{
     align-items: center;
@@ -74,6 +83,20 @@ navContainer {
     background: #e1dede69;
     color: grey;
 
+}
+.dropdownMenu{
+    align-content: center;
+    width: 95%;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    outline-width: 20px;
+    outline-color: #333333;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    text-align: center;
+    color: grey;
+    margin-bottom: 20px;
 }
 
 .submit-button {
@@ -92,5 +115,6 @@ navContainer {
     background: #91B2C7;
     width: 280px;
     cursor: pointer;
-    margin-left: 175px;
+    margin-left: 325px;
+    margin-top: 25px;
 }

@@ -10,8 +10,8 @@ html {
 }
 
  .container{
-    width: 700px;
-    height: 225px;
+    width: 1000px;
+    height: 300px;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -20,7 +20,7 @@ html {
     background: white;
     text-align: center;
     margin-top: 20px;
-    margin-left: 375px
+    margin-left: 440px
 
 }
 .newCourseContainer {
@@ -34,6 +34,31 @@ html {
     margin-bottom: 100px;
 }
 
+.messageSuccess {
+    height: auto;
+    border: 2px solid White;
+    border-radius: 5px;
+    background: white;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: green;
+}
+
+.messageError {
+    height: auto;
+    border: 2px solid White;
+    border-radius: 5px;
+    background: white;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: red;
+}
 
 .submit-button button {
 
@@ -45,8 +70,8 @@ html {
     background: #91B2C7;
     width: 500px;
     cursor: pointer;
-    margin-left: 75px;
-    margin-top:10px;
+    margin-left: 220px;
+    margin-top:25px;
 }
 
 .textbox{

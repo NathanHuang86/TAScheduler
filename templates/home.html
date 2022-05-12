@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 {% if sessionUser.username == "" %}
-    <meta http-equiv="Refresh" content="0; url='/'" />
+    <meta http-equiv="Refresh" content="0; url='/'"/>
 {% endif %}
 <html lang="en">
 <head>
@@ -25,7 +25,7 @@
 </div>
 
 <body>
-<p class="header">{{ sessionUser.username }}'s Home</p>
+<p class="title">{{ sessionUser.username }}'s Home</p>
 <div class="container">
     <p class=header>My Info</p>
     <div class="containerbox">
@@ -42,7 +42,7 @@
             <tr>
                 {% if editing == "allowed" %}
                     <form action="" method="post">
-                    {% csrf_token %}
+                        {% csrf_token %}
                         <td><input name="username" placeholder="{{ sessionUser.username }}"></td>
                         <td><input name="password" placeholder="{{ sessionUser.password }}"></td>
                         <td><input name="name" placeholder="{{ sessionUser.name }}"></td>
@@ -57,7 +57,7 @@
                         <a href="/">
                             <button>Cancel</button>
                         </a>
-                {% else %}
+                        {% else %}
                     <td>{{ sessionUser.username }}</td>
                     <td>{{ sessionUser.password }}</td>
                     <td>{{ sessionUser.name }}</td>
@@ -76,8 +76,12 @@
         </table>
     </div>
 </div>
-{{ error }}
-{{ success }}
+<div class="messageSuccess">
+    {{ success }}
+</div>
+<div class="messageError">
+    {{ error }}
+</div>
 <div class="container">
     <p class=header>My Assigned Courses</p>
     <div class="containerbox">
@@ -87,11 +91,13 @@
                 <th>Term</th>
                 <th>Year</th>
             </tr>
-                {% for i in courses %}
-                    <tr><td>{{ i.name }}</td>
-                    <td>{{ i.term }}</td>
-                    <td>{{ i.year }}</td></tr>
-                {% endfor %}
+            {% for i in courses %}
+                <tr>
+                    <td class="items">{{ i.name }}</td>
+                    <td class="items">{{ i.term }}</td>
+                    <td class="items">{{ i.year }}</td>
+                </tr>
+            {% endfor %}
         </table>
     </div>
 </div>
@@ -112,8 +118,8 @@
                 <th>Thursday</th>
                 <th>Friday</th>
             </tr>
-                {% for i in sections %}
-                    <tr>
+            {% for i in sections %}
+                <tr>
                     <td>{{ i.Class }}</td>
                     <td>{{ i.sectionType }}</td>
                     <td>{{ i.sectionNumber }}</td>
@@ -125,8 +131,8 @@
                     <td>{{ i.wednesday }}</td>
                     <td>{{ i.thursday }}</td>
                     <td>{{ i.friday }}</td>
-                    </tr>
-                {% endfor %}
+                </tr>
+            {% endfor %}
         </table>
     </div>
 </div>

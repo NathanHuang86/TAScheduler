@@ -31,7 +31,7 @@ html {
     border-radius: 15px;
     background: white;
     text-align: center;
-    margin-left: 380px;
+    margin-left: 600px;
     margin-top: 20px;
 
 }
@@ -54,7 +54,7 @@ html {
 
 .dropdownMenu{
     align-content: center;
-    width: 100%;
+    width: 85%;
     font-size: 14px;
     letter-spacing: 1px;
     background: rgba(136, 126, 126, 0.04);
@@ -63,8 +63,22 @@ html {
     box-sizing: border-box;
     border: 2px solid rgba(0, 0, 0, 0.3);
     text-align: center;
-    margin-bottom: 5px;
-    margin-top: 10px;
+    color: grey;
+    margin-left: 50px;
+    margin-bottom: 15px;
+}
+
+.dropdownMenuSection{
+    align-content: center;
+    width: 85%;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    outline-width: 20px;
+    outline-color: #333333;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    text-align: center;
     color: grey;
 }
 .containerbox{

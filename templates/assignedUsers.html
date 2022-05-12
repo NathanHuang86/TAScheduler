@@ -6,8 +6,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Course</title>
-    <link rel="stylesheet" type="text/css" href="{% static "css/editCourse.css" %}"/>
+    <title>Assigned Users</title>
+    <link rel="stylesheet" type="text/css" href="{% static "css/assignedUsers.css" %}"/>
 </head>
 
 <div class="navContainer">
@@ -35,22 +35,22 @@
                 <th>Name</th>
                 <th>Role</th>
             </tr>
-                {% for i in assignedUsers %}
-                    <tr>
+            {% for i in assignedUsers %}
+                <tr>
                     <td>{{ i.username }}</td>
                     <td>{{ i.name }}</td>
                     <td>{{ i.role }}</td>
                     <form action="" method="post">
-                                {% csrf_token %}
-                                <td>
-                                    <button name="unassignUser" value="{{ i.username }}">Unassign</button>
-                                </td>
-                            </form>
-                    </tr>
-                {% endfor %}
+                        {% csrf_token %}
+                        <td>
+                            <button name="unassignUser" value="{{ i.username }}">Unassign</button>
+                        </td>
+                    </form>
+                </tr>
+            {% endfor %}
         </table>
         <form action="" method="post">
-        {% csrf_token %}
+            {% csrf_token %}
             <select class="dropdownMenu" name="assignUser">
                 <option value="" disabled selected>Assign User</option>
                 {% for i in unassignedUsers %}
@@ -58,13 +58,18 @@
                 {% endfor %}
             </select>
             <div class="submit-button">
-            <button type="submit">Assign</button>
+                <button type="submit">Assign</button>
             </div>
         </form>
+
     </div>
 </div>
 
-{{ success }}
-{{ error }}
+<div class="messageSuccess">
+    {{ success }}
+</div>
+<div class="messageError">
+    {{ error }}
+</div>
 </body>
 </html>
