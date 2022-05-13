@@ -36,6 +36,24 @@ html {
 
 }
 
+.messageSuccess {
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: green;
+}
+
+.messageError {
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: red;
+}
+
 .course-textbox{
     align-items: center;
     width: 100%;

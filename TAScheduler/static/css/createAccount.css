@@ -31,13 +31,31 @@ html {
     border-radius: 15px;
     background: white;
     text-align: center;
-    margin-left: 380px;
+    margin-left: 600px;
     margin-top: 20px;
 
 }
 
 .containerbox {
     display: grid;
+}
+
+.messageSuccess {
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: green;
+}
+
+.messageError {
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: red;
 }
 
 .newAccountInformation {

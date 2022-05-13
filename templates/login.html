@@ -9,25 +9,27 @@
 
 <body>
 <form action="/" method="post">
-    {%  csrf_token %}
+    {% csrf_token %}
     <div class="body-content">
         <div class="container">
             <h2>Login</h2>
             <div class="login-form">
-                    <div class="login-item">
-                        <input type="text" name="username" placeholder="Username or Email">
-                    </div>
-                    <div class="login-item">
-                        <input type="password" name="password" placeholder="Password">
-                    </div>
-                    <div class="login-button">
-                        <button type="submit" name="loginSubmit">Login</button>
-                    </div>
+                <div class="login-item">
+                    <input type="text" name="username" placeholder="Username or Email">
+                </div>
+                <div class="login-item">
+                    <input type="password" name="password" placeholder="Password">
+                </div>
+                <div class="login-button">
+                    <button type="submit" name="loginSubmit">Login</button>
+                </div>
             </div>
             <hr>
+            <div class="message">
+                {{ message }}
+            </div>
         </div>
     </div>
-    {{ message }}
 </form>
 </body>
 </html>

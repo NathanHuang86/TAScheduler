@@ -67,5 +67,12 @@ h2 {
     width: 280px;
     cursor: pointer;
 }
-
+.message{
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: red;
+}
 

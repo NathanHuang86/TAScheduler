@@ -54,6 +54,24 @@ html {
     width: 50px;
 }
 
+.messageSuccess {
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: green;
+}
+
+.messageError {
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: red;
+}
+
 navContainer {
     position: center;
     height: auto;
