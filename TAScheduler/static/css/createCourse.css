@@ -35,10 +35,6 @@ html {
 }
 
 .messageSuccess {
-    height: auto;
-    border: 2px solid White;
-    border-radius: 5px;
-    background: white;
     text-align: center;
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
@@ -48,10 +44,6 @@ html {
 }
 
 .messageError {
-    height: auto;
-    border: 2px solid White;
-    border-radius: 5px;
-    background: white;
     text-align: center;
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
