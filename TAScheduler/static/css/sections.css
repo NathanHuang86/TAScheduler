@@ -46,7 +46,7 @@ navContainer {
     justify-content: center;
     align-items: center;
     margin-bottom: 6px;
-    margin-left: 220px;
+    margin-left: 210px;
     border: 2px solid White;
     border-radius: 15px;
     background: white;
@@ -56,6 +56,24 @@ navContainer {
 .containerbox {
     display: grid;
     gap: 50px;
+    text-align: left;
+}
+.messageSuccess {
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: green;
+}
+
+.messageError {
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: red;
 }
 .th, td{
     border-bottom: 1px solid #ddd;

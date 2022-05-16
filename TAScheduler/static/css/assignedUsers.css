@@ -58,6 +58,7 @@ navContainer {
     display: grid;
     gap: 50px;
     margin: auto;
+    text-align: left;
 }
 
 .th, td{
@@ -115,12 +116,13 @@ navContainer {
     text-align: center;
     color: grey;
     margin-bottom: 20px;
+    margin-left: 20px;
 }
 
 .submit-button {
     display: flex;
+    width: 500px;
     flex-direction: column;
-    margin: auto;
     padding: 10px 30px;
 }
 

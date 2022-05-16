@@ -23,7 +23,7 @@ html {
 }
 .container {
     width: 700px;
-    height: 425px;
+    height: 475px;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -106,7 +106,7 @@ html {
 .submit-button {
     display: flex;
     flex-direction: column;
-    margin: auto;
+    margin-top: 25px;
     padding: 10px 30px;
 }
 

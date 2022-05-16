@@ -46,7 +46,7 @@ navContainer {
     justify-content: center;
     align-items: center;
     margin-bottom: 50px;
-    margin-left: 420px;
+    margin-left: 450px;
     border: 2px solid White;
     border-radius: 15px;
     background: white;
@@ -54,10 +54,15 @@ navContainer {
 
 }
 
+.items{
+    width: 50px;
+}
+
 .containerbox {
     display: grid;
     gap: 50px;
     margin-bottom: 10px;
+    text-align: left;
 }
 
 .th, td{

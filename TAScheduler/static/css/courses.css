@@ -58,6 +58,7 @@ navContainer {
     display: grid;
     gap: 50px;
     margin-bottom: 10px;
+    text-align: left;
 }
 .th, td{
     border-bottom: 1px solid #ddd;

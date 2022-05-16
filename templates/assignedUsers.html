@@ -51,25 +51,29 @@
         </table>
         <form action="" method="post">
             {% csrf_token %}
-            <select class="dropdownMenu" name="assignUser">
-                <option value="" disabled selected>Assign User</option>
-                {% for i in unassignedUsers %}
-                    <option value="{{ i.username }}">{{ i.username }}</option>
-                {% endfor %}
-            </select>
+            <tr>
+                <select class="dropdownMenu" name="assignUser">
+                    <option value="" disabled selected>Assign User</option>
+                    {% for i in unassignedUsers %}
+                        <option value="{{ i.username }}">{{ i.username }}</option>
+                    {% endfor %}
+                </select>
+            </tr>
+            <div class="messageSuccess">
+                {{ success }}
+            </div>
+            <div class="messageError">
+                {{ error }}
+            </div>
             <div class="submit-button">
                 <button type="submit">Assign</button>
             </div>
         </form>
 
     </div>
+
+
 </div>
 
-<div class="messageSuccess">
-    {{ success }}
-</div>
-<div class="messageError">
-    {{ error }}
-</div>
 </body>
 </html>
