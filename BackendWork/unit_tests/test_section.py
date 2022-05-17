@@ -1,6 +1,5 @@
 from django.test import TestCase
 from BackendWork.models import Section, MyUser, ClassList
-import datetime
 from _datetime import time
 
 class SectionUnitTestSuite(TestCase):
