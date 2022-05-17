@@ -18,7 +18,7 @@ class TestAccountCreate(TestCase):
             temp.role = "Admin"
             temp.save()
 
-    def test_CreateAccount(self):
+    def test_DeleteAccount(self):
         self.client.post("", {"username": "Mike", "password": "Mike"}, follow=True)
         self.client.post("createAccount/", follow=True)
         self.client.post("/createAccount/", {"username": "alice", "password": "password", "name": "alice",
@@ -26,5 +26,6 @@ class TestAccountCreate(TestCase):
                                              "button1": "1"}, follow=True)
         alice = MyUser.objects.filter(username="alice")
         self.assertEqual(len(alice), 1)
-        alice.delete()
+        self.client.post("/users/", {"deleteUser": "alice"}, follow=True)
+        alice = MyUser.objects.filter(username="alice")
         self.assertEqual(len(alice), 0)
