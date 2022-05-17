@@ -46,3 +46,11 @@ class TestAddItem(TestCase):
         self.client.post("/createCourses/", {"name": "", "term": "summer", "year": "2032"}, follow=True)
         Bob = ClassList.objects.filter(name="Bob")
         self.assertEqual(len(Bob), 0)
+
+    def test_EmptyField(self):
+        self.client.post("", {"username": "Mike", "password": "Mike"}, follow=True)
+        self.client.post("courses/", follow=True)
+        self.client.post("createCourses/", follow=True)
+        self.client.post("/createCourses/", {"name": "", "term": "summer", "year": "2032"}, follow=True)
+        Bob = ClassList.objects.filter(name="Bob")
+        self.assertEqual(len(Bob), 1)

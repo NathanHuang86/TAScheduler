@@ -104,3 +104,21 @@ class TestSectionEdit(TestCase):
         self.client.post("/sections/", {'deleteSection': "1"}, follow=True)
         aliceSections = Section.objects.filter(assignedUser=self.alice)
         self.assertEqual(len(aliceSections), 4)
+
+    def test_DeleteNewSection(self):
+        aliceSections = Section.objects.filter(assignedUser=self.alice)
+        self.assertEqual(len(aliceSections), 4)
+        self.client.post("", {"username": "Mike", "password": "Mike"}, follow=True)
+        self.client.post("/courses/", {'thisCourseSections': "math"}, follow=True)
+        self.client.post("/sections/", {'deleteSection': "2354"}, follow=True)
+        aliceSections = Section.objects.filter(assignedUser=self.alice)
+        self.assertEqual(len(aliceSections), 8)
+
+    def test_DeleteNotExistSection(self):
+        aliceSections = Section.objects.filter(assignedUser=self.alice)
+        self.assertEqual(len(aliceSections), 4)
+        self.client.post("", {"username": "Mike", "password": "Mike"}, follow=True)
+        self.client.post("/courses/", {'thisCourseSections': "math"}, follow=True)
+        self.client.post("/sections/", {'deleteSection': "34563456"}, follow=True)
+        aliceSections = Section.objects.filter(assignedUser=self.alice)
+        self.assertEqual(len(aliceSections), 7)

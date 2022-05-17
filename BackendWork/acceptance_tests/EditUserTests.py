@@ -42,3 +42,25 @@ class TestSectionEdit(TestCase):
         mikes = MyUser.objects.filter(username='Mike')
         self.assertEqual(len(alices), 1)
         self.assertEqual(len(mikes), 1)
+
+    def test_editUserNameFailure(self):
+        alices = MyUser.objects.filter(username='alice')
+        self.assertEqual(len(alices), 1)
+        self.client.post("", {"username": "Mike", "password": "Mike"}, follow=True)
+        self.client.post("/users/", {'editUser': "alice"}, follow=True)
+        self.client.post("/users/", {'saveEditUser': "alice", 'username': "Mike", 'role': "Teaching Assistant"}, follow=True)
+        alices = MyUser.objects.filter(username='alice')
+        mikes = MyUser.objects.filter(username='Mike')
+        self.assertEqual(len(alices), 1)
+        self.assertEqual(len(mikes), 0)
+
+    def test_editUserNoRole(self):
+        alices = MyUser.objects.filter(username='alice')
+        self.assertEqual(len(alices), 1)
+        self.client.post("", {"username": "Mike", "password": "Mike"}, follow=True)
+        self.client.post("/users/", {'editUser': "alice"}, follow=True)
+        self.client.post("/users/", {'saveEditUser': "alice", 'username': "Mike"}, follow=True)
+        alices = MyUser.objects.filter(username='alice')
+        mikes = MyUser.objects.filter(username='Mike')
+        self.assertEqual(len(alices), 1)
+        self.assertEqual(len(mikes), 0)
