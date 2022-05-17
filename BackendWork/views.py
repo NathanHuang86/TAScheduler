@@ -229,7 +229,7 @@ class Sections(View):
             successMessage = sectionType + ' ' + request.POST.get('deleteSection') + ' deleted.'
 
         elif request.POST.get('saveSection'):
-            onFile = Section.objects.get(sectionNumber=int(request.POST['saveSection']))
+            onFile = Section.objects.get(Class=ClassList.objects.get(name=request.session['thisCourse']), sectionNumber=int(request.POST['saveSection']))
 
             if request.POST.get('sectionNumber'):
                 if len(Section.objects.filter(Class=ClassList.objects.get(name=request.session['thisCourse']), sectionNumber=request.POST.get('sectionNumber'))) != 0:
@@ -343,7 +343,7 @@ class CreateSection(View):
                           {'sessionUser': MyUser.objects.get(username=request.session["user"]),
                            'course': ClassList.objects.get(name=request.session["thisCourse"]),
                            'users': MyUser.objects.filter(role='Teaching Assistant'),
-                           'success': errorMessage})
+                           'error': errorMessage})
         if len(Section.objects.filter(Class=ClassList.objects.get(name=request.session["thisCourse"]),
                                       sectionNumber=request.POST.get('sectionNumber'))) != 0:
             errorMessage = 'Section number ' + request.POST.get('sectionNumber') + ' already exists.'
@@ -351,7 +351,7 @@ class CreateSection(View):
                           {'sessionUser': MyUser.objects.get(username=request.session["user"]),
                            'course': ClassList.objects.get(name=request.session["thisCourse"]),
                            'users': MyUser.objects.filter(role='Teaching Assistant'),
-                           'success': errorMessage})
+                           'error': errorMessage})
 
         newSection = Section.objects.create(Class=ClassList.objects.get(name=request.session["thisCourse"]),
                                             sectionNumber=request.POST["sectionNumber"],

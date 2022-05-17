@@ -40,13 +40,13 @@ navContainer {
 
 .container {
     margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
     width: 1500px;
     height: auto;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-bottom: 6px;
-    margin-left: 220px;
     border: 2px solid White;
     border-radius: 15px;
     background: white;

@@ -14,7 +14,6 @@ html {
     font-weight: bold;
     font-size: 36px;
     text-align: center;
-    padding-bottom: 10px;
 }
 
 .title {
@@ -26,13 +25,13 @@ html {
 
 .container {
     margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
     width: 1500px;
     height: 325px;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-bottom: 50px;
-    margin-left: 190px;
     border: 2px solid White;
     border-radius: 15px;
     background: white;

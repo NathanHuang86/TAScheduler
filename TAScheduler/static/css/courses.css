@@ -38,20 +38,18 @@ navContainer {
 }
 
 .container {
+    margin-right: auto;
+    margin-left: auto;
     margin-top: 20px;
     width: 1000px;
     height: auto;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-top: 25px;
-    margin-left: 445px;
     border: 2px solid White;
     border-radius: 15px;
     background: white;
     text-align: center;
-
-
 }
 
 .containerbox {
