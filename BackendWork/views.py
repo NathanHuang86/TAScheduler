@@ -88,8 +88,6 @@ class Home(View):
                                                  'success': successMessage})
 
 
-
-
 class Users(View):
 
     def get(self, request):
@@ -217,7 +215,8 @@ class Sections(View):
                                Class=ClassList.objects.get(name=request.session["thisCourse"]),
                                sectionNumber=request.session['thisSection']).endTime.strftime("%H:%M"),
                            'editingSection': int(request.session.pop('thisSection')),
-                           'courseUsers': MyUser.objects.filter(assignedClasses=ClassList.objects.get(name=request.session["thisCourse"]))})
+                           'courseUsers': MyUser.objects.filter(
+                               assignedClasses=ClassList.objects.get(name=request.session["thisCourse"]))})
 
         successMessage = ""
 
@@ -229,20 +228,31 @@ class Sections(View):
             successMessage = sectionType + ' ' + request.POST.get('deleteSection') + ' deleted.'
 
         elif request.POST.get('saveSection'):
-            onFile = Section.objects.get(Class=ClassList.objects.get(name=request.session['thisCourse']), sectionNumber=int(request.POST['saveSection']))
+            onFile = Section.objects.get(Class=ClassList.objects.get(name=request.session['thisCourse']),
+                                         sectionNumber=int(request.POST['saveSection']))
 
             if request.POST.get('sectionNumber'):
-                if len(Section.objects.filter(Class=ClassList.objects.get(name=request.session['thisCourse']), sectionNumber=request.POST.get('sectionNumber'))) != 0:
-                    errorMessage = "Section Number " + str(request.POST.get("sectionNumber")) + " already exists."
+                try:
+                    if len(Section.objects.filter(Class=ClassList.objects.get(name=request.session['thisCourse']),
+                                                  sectionNumber=request.POST.get('sectionNumber'))) != 0:
+                        errorMessage = "Section Number " + str(request.POST.get("sectionNumber")) + " already exists."
+                        return render(request, "sections.html",
+                                      {'sessionUser': MyUser.objects.get(username=request.session["user"]),
+                                       'course': ClassList.objects.get(name=request.session["thisCourse"]),
+                                       'sections': Section.objects.filter(
+                                           Class=ClassList.objects.get(name=request.session["thisCourse"])),
+                                       'error': errorMessage})
+                    else:
+                        onFile.sectionNumber = int(request.POST.get("sectionNumber"))
 
+                except:
+                    errorMessage = "Section Number must be an integer."
                     return render(request, "sections.html",
                                   {'sessionUser': MyUser.objects.get(username=request.session["user"]),
                                    'course': ClassList.objects.get(name=request.session["thisCourse"]),
                                    'sections': Section.objects.filter(
                                        Class=ClassList.objects.get(name=request.session["thisCourse"])),
-                                   'error': errorMessage})
-                else:
-                    onFile.sectionNumber = int(request.POST.get("sectionNumber"))
+                                   "error": errorMessage})
 
             if request.POST.get("assignedUser"):
                 onFile.assignedUser = MyUser.objects.get(username=request.POST.get("assignedUser"))
@@ -445,7 +455,9 @@ class AssignedUsers(View):
         if request.POST.get('unassignUser'):
             assignUser = MyUser.objects.get(username=request.POST.get('unassignUser'))
             assignUser.assignedClasses.remove(ClassList.objects.get(name=request.session["thisCourse"]))
-            sectionsWithAssignedUser = list(Section.objects.filter(Class=ClassList.objects.get(name=request.session["thisCourse"]), assignedUser=assignUser))
+            sectionsWithAssignedUser = list(
+                Section.objects.filter(Class=ClassList.objects.get(name=request.session["thisCourse"]),
+                                       assignedUser=assignUser))
             for section in sectionsWithAssignedUser:
                 section.assignedUser = None
                 section.save()
