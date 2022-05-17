@@ -4,7 +4,7 @@ from django.test import Client
 
 
 # Create your tests here.
-class TestAccountCreate(TestCase):
+class TestAccountDelete(TestCase):
     client = None
     theList = None
 
