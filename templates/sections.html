@@ -103,7 +103,7 @@
                         <td>{{ i.wednesday }}</td>
                         <td>{{ i.thursday }}</td>
                         <td>{{ i.friday }}</td>
-                        {% if sessionUser.role == "Admin" %}
+                        {% if sessionUser.role == "Admin" or "Instructor" %}
                             <td>
                                 <form action="" method="post">
                                     {% csrf_token %}
