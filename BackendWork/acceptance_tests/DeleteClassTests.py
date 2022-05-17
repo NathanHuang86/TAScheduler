@@ -22,27 +22,13 @@ class TestAddItem(TestCase):
                        role='Instructor')
         alice.save()
 
-    def test_AddItem(self):
+    def test_DeleteItem(self):
         self.client.post("", {"username": "Mike", "password": "Mike"}, follow=True)
         self.client.post("courses/", follow=True)
         self.client.post("createCourses/", follow=True)
         self.client.post("/createCourses/", {"name": "Bob", "term": "summer", "year": "2032"}, follow=True)
         Bob = ClassList.objects.filter(name="Bob")
         self.assertEqual(len(Bob), 1)
-
-    def test_UniqueItem(self):
-        self.client.post("", {"username": "Mike", "password": "Mike"}, follow=True)
         self.client.post("courses/", follow=True)
-        self.client.post("createCourses/", follow=True)
-        self.client.post("/createCourses/", {"name": "Bob", "term": "summer", "year": "2032"}, follow=True)
-        self.client.post("/createCourses/", {"name": "Bob", "term": "summer", "year": "2032"}, follow=True)
-        Bob = ClassList.objects.filter(name="Bob")
-        self.assertEqual(len(Bob), 1)
-
-    def test_EmptyItem(self):
-        self.client.post("", {"username": "Mike", "password": "Mike"}, follow=True)
-        self.client.post("courses/", follow=True)
-        self.client.post("createCourses/", follow=True)
-        self.client.post("/createCourses/", {"name": "", "term": "summer", "year": "2032"}, follow=True)
-        Bob = ClassList.objects.filter(name="Bob")
+        self.client.post("courses/", "deleteUser", {"name": "Bob"}, follow=True)
         self.assertEqual(len(Bob), 0)

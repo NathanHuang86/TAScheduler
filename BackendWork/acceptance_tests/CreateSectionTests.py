@@ -1,5 +1,5 @@
 from django.test import TestCase
-from BackendWork.models import ClassList, MyUser
+from BackendWork.models import ClassList, MyUser, Section
 from django.test import Client
 
 
@@ -29,20 +29,9 @@ class TestAddItem(TestCase):
         self.client.post("/createCourses/", {"name": "Bob", "term": "summer", "year": "2032"}, follow=True)
         Bob = ClassList.objects.filter(name="Bob")
         self.assertEqual(len(Bob), 1)
-
-    def test_UniqueItem(self):
-        self.client.post("", {"username": "Mike", "password": "Mike"}, follow=True)
         self.client.post("courses/", follow=True)
-        self.client.post("createCourses/", follow=True)
-        self.client.post("/createCourses/", {"name": "Bob", "term": "summer", "year": "2032"}, follow=True)
-        self.client.post("/createCourses/", {"name": "Bob", "term": "summer", "year": "2032"}, follow=True)
-        Bob = ClassList.objects.filter(name="Bob")
-        self.assertEqual(len(Bob), 1)
-
-    def test_EmptyItem(self):
-        self.client.post("", {"username": "Mike", "password": "Mike"}, follow=True)
-        self.client.post("courses/", follow=True)
-        self.client.post("createCourses/", follow=True)
-        self.client.post("/createCourses/", {"name": "", "term": "summer", "year": "2032"}, follow=True)
-        Bob = ClassList.objects.filter(name="Bob")
-        self.assertEqual(len(Bob), 0)
+        self.client.session["thisCourse"]
+        self.client.post("courses/sections/", {'course': ClassList.objects.get(name=self.client.session["thisCourse"]),
+                                               'sections': Section.objects.filter(
+                                                   Class=ClassList.objects.get(
+                                                       name=self.client.session["thisCourse"]))}, follow=True)

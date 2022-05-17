@@ -27,6 +27,18 @@ class TestAccountCreate(TestCase):
         alice = MyUser.objects.filter(username="alice")
         self.assertEqual(len(alice), 1)
 
+    def test_UniqueAccount(self):
+        self.client.post("", {"username": "Mike", "password": "Mike"}, follow=True)
+        self.client.post("createAccount/", follow=True)
+        self.client.post("/createAccount/", {"username": "alice", "password": "password", "name": "alice",
+                                             "email": "alice@gmail.com", "address": "Bob", "phone": "Bob",
+                                             "button1": "1"}, follow=True)
+        self.client.post("/createAccount/", {"username": "alice", "password": "password", "name": "alice",
+                                             "email": "alice@gmail.com", "address": "Bob", "phone": "Bob",
+                                             "button1": "1"}, follow=True)
+        alice = MyUser.objects.filter(username="alice")
+        self.assertEqual(len(alice), 1)
+
 
 class TestFailAccount(TestCase):
     client = None
