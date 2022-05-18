@@ -40,13 +40,13 @@ navContainer {
 
 .container {
     margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
     width: 1500px;
     height: auto;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-bottom: 6px;
-    margin-left: 210px;
     border: 2px solid White;
     border-radius: 15px;
     background: white;
@@ -118,4 +118,22 @@ navContainer {
     cursor: pointer;
     margin-left: 80px;
     margin-top: 15px;
+}
+
+.messageError{
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: red;
+}
+
+.messageSuccess{
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: green;
 }

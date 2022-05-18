@@ -1,6 +1,6 @@
 {% load static %}
 {% if sessionUser.username == "" %}
-        <meta http-equiv="Refresh" content="0; url='/'" />
+    <meta http-equiv="Refresh" content="0; url='/'"/>
 {% endif %}
 <!DOCTYPE html>
 <html lang="en">
@@ -34,11 +34,6 @@
                 <th>Term</th>
                 <th>Year</th>
             </tr>
-                {% for i in courses %}
-                    <tr><td class="items">{{ i.name }}</td>
-                    <td class="items">{{ i.term }}</td>
-                    <td class="items">{{ i.year }}</td></tr>
-                {% endfor %}
         </table>
     </div>
 </div>
@@ -59,8 +54,8 @@
                 <th>Thursday</th>
                 <th>Friday</th>
             </tr>
-                {% for i in sections %}
-                    <tr>
+            {% for i in sections %}
+                <tr>
                     <td>{{ i.Class }}</td>
                     <td>{{ i.sectionType }}</td>
                     <td>{{ i.sectionNumber }}</td>
@@ -72,8 +67,8 @@
                     <td>{{ i.wednesday }}</td>
                     <td>{{ i.thursday }}</td>
                     <td>{{ i.friday }}</td>
-                    </tr>
-                {% endfor %}
+                </tr>
+            {% endfor %}
         </table>
     </div>
 </div>

@@ -41,10 +41,12 @@
                     <td>{{ i.term }}</td>
                     <td>{{ i.year }}</td>
                     <td>
-                        <form action="" method="post">
-                            {% csrf_token %}
-                            <button name="assignedUser" value="{{ i.name }}">Assigned Users</button>
-                        </form>
+                        {% if sessionUser.role == "Admin" %}
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <button name="assignedUser" value="{{ i.name }}">Assigned Users</button>
+                            </form>
+                        {% endif %}
                     </td>
                     <td>
                         <form action="" method="post">
