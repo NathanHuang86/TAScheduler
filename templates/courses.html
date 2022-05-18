@@ -66,6 +66,9 @@
                 {% endfor %}
         </table>
     </div>
+    <div class="messageSuccess">
+        {{ success }}
+    </div>
     {% if sessionUser.role == "Admin" %}
         <div class="submit-button">
             <a href="../createCourses/">
@@ -73,10 +76,6 @@
             </a>
         </div>
     {% endif %}
-
-<div class="messageSuccess">
-    {{ success }}
-</div>
 </div>
 </div>
 </body>

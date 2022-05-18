@@ -41,6 +41,7 @@ html {
 .containerbox {
     display: grid;
     gap: 50px;
+    text-align: left;
 }
 .th, td{
     border-bottom: 1px solid #ddd;
@@ -60,6 +61,7 @@ html {
     font-size: 18px;
     text-align: center;
     color: green;
+    margin-top: 10px;
 }
 
 .messageError {
@@ -69,6 +71,7 @@ html {
     font-size: 18px;
     text-align: center;
     color: red;
+    margin-top: 10px;
 }
 
 navContainer {

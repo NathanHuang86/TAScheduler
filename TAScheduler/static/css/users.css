@@ -63,6 +63,7 @@ navContainer {
     display: grid;
     gap: 50px;
     margin-bottom: 10px;
+    text-align: left;
 }
 
 .messageSuccess {

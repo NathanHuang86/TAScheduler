@@ -56,6 +56,24 @@ navContainer {
 .containerbox {
     display: grid;
     gap: 50px;
+    text-align: left;
+}
+.messageSuccess {
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: green;
+}
+
+.messageError {
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: red;
 }
 .th, td{
     border-bottom: 1px solid #ddd;

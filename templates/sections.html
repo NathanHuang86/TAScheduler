@@ -140,6 +140,12 @@
                 {% endfor %}
         </table>
     </div>
+    <div class="messageSuccess">
+        {{ success }}
+    </div>
+    <div class="messageError">
+        {{ error }}
+    </div>
     {% if sessionUser.role == "Admin" %}
         <div class="submit-button">
             <a href="../createSection/">
@@ -147,14 +153,6 @@
             </a>
         </div>
     {% endif %}
-
-    <div class="messageSuccess">
-        {{ success }}
-    </div>
-    <div class="messageError">
-        {{ error }}
-    </div>
-
 </div>
 </body>
 </html>

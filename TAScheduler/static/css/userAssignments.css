@@ -52,10 +52,15 @@ navContainer {
     text-align: center;
 }
 
+.items{
+    width: 50px;
+}
+
 .containerbox {
     display: grid;
     gap: 50px;
     margin-bottom: 10px;
+    text-align: left;
 }
 
 .th, td{
